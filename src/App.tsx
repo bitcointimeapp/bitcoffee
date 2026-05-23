@@ -17,6 +17,9 @@ function App() {
   const [showPayment, setShowPayment] = useState(false)
   const [selectedItem, setSelectedItem] = useState<any>(null)
 
+  // Menu Accordion
+  const [openCategory, setOpenCategory] = useState<'drinks' | 'food' | null>('drinks')
+
   // Events
   const eventsData = [
     {
@@ -34,14 +37,6 @@ function App() {
       date: "Jeden Mittwoch",
       time: "19:30 Uhr",
       emoji: "⚡"
-    },
-    {
-      de: { title: "Ordinals & Runes Meetup", desc: "Diskussion über Bitcoin NFTs und Runes" },
-      en: { title: "Ordinals & Runes Meetup", desc: "Discussion about Bitcoin NFTs and Runes" },
-      vi: { title: "Gặp gỡ Ordinals & Runes", desc: "Thảo luận về Bitcoin NFT và Runes" },
-      date: "05. Juli 2026",
-      time: "17:00 Uhr",
-      emoji: "🖼️"
     }
   ]
 
@@ -63,16 +58,29 @@ function App() {
   }, [])
 
   const t = {
-    de: { title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Start", menu: "Menü", reservation: "Tisch reservieren", events: "Events", send: "Reservierung absenden", pay: "Mit Lightning bezahlen", howToReceive: "Wie möchtest du die Reservierung erhalten?", whatsapp: "Per WhatsApp senden", email: "Per E-Mail senden", newReservation: "Neue Reservierung", success: "✅ Reservierung erhalten! Wir melden uns bald bei dir." },
-    en: { title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Home", menu: "Menu", reservation: "Reserve Table", events: "Events", send: "Send Reservation", pay: "Pay with Lightning", howToReceive: "How would you like to receive the reservation?", whatsapp: "Send via WhatsApp", email: "Send via Email", newReservation: "New Reservation", success: "✅ Reservation received! We'll contact you soon." },
-    vi: { title: "₿itCoffee", subtitle: "Đà Nẵng • Việt Nam", home: "Trang chủ", menu: "Thực đơn", reservation: "Đặt bàn", events: "Sự kiện", send: "Gửi đặt bàn", pay: "Thanh toán bằng Lightning", howToReceive: "Bạn muốn nhận đặt bàn qua?", whatsapp: "Gửi qua WhatsApp", email: "Gửi qua Email", newReservation: "Đặt bàn mới", success: "✅ Đã nhận đặt bàn! Chúng tôi sẽ liên hệ sớm." }
+    de: { title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Start", menu: "Speisekarte", reservation: "Tisch reservieren", events: "Events", send: "Reservierung absenden", pay: "Mit Lightning bezahlen", howToReceive: "Wie möchtest du die Reservierung erhalten?", whatsapp: "Per WhatsApp senden", email: "Per E-Mail senden", newReservation: "Neue Reservierung", success: "✅ Reservierung erhalten! Wir melden uns bald bei dir.", drinks: "Getränke", food: "Essen" },
+    en: { title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Home", menu: "Menu", reservation: "Reserve Table", events: "Events", send: "Send Reservation", pay: "Pay with Lightning", howToReceive: "How would you like to receive the reservation?", whatsapp: "Send via WhatsApp", email: "Send via Email", newReservation: "New Reservation", success: "✅ Reservation received! We'll contact you soon.", drinks: "Drinks", food: "Food" },
+    vi: { title: "₿itCoffee", subtitle: "Đà Nẵng • Việt Nam", home: "Trang chủ", menu: "Thực đơn", reservation: "Đặt bàn", events: "Sự kiện", send: "Gửi đặt bàn", pay: "Thanh toán bằng Lightning", howToReceive: "Bạn muốn nhận đặt bàn qua?", whatsapp: "Gửi qua WhatsApp", email: "Gửi qua Email", newReservation: "Đặt bàn mới", success: "✅ Đã nhận đặt bàn! Chúng tôi sẽ liên hệ sớm.", drinks: "Đồ uống", food: "Đồ ăn" }
   }[language]
 
-  const menuItems = [
-    { name: "Espresso", priceVnd: "45.000", sats: "6500", emoji: "☕" },
-    { name: "Cappuccino", priceVnd: "55.000", sats: "8000", emoji: "☕" },
-    { name: "Avocado Toast", priceVnd: "95.000", sats: "13500", emoji: "🥐" },
-    { name: "Coconut Coffee", priceVnd: "65.000", sats: "9200", emoji: "🥥" },
+  const calculateSats = (vndPrice: number) => {
+    if (!btcPrice?.vnd) return '0';
+    const sats = Math.round((vndPrice / btcPrice.vnd) * 100000000);
+    return sats.toLocaleString();
+  }
+
+  const menuDrinks = [
+    { name: "BitCoffee", priceVnd: 45000, emoji: "☕" },
+    { name: "Cappuccino", priceVnd: 55000, emoji: "☕" },
+    { name: "Espresso", priceVnd: 45000, emoji: "☕" },
+    { name: "Café Latte", priceVnd: 58000, emoji: "☕" },
+  ]
+
+  const menuFood = [
+    { name: "Avocado Toast", priceVnd: 95000, emoji: "🥐" },
+    { name: "Pho Bo Mini", priceVnd: 85000, emoji: "🍜" },
+    { name: "Banh Mi", priceVnd: 65000, emoji: "🥖" },
+    { name: "Spring Rolls", priceVnd: 75000, emoji: "🌯" },
   ]
 
   const handlePayment = (item: any) => {
@@ -128,24 +136,14 @@ function App() {
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>☕</div>
+          <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>₿☕</div>
           <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', color: '#f59e0b' }}>{t.title}</h1>
           <p style={{ color: '#f59e0b', marginBottom: '0.8rem' }}>{t.subtitle}</p>
 
-          {/* Kontakt + X/Twitter */}
           <div style={{ fontSize: '1rem', color: '#ddd', lineHeight: '1.6', marginTop: '1rem' }}>
-            <p style={{ color: '#f59e0b', cursor: 'pointer', marginBottom: '4px' }} 
-               onClick={() => window.open('https://maps.google.com/?q=DEINE_VOLLE_ADRESSE_HIER', '_blank')}>
-              📍 [Deine volle Adresse hier]
-            </p>
-            <p style={{ color: '#f59e0b', cursor: 'pointer', marginBottom: '4px' }} 
-               onClick={() => window.open('tel:+849XXXXXXXXX')}>
-              📞 [+84 9XX XXX XXX]
-            </p>
-            <p style={{ color: '#f59e0b', cursor: 'pointer' }} 
-               onClick={() => window.open('https://x.com/21BitCoffee', '_blank')}>
-              𝕏 @21BitCoffee
-            </p>
+            <p style={{ color: '#f59e0b', cursor: 'pointer', marginBottom: '4px' }} onClick={() => window.open('https://maps.google.com/?q=DEINE_VOLLE_ADRESSE_HIER', '_blank')}>📍 [Deine volle Adresse hier]</p>
+            <p style={{ color: '#f59e0b', cursor: 'pointer', marginBottom: '4px' }} onClick={() => window.open('tel:+849XXXXXXXXX')}>📞 [+84 9XX XXX XXX]</p>
+            <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://x.com/21BitCoffee', '_blank')}>𝕏 @21BitCoffee</p>
           </div>
         </div>
 
@@ -162,41 +160,54 @@ function App() {
           ))}
         </div>
 
-        {/* Events */}
-        {activeTab === 'events' && (
-          <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
-            <h3 style={{ color: '#f59e0b', marginBottom: '1.8rem' }}>{t.events}</h3>
-            {eventsData.map((event, i) => (
-              <div key={i} style={{ marginBottom: '2rem', paddingBottom: '1.5rem', borderBottom: i !== eventsData.length-1 ? '1px solid #333' : 'none' }}>
-                <div style={{ fontSize: '2.2rem', marginBottom: '0.6rem' }}>{event.emoji}</div>
-                <h4 style={{ color: '#f59e0b', margin: '0.4rem 0' }}>{event[language].title}</h4>
-                <p style={{ color: '#ddd', margin: '0.4rem 0' }}>📅 {event.date} • 🕒 {event.time}</p>
-                <p style={{ color: '#aaa', lineHeight: '1.5' }}>{event[language].desc}</p>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Menu */}
+        {/* Menu mit ausklappbaren Kategorien */}
         {activeTab === 'menu' && (
           <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
             <h3 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>{t.menu}</h3>
-            {menuItems.map((item, i) => (
-              <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: i !== menuItems.length-1 ? '1px solid #333' : 'none' }}>
-                <div><span style={{ marginRight: '10px' }}>{item.emoji}</span>{item.name}</div>
-                <div style={{ textAlign: 'right' }}>
-                  <div>{item.priceVnd} VND</div>
-                  <div style={{ color: '#f59e0b' }}>~{item.sats} Sats</div>
-                  <button onClick={() => handlePayment(item)} style={{ marginTop: '8px', background: '#f59e0b', color: '#111', padding: '6px 16px', borderRadius: '9999px', fontSize: '0.85rem' }}>
-                    {t.pay}
-                  </button>
-                </div>
+
+            {/* Getränke */}
+            <div onClick={() => setOpenCategory(openCategory === 'drinks' ? null : 'drinks')} style={{ cursor: 'pointer', padding: '12px', background: '#222', borderRadius: '12px', marginBottom: '8px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>
+                <span>{t.drinks}</span>
+                <span>{openCategory === 'drinks' ? '−' : '+'}</span>
               </div>
-            ))}
+              {openCategory === 'drinks' && menuDrinks.map((item, i) => (
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: i !== menuDrinks.length-1 ? '1px solid #333' : 'none' }}>
+                  <div><span style={{ marginRight: '10px' }}>{item.emoji}</span>{item.name}</div>
+                  <div style={{ textAlign: 'right' }}>
+                    <div>{item.priceVnd.toLocaleString()} VND</div>
+                    <div style={{ color: '#f59e0b' }}>~{calculateSats(item.priceVnd)} Sats</div>
+                    <button onClick={() => handlePayment(item)} style={{ marginTop: '6px', background: '#f59e0b', color: '#111', padding: '6px 14px', borderRadius: '9999px', fontSize: '0.85rem' }}>
+                      {t.pay}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Essen */}
+            <div onClick={() => setOpenCategory(openCategory === 'food' ? null : 'food')} style={{ cursor: 'pointer', padding: '12px', background: '#222', borderRadius: '12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>
+                <span>{t.food}</span>
+                <span>{openCategory === 'food' ? '−' : '+'}</span>
+              </div>
+              {openCategory === 'food' && menuFood.map((item, i) => (
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: i !== menuFood.length-1 ? '1px solid #333' : 'none' }}>
+                  <div><span style={{ marginRight: '10px' }}>{item.emoji}</span>{item.name}</div>
+                  <div style={{ textAlign: 'right' }}>
+                    <div>{item.priceVnd.toLocaleString()} VND</div>
+                    <div style={{ color: '#f59e0b' }}>~{calculateSats(item.priceVnd)} Sats</div>
+                    <button onClick={() => handlePayment(item)} style={{ marginTop: '6px', background: '#f59e0b', color: '#111', padding: '6px 14px', borderRadius: '9999px', fontSize: '0.85rem' }}>
+                      {t.pay}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* Reservation - verbessert */}
+        {/* Reservation */}
         {activeTab === 'reservation' && (
           <div style={{ background: '#1a1a1a', padding: '1.8rem', borderRadius: '20px' }}>
             <h2 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '1.5rem' }}>{t.reservation}</h2>
@@ -235,6 +246,12 @@ function App() {
           </div>
         )}
 
+        {activeTab === 'home' && (
+          <div style={{ textAlign: 'center', padding: '3rem 1rem', color: '#ddd' }}>
+            Welcome / Willkommen / Chào mừng bạn đến với ₿itCoffee!
+          </div>
+        )}
+
         {/* Live Daten */}
         <div style={{ marginTop: '2.5rem', background: '#1a1a1a', padding: '14px', borderRadius: '16px', textAlign: 'center', fontSize: '0.95rem' }}>
           <div>Block Height: <span style={{ color: '#f59e0b' }}>{blockHeight ? `#${blockHeight.toLocaleString()}` : 'Laden...'}</span></div>
@@ -253,9 +270,9 @@ function App() {
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.95)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
           <div style={{ background: '#111', padding: '2rem', borderRadius: '20px', maxWidth: '360px', textAlign: 'center' }}>
             <h3 style={{ color: '#f59e0b' }}>Lightning Zahlung</h3>
-            <p style={{ margin: '1rem 0' }}>{selectedItem.emoji} {selectedItem.name}<br />~{selectedItem.sats} Sats</p>
+            <p style={{ margin: '1rem 0' }}>{selectedItem.emoji} {selectedItem.name}<br />~{calculateSats(selectedItem.priceVnd)} Sats</p>
             <div style={{ background: 'white', padding: '15px', borderRadius: '12px', margin: '1rem 0' }}>
-              <img src={`https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=lnbc${selectedItem.sats}`} alt="QR" style={{ width: '260px' }} />
+              <img src={`https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=lnbc${calculateSats(selectedItem.priceVnd)}`} alt="QR" style={{ width: '260px' }} />
             </div>
             <button onClick={() => setShowPayment(false)} style={{ background: '#f59e0b', color: '#111', padding: '14px 40px', borderRadius: '9999px', fontWeight: 'bold' }}>
               Fertig
