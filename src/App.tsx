@@ -15,7 +15,6 @@ function App() {
 
   // Lightning Payment (aktuell deaktiviert)
   const [showPayment, setShowPayment] = useState(false)
-  // const [selectedItem, setSelectedItem] = useState<any>(null)
 
   // Menu Accordion
   const [openCategory, setOpenCategory] = useState<'drinks' | 'food' | null>('drinks')
@@ -83,12 +82,6 @@ function App() {
     { name: "Spring Rolls", priceVnd: 75000, emoji: "🌯" },
   ]
 
-  // handlePayment Funktion (auskommentiert)
-  // const handlePayment = (item: any) => {
-  //   setSelectedItem(item)
-  //   setShowPayment(true)
-  // }
-
   const handleReservationSubmit = (e: any) => {
     e.preventDefault()
     setReservationStep('choice')
@@ -139,10 +132,15 @@ function App() {
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>☕</div>
           
-          {/* Zweifarbiges Logo */}
+          {/* Zweifarbiges Logo mit gedrehtem ₿ */}
           <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', margin: '0 0 0.3rem 0' }}>
-            <span style={{ color: '#f59e0b' }}>₿it</span>
-            <span style={{ color: 'white' }}>Coffee</span>
+            <span style={{ 
+              color: '#f59e0b', 
+              display: 'inline-block', 
+              transform: 'rotate(-12deg)',
+              marginRight: '2px'
+            }}>₿</span>
+            <span style={{ color: 'white' }}>itCoffee</span>
           </h1>
           
           <p style={{ color: '#f59e0b', marginBottom: '0.8rem' }}>{t.subtitle}</p>
@@ -184,13 +182,6 @@ function App() {
                   <div style={{ textAlign: 'right' }}>
                     <div>{item.priceVnd.toLocaleString()} VND</div>
                     <div style={{ color: '#f59e0b' }}>~{calculateSats(item.priceVnd)} Sats</div>
-                    
-                    {/* Lightning Button (auskommentiert) */}
-                    {/* 
-                    <button onClick={() => handlePayment(item)} style={{ marginTop: '6px', background: '#f59e0b', color: '#111', padding: '6px 14px', borderRadius: '9999px', fontSize: '0.85rem' }}>
-                      {t.pay}
-                    </button>
-                    */}
                   </div>
                 </div>
               ))}
@@ -208,13 +199,6 @@ function App() {
                   <div style={{ textAlign: 'right' }}>
                     <div>{item.priceVnd.toLocaleString()} VND</div>
                     <div style={{ color: '#f59e0b' }}>~{calculateSats(item.priceVnd)} Sats</div>
-                    
-                    {/* Lightning Button (auskommentiert) */}
-                    {/* 
-                    <button onClick={() => handlePayment(item)} style={{ marginTop: '6px', background: '#f59e0b', color: '#111', padding: '6px 14px', borderRadius: '9999px', fontSize: '0.85rem' }}>
-                      {t.pay}
-                    </button>
-                    */}
                   </div>
                 </div>
               ))}
@@ -304,7 +288,7 @@ function App() {
         </div>
       </div>
 
-      {/* Lightning Modal (bleibt erhalten für später) */}
+      {/* Lightning Modal */}
       {showPayment && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.95)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
           <div style={{ background: '#111', padding: '2rem', borderRadius: '20px', maxWidth: '360px', textAlign: 'center' }}>
