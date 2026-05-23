@@ -138,7 +138,7 @@ function App() {
               color: '#f59e0b', 
               display: 'inline-block', 
               transform: 'rotate(12deg)',
-              marginRight: '-2px'   // enger Abstand
+              marginRight: '-3px'   // enger Abstand
             }}>₿</span>
             <span style={{ color: '#f59e0b' }}>it</span>
             <span style={{ color: 'white' }}>Coffee</span>
