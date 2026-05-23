@@ -92,7 +92,7 @@ function App() {
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#0a0a0a', color: 'white', paddingBottom: '80px' }}>
-      <img src="/bitcoffee-hero.jpg" alt="BitCoffee" style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
+      <img src="/bitcoffee-hero.png" alt="BitCoffee" style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
 
       <div style={{ maxWidth: '460px', margin: '0 auto', padding: '0 1.5rem' }}>
         
