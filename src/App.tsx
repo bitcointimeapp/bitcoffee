@@ -13,9 +13,9 @@ function App() {
   const [reservation, setReservation] = useState({ date: '', time: '', people: '2', name: '', phone: '' })
   const [reservationStep, setReservationStep] = useState<'form' | 'choice' | 'sent'>('form')
 
-  // Lightning Payment
+  // Lightning Payment (aktuell deaktiviert)
   const [showPayment, setShowPayment] = useState(false)
-  const [selectedItem, setSelectedItem] = useState<any>(null)
+  // const [selectedItem, setSelectedItem] = useState<any>(null)
 
   // Menu Accordion
   const [openCategory, setOpenCategory] = useState<'drinks' | 'food' | null>('drinks')
@@ -83,7 +83,7 @@ function App() {
     { name: "Spring Rolls", priceVnd: 75000, emoji: "🌯" },
   ]
 
-  // handlePayment Funktion (auskommentiert, weil Buttons deaktiviert sind)
+  // handlePayment Funktion (auskommentiert)
   // const handlePayment = (item: any) => {
   //   setSelectedItem(item)
   //   setShowPayment(true)
@@ -304,15 +304,12 @@ function App() {
         </div>
       </div>
 
-      {/* Lightning Modal (bleibt erhalten) */}
-      {showPayment && selectedItem && (
+      {/* Lightning Modal (bleibt erhalten für später) */}
+      {showPayment && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.95)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
           <div style={{ background: '#111', padding: '2rem', borderRadius: '20px', maxWidth: '360px', textAlign: 'center' }}>
             <h3 style={{ color: '#f59e0b' }}>Lightning Zahlung</h3>
-            <p style={{ margin: '1rem 0' }}>{selectedItem.emoji} {selectedItem.name}<br />~{calculateSats(selectedItem.priceVnd)} Sats</p>
-            <div style={{ background: 'white', padding: '15px', borderRadius: '12px', margin: '1rem 0' }}>
-              <img src={`https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=lnbc${calculateSats(selectedItem.priceVnd)}`} alt="QR" style={{ width: '260px' }} />
-            </div>
+            <p style={{ margin: '1rem 0' }}>Zahlungsmodal (wird später aktiviert)</p>
             <button onClick={() => setShowPayment(false)} style={{ background: '#f59e0b', color: '#111', padding: '14px 40px', borderRadius: '9999px', fontWeight: 'bold' }}>
               Fertig
             </button>
