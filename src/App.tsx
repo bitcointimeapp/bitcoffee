@@ -137,7 +137,7 @@ function App() {
             <span style={{ 
               color: '#f59e0b', 
               display: 'inline-block', 
-              transform: 'rotate(-12deg)',
+              transform: 'rotate(+12deg)',
               marginRight: '2px'
             }}>₿</span>
             <span style={{ color: 'white' }}>itCoffee</span>
