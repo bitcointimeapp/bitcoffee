@@ -63,9 +63,9 @@ function App() {
   }, [])
 
   const t = {
-    de: { title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Start", menu: "Speisekarte", reservation: "Tisch reservieren", events: "Events", confirm: "✅ Reservierung erhalten! Wir melden uns bald bei dir.", send: "Reservierung absenden", pay: "Mit Lightning bezahlen", howToReceive: "Wie möchtest du die Reservierung erhalten?", whatsapp: "Per WhatsApp senden", email: "Per E-Mail senden", newReservation: "Neue Reservierung" },
-    en: { title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Home", menu: "Menu", reservation: "Reserve Table", events: "Events", confirm: "✅ Reservation received! We'll contact you soon.", send: "Send Reservation", pay: "Pay with Lightning", howToReceive: "How would you like to receive the reservation?", whatsapp: "Send via WhatsApp", email: "Send via Email", newReservation: "New Reservation" },
-    vi: { title: "₿itCoffee", subtitle: "Đà Nẵng • Việt Nam", home: "Trang chủ", menu: "Thực đơn", reservation: "Đặt bàn", events: "Sự kiện", confirm: "✅ Đã nhận đặt bàn! Chúng tôi sẽ liên hệ sớm.", send: "Gửi đặt bàn", pay: "Thanh toán bằng Lightning", howToReceive: "Bạn muốn nhận đặt bàn qua?", whatsapp: "Gửi qua WhatsApp", email: "Gửi qua Email", newReservation: "Đặt bàn mới" }
+    de: { title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Start", menu: "Menü", reservation: "Tisch reservieren", events: "Events", confirm: "Reservierung erhalten! Wir melden uns bald bei dir.", send: "Reservierung absenden", pay: "Mit Lightning bezahlen", howToReceive: "Wie möchtest du die Reservierung erhalten?", whatsapp: "Per WhatsApp senden", email: "Per E-Mail senden", newReservation: "Neue Reservierung" },
+    en: { title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Home", menu: "Menu", reservation: "Reserve Table", events: "Events", confirm: "Reservation received! We'll contact you soon.", send: "Send Reservation", pay: "Pay with Lightning", howToReceive: "How would you like to receive the reservation?", whatsapp: "Send via WhatsApp", email: "Send via Email", newReservation: "New Reservation" },
+    vi: { title: "₿itCoffee", subtitle: "Đà Nẵng • Việt Nam", home: "Trang chủ", menu: "Thực đơn", reservation: "Đặt bàn", events: "Sự kiện", confirm: "Đã nhận đặt bàn! Chúng tôi sẽ liên hệ sớm.", send: "Gửi đặt bàn", pay: "Thanh toán bằng Lightning", howToReceive: "Bạn muốn nhận đặt bàn qua?", whatsapp: "Gửi qua WhatsApp", email: "Gửi qua Email", newReservation: "Đặt bàn mới" }
   }[language]
 
   const menuItems = [
