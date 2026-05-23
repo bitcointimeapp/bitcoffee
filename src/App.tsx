@@ -132,15 +132,16 @@ function App() {
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>☕</div>
           
-          {/* Zweifarbiges Logo mit gedrehtem ₿ */}
+          {/* Zweifarbiges Logo mit gedrehtem ₿ + enger Abstand */}
           <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', margin: '0 0 0.3rem 0' }}>
             <span style={{ 
               color: '#f59e0b', 
               display: 'inline-block', 
-              transform: 'rotate(+12deg)',
-              marginRight: '2px'
+              transform: 'rotate(12deg)',
+              marginRight: '-4px'   // enger Abstand
             }}>₿</span>
-            <span style={{ color: 'white' }}>itCoffee</span>
+            <span style={{ color: '#f59e0b' }}>it</span>
+            <span style={{ color: 'white' }}>Coffee</span>
           </h1>
           
           <p style={{ color: '#f59e0b', marginBottom: '0.8rem' }}>{t.subtitle}</p>
