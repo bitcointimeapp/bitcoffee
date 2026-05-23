@@ -4,7 +4,7 @@ type Language = 'de' | 'en' | 'vi'
 type Tab = 'home' | 'menu' | 'reservation' | 'events'
 
 function App() {
-  const [language, setLanguage] = useState<Language>('de')
+  const [language, setLanguage] = useState<Language>('en')
   const [activeTab, setActiveTab] = useState<Tab>('home')
   const [blockHeight, setBlockHeight] = useState<number | null>(null)
   const [btcPrice, setBtcPrice] = useState<any>(null)
