@@ -8,9 +8,9 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'BitCoffee Da Nang',
-        short_name: 'BitCoffee',
-        description: 'Bitcoin Café Da Nang',
+        name: '₿itCoffee Da Nang',
+        short_name: '₿itCoffee',
+        description: '₿itcoin Café Da Nang',
         theme_color: '#f59e0b',
         background_color: '#0a0a0a',
         display: 'standalone',
