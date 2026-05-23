@@ -136,7 +136,7 @@ function App() {
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>☕</div>
+          <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>₿☕</div>
           <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', color: '#f59e0b' }}>{t.title}</h1>
           <p style={{ color: '#f59e0b', marginBottom: '0.8rem' }}>{t.subtitle}</p>
 
@@ -160,9 +160,10 @@ function App() {
           ))}
         </div>
 
-        {/* Menu mit ausklappbaren Kategorien */}
+        {/* Menu */}
         {activeTab === 'menu' && (
           <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
+            {/* ... dein bestehender Menu-Code ... */}
             <h3 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>{t.menu}</h3>
 
             {/* Getränke */}
@@ -210,6 +211,7 @@ function App() {
         {/* Reservation */}
         {activeTab === 'reservation' && (
           <div style={{ background: '#1a1a1a', padding: '1.8rem', borderRadius: '20px' }}>
+            {/* ... dein bestehender Reservation-Code ... */}
             <h2 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '1.5rem' }}>{t.reservation}</h2>
             
             {reservationStep === 'sent' ? (
@@ -246,6 +248,31 @@ function App() {
           </div>
         )}
 
+        {/* === EVENTS TAB (neu hinzugefügt) === */}
+        {activeTab === 'events' && (
+          <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
+            <h3 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>{t.events}</h3>
+            
+            {eventsData.map((event, i) => (
+              <div key={i} style={{ 
+                background: '#222', 
+                padding: '1.25rem', 
+                borderRadius: '12px', 
+                marginBottom: i !== eventsData.length - 1 ? '1rem' : 0 
+              }}>
+                <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>{event.emoji}</div>
+                <h4 style={{ margin: '0 0 0.5rem 0', color: '#f59e0b' }}>{event[language].title}</h4>
+                <p style={{ color: '#ddd', marginBottom: '1rem' }}>{event[language].desc}</p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem', color: '#ccc' }}>
+                  <div><strong>{event.date}</strong></div>
+                  <div>{event.time}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Home */}
         {activeTab === 'home' && (
           <div style={{ textAlign: 'center', padding: '3rem 1rem', color: '#ddd' }}>
             Welcome / Willkommen / Chào mừng bạn đến với ₿itCoffee!
