@@ -83,10 +83,11 @@ function App() {
     { name: "Spring Rolls", priceVnd: 75000, emoji: "🌯" },
   ]
 
-  const handlePayment = (item: any) => {
-    setSelectedItem(item)
-    setShowPayment(true)
-  }
+  // handlePayment Funktion (auskommentiert, weil Buttons deaktiviert sind)
+  // const handlePayment = (item: any) => {
+  //   setSelectedItem(item)
+  //   setShowPayment(true)
+  // }
 
   const handleReservationSubmit = (e: any) => {
     e.preventDefault()
@@ -303,7 +304,7 @@ function App() {
         </div>
       </div>
 
-      {/* Lightning Modal (bleibt aktiv, falls du später wieder Buttons einblendest) */}
+      {/* Lightning Modal (bleibt erhalten) */}
       {showPayment && selectedItem && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.95)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
           <div style={{ background: '#111', padding: '2rem', borderRadius: '20px', maxWidth: '360px', textAlign: 'center' }}>
