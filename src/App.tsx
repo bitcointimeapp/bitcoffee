@@ -136,7 +136,7 @@ function App() {
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>₿☕</div>
+          <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>☕</div>
           <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', color: '#f59e0b' }}>{t.title}</h1>
           <p style={{ color: '#f59e0b', marginBottom: '0.8rem' }}>{t.subtitle}</p>
 
