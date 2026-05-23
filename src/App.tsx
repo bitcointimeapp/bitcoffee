@@ -102,7 +102,7 @@ function App() {
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>₿☕</div>
+          <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>☕</div>
           <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', color: '#f59e0b' }}>{t.title}</h1>
           <p style={{ color: '#f59e0b', marginBottom: '0.8rem' }}>{t.subtitle}</p>
 
@@ -171,7 +171,7 @@ function App() {
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   <button onClick={() => {
-                    const text = encodeURIComponent(`Neue Reservierung ₿itCoffee\n\nName: ${reservation.name}\nDatum: ${reservation.date}\nUhrzeit: ${reservation.time}\nPersonen: ${reservation.people}\nTelefon: ${reservation.phone}`);
+                    const text = encodeURIComponent(`New Reservation ₿itCoffee\n\nName: ${reservation.name}\nDatum: ${reservation.date}\nUhrzeit: ${reservation.time}\nPersonen: ${reservation.people}\nTelefon: ${reservation.phone}`);
                     window.open(`https://wa.me/849XXXXXXXXX?text=${text}`, '_blank');
                   }} style={{ background: '#25D366', color: 'white', padding: '16px', borderRadius: '9999px', fontWeight: 'bold', border: 'none' }}>
                     📱 {t.whatsapp}
@@ -179,7 +179,7 @@ function App() {
 
                   <button onClick={() => {
                     const subject = encodeURIComponent('Neue Reservierung ₿itCoffee');
-                    const body = encodeURIComponent(`Name: ${reservation.name}\nDatum: ${reservation.date}\nUhrzeit: ${reservation.time}\nPersonen: ${reservation.people}\nTelefon: ${reservation.phone}\n\nBitte bestätigen.`);
+                    const body = encodeURIComponent(`Name: ${reservation.name}\nDate: ${reservation.date}\nTime: ${reservation.time}\nPersons: ${reservation.people}\nTelefon: ${reservation.phone}\n\nPlease confirm.`);
                     window.open(`mailto:DEINE_EMAIL_HIER@gmail.com?subject=${subject}&body=${body}`, '_blank');
                   }} style={{ background: '#f59e0b', color: '#111', padding: '16px', borderRadius: '9999px', fontWeight: 'bold', border: 'none' }}>
                     ✉️ {t.email}
