@@ -69,8 +69,8 @@ function App() {
   }[language]
 
   const menuItems = [
-    { name: "Espresso", priceVnd: "45.000", sats: "6500", emoji: "☕" },
-    { name: "Cappuccino", priceVnd: "55.000", sats: "8000", emoji: "☕" },
+    { name: "Espresso", priceVnd: "28.000", sats: "6500", emoji: "☕" },
+    { name: "Cappuccino", priceVnd: "30.000", sats: "8000", emoji: "☕" },
     { name: "Avocado Toast", priceVnd: "95.000", sats: "13500", emoji: "🥐" },
     { name: "Coconut Coffee", priceVnd: "65.000", sats: "9200", emoji: "🥥" },
   ]
@@ -87,7 +87,7 @@ function App() {
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#0a0a0a', color: 'white', paddingBottom: '80px' }}>
-      <img src="/bitcoffee-hero.png" alt="BitCoffee" style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
+      <img src="/bitcoffee-hero.png" alt="₿itCoffee" style={{ width: '100%', height: '220px', objectFit: 'cover' }} />
 
       <div style={{ maxWidth: '460px', margin: '0 auto', padding: '0 1.5rem' }}>
         
@@ -102,7 +102,7 @@ function App() {
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>₿☕</div>
+          <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>☕</div>
           <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', color: '#f59e0b' }}>{t.title}</h1>
           <p style={{ color: '#f59e0b', marginBottom: '0.8rem' }}>{t.subtitle}</p>
 
@@ -185,7 +185,7 @@ function App() {
                   <button 
                     onClick={() => {
                       const text = encodeURIComponent(
-                        `Neue Reservierung BitCoffee\n\n` +
+                        `Neue Reservierung ₿itCoffee\n\n` +
                         `Name: ${reservation.name}\n` +
                         `Datum: ${reservation.date}\n` +
                         `Uhrzeit: ${reservation.time}\n` +
@@ -201,7 +201,7 @@ function App() {
 
                   <button 
                     onClick={() => {
-                      const subject = encodeURIComponent('Neue Reservierung BitCoffee');
+                      const subject = encodeURIComponent('Neue Reservierung ₿itCoffee');
                       const body = encodeURIComponent(
                         `Name: ${reservation.name}\n` +
                         `Datum: ${reservation.date}\n` +
@@ -244,7 +244,7 @@ function App() {
 
         {activeTab === 'home' && (
           <div style={{ textAlign: 'center', padding: '3rem 1rem', color: '#ddd' }}>
-            Welcome to BitCoffee!
+            Welcome / Willkommen / Chào mừng bạn đến với ₿itCoffee!
           </div>
         )}
 
