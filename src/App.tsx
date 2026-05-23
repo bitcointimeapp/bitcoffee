@@ -171,15 +171,15 @@ function App() {
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   <button onClick={() => {
-                    const text = encodeURIComponent(`New Reservation ₿itCoffee\n\nName: ${reservation.name}\nDatum: ${reservation.date}\nUhrzeit: ${reservation.time}\nPersonen: ${reservation.people}\nTelefon: ${reservation.phone}`);
+                    const text = encodeURIComponent(`New Reservation ₿itCoffee\n\nName: ${reservation.name}\nDate: ${reservation.date}\nTime: ${reservation.time}\nPersons: ${reservation.people}\nPhone: ${reservation.phone}`);
                     window.open(`https://wa.me/849XXXXXXXXX?text=${text}`, '_blank');
                   }} style={{ background: '#25D366', color: 'white', padding: '16px', borderRadius: '9999px', fontWeight: 'bold', border: 'none' }}>
                     📱 {t.whatsapp}
                   </button>
 
                   <button onClick={() => {
-                    const subject = encodeURIComponent('Neue Reservierung ₿itCoffee');
-                    const body = encodeURIComponent(`Name: ${reservation.name}\nDate: ${reservation.date}\nTime: ${reservation.time}\nPersons: ${reservation.people}\nTelefon: ${reservation.phone}\n\nPlease confirm.`);
+                    const subject = encodeURIComponent('New Reservation ₿itCoffee');
+                    const body = encodeURIComponent(`Name: ${reservation.name}\nDate: ${reservation.date}\nTime: ${reservation.time}\nPersons: ${reservation.people}\nPhone: ${reservation.phone}\n\nPlease confirm.`);
                     window.open(`mailto:DEINE_EMAIL_HIER@gmail.com?subject=${subject}&body=${body}`, '_blank');
                   }} style={{ background: '#f59e0b', color: '#111', padding: '16px', borderRadius: '9999px', fontWeight: 'bold', border: 'none' }}>
                     ✉️ {t.email}
