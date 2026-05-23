@@ -4,7 +4,7 @@ type Language = 'de' | 'en' | 'vi'
 type Tab = 'home' | 'menu' | 'reservation' | 'events'
 
 function App() {
-  const [language, setLanguage] = useState<Language>('en')
+  const [language, setLanguage] = useState<Language>('en') // Englisch als Standard
   const [activeTab, setActiveTab] = useState<Tab>('home')
   const [blockHeight, setBlockHeight] = useState<number | null>(null)
   const [btcPrice, setBtcPrice] = useState<any>(null)
@@ -17,7 +17,7 @@ function App() {
   const [showPayment, setShowPayment] = useState(false)
   const [selectedItem, setSelectedItem] = useState<any>(null)
 
-  // ==================== EVENTS - HIER NEUE EVENTS HINZUFÜGEN ====================
+  // ==================== EVENTS ====================
   const eventsData = [
     {
       de: { title: "Bitcoin Pizza Day", desc: "Große Pizza-Party mit Lightning-Raffles & Community" },
@@ -83,11 +83,6 @@ function App() {
   const handleReservation = (e: any) => {
     e.preventDefault()
     setReservationSent(true)
-    setTimeout(() => {
-      alert(t.confirm)
-      setReservationSent(false)
-      setReservation({ date: '', time: '', people: '2', name: '', phone: '' })
-    }, 700)
   }
 
   return (
@@ -107,7 +102,7 @@ function App() {
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>☕</div>
+          <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>₿☕</div>
           <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', color: '#f59e0b' }}>{t.title}</h1>
           <p style={{ color: '#f59e0b', marginBottom: '0.8rem' }}>{t.subtitle}</p>
 
@@ -171,12 +166,67 @@ function App() {
           </div>
         )}
 
-        {/* Reservation */}
+        {/* ==================== RESERVIERUNG MIT WHATSAPP + EMAIL ==================== */}
         {activeTab === 'reservation' && (
           <div style={{ background: '#1a1a1a', padding: '1.8rem', borderRadius: '20px' }}>
             <h2 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '1.5rem' }}>{t.reservation}</h2>
+            
             {reservationSent ? (
-              <p style={{ textAlign: 'center', color: '#4ade80', fontSize: '1.1rem' }}>{t.confirm}</p>
+              <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+                <p style={{ fontSize: '1.3rem', color: '#4ade80', marginBottom: '2rem' }}>
+                  ✅ {t.confirm}
+                </p>
+                
+                <p style={{ marginBottom: '1.5rem', color: '#ddd' }}>
+                  Wie möchtest du die Reservierung erhalten?
+                </p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <button 
+                    onClick={() => {
+                      const text = encodeURIComponent(
+                        `Neue Reservierung BitCoffee\n\n` +
+                        `Name: ${reservation.name}\n` +
+                        `Datum: ${reservation.date}\n` +
+                        `Uhrzeit: ${reservation.time}\n` +
+                        `Personen: ${reservation.people}\n` +
+                        `Telefon: ${reservation.phone}`
+                      );
+                      window.open(`https://wa.me/849XXXXXXXXX?text=${text}`, '_blank');
+                    }}
+                    style={{ background: '#25D366', color: 'white', padding: '16px', borderRadius: '9999px', fontWeight: 'bold', border: 'none' }}
+                  >
+                    📱 Per WhatsApp senden
+                  </button>
+
+                  <button 
+                    onClick={() => {
+                      const subject = encodeURIComponent('Neue Reservierung BitCoffee');
+                      const body = encodeURIComponent(
+                        `Name: ${reservation.name}\n` +
+                        `Datum: ${reservation.date}\n` +
+                        `Uhrzeit: ${reservation.time}\n` +
+                        `Personen: ${reservation.people}\n` +
+                        `Telefon: ${reservation.phone}\n\nBitte bestätigen.`
+                      );
+                      window.open(`mailto:DEINE_EMAIL_HIER@gmail.com?subject=${subject}&body=${body}`, '_blank');
+                    }}
+                    style={{ background: '#f59e0b', color: '#111', padding: '16px', borderRadius: '9999px', fontWeight: 'bold', border: 'none' }}
+                  >
+                    ✉️ Per E-Mail senden
+                  </button>
+                </div>
+
+                <button 
+                  onClick={() => {
+                    setReservationSent(false);
+                    setReservation({ date: '', time: '', people: '2', name: '', phone: '' });
+                  }}
+                  style={{ marginTop: '2rem', color: '#888', background: 'none', border: 'none' }}
+                >
+                  Neue Reservierung
+                </button>
+              </div>
             ) : (
               <form onSubmit={handleReservation} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <input type="date" value={reservation.date} onChange={e => setReservation({...reservation, date: e.target.value})} required style={{ padding: '12px', borderRadius: '12px', background: '#222', color: 'white', border: 'none' }} />
@@ -194,7 +244,7 @@ function App() {
 
         {activeTab === 'home' && (
           <div style={{ textAlign: 'center', padding: '3rem 1rem', color: '#ddd' }}>
-            Willkommen / Welcome / Chào mừng bạn đến với BitCoffee!
+            Welcome to BitCoffee!
           </div>
         )}
 
