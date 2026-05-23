@@ -58,7 +58,7 @@ function App() {
   }, [])
 
   const t = {
-    de: { title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Start", menu: "Speisekarte", reservation: "Tisch reservieren", events: "Events", send: "Reservierung absenden", pay: "Mit Lightning bezahlen", howToReceive: "Wie möchtest du die Reservierung erhalten?", whatsapp: "Per WhatsApp senden", email: "Per E-Mail senden", newReservation: "Neue Reservierung", success: "✅ Reservierung erhalten! Wir melden uns bald bei dir.", drinks: "Getränke", food: "Essen" },
+    de: { title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Start", menu: "Menü", reservation: "Tisch reservieren", events: "Events", send: "Reservierung absenden", pay: "Mit Lightning bezahlen", howToReceive: "Wie möchtest du die Reservierung erhalten?", whatsapp: "Per WhatsApp senden", email: "Per E-Mail senden", newReservation: "Neue Reservierung", success: "✅ Reservierung erhalten! Wir melden uns bald bei dir.", drinks: "Getränke", food: "Essen" },
     en: { title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Home", menu: "Menu", reservation: "Reserve Table", events: "Events", send: "Send Reservation", pay: "Pay with Lightning", howToReceive: "How would you like to receive the reservation?", whatsapp: "Send via WhatsApp", email: "Send via Email", newReservation: "New Reservation", success: "✅ Reservation received! We'll contact you soon.", drinks: "Drinks", food: "Food" },
     vi: { title: "₿itCoffee", subtitle: "Đà Nẵng • Việt Nam", home: "Trang chủ", menu: "Thực đơn", reservation: "Đặt bàn", events: "Sự kiện", send: "Gửi đặt bàn", pay: "Thanh toán bằng Lightning", howToReceive: "Bạn muốn nhận đặt bàn qua?", whatsapp: "Gửi qua WhatsApp", email: "Gửi qua Email", newReservation: "Đặt bàn mới", success: "✅ Đã nhận đặt bàn! Chúng tôi sẽ liên hệ sớm.", drinks: "Đồ uống", food: "Đồ ăn" }
   }[language]
@@ -70,10 +70,10 @@ function App() {
   }
 
   const menuDrinks = [
-    { name: "BitCoffee", priceVnd: 45000, emoji: "☕" },
-    { name: "Cappuccino", priceVnd: 55000, emoji: "☕" },
-    { name: "Espresso", priceVnd: 45000, emoji: "☕" },
-    { name: "Café Latte", priceVnd: 58000, emoji: "☕" },
+    { name: "BitCoffee", priceVnd: 30000, emoji: "☕" },
+    { name: "Cappuccino", priceVnd: 35000, emoji: "☕" },
+    { name: "Espresso", priceVnd: 28000, emoji: "☕" },
+    { name: "Café Latte", priceVnd: 40000, emoji: "☕" },
   ]
 
   const menuFood = [
@@ -136,7 +136,7 @@ function App() {
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>₿☕</div>
+          <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>☕</div>
           <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', color: '#f59e0b' }}>{t.title}</h1>
           <p style={{ color: '#f59e0b', marginBottom: '0.8rem' }}>{t.subtitle}</p>
 
