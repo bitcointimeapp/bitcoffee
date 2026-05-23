@@ -137,7 +137,13 @@ function App() {
 
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>☕</div>
-          <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', color: '#f59e0b' }}>{t.title}</h1>
+          
+          {/* Zweifarbiges Logo */}
+          <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', margin: '0 0 0.3rem 0' }}>
+            <span style={{ color: '#f59e0b' }}>₿it</span>
+            <span style={{ color: 'white' }}>Coffee</span>
+          </h1>
+          
           <p style={{ color: '#f59e0b', marginBottom: '0.8rem' }}>{t.subtitle}</p>
 
           <div style={{ fontSize: '1rem', color: '#ddd', lineHeight: '1.6', marginTop: '1rem' }}>
@@ -163,7 +169,6 @@ function App() {
         {/* Menu */}
         {activeTab === 'menu' && (
           <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
-            {/* ... dein bestehender Menu-Code ... */}
             <h3 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>{t.menu}</h3>
 
             {/* Getränke */}
@@ -178,9 +183,13 @@ function App() {
                   <div style={{ textAlign: 'right' }}>
                     <div>{item.priceVnd.toLocaleString()} VND</div>
                     <div style={{ color: '#f59e0b' }}>~{calculateSats(item.priceVnd)} Sats</div>
+                    
+                    {/* Lightning Button (auskommentiert) */}
+                    {/* 
                     <button onClick={() => handlePayment(item)} style={{ marginTop: '6px', background: '#f59e0b', color: '#111', padding: '6px 14px', borderRadius: '9999px', fontSize: '0.85rem' }}>
                       {t.pay}
                     </button>
+                    */}
                   </div>
                 </div>
               ))}
@@ -198,9 +207,13 @@ function App() {
                   <div style={{ textAlign: 'right' }}>
                     <div>{item.priceVnd.toLocaleString()} VND</div>
                     <div style={{ color: '#f59e0b' }}>~{calculateSats(item.priceVnd)} Sats</div>
+                    
+                    {/* Lightning Button (auskommentiert) */}
+                    {/* 
                     <button onClick={() => handlePayment(item)} style={{ marginTop: '6px', background: '#f59e0b', color: '#111', padding: '6px 14px', borderRadius: '9999px', fontSize: '0.85rem' }}>
                       {t.pay}
                     </button>
+                    */}
                   </div>
                 </div>
               ))}
@@ -211,7 +224,6 @@ function App() {
         {/* Reservation */}
         {activeTab === 'reservation' && (
           <div style={{ background: '#1a1a1a', padding: '1.8rem', borderRadius: '20px' }}>
-            {/* ... dein bestehender Reservation-Code ... */}
             <h2 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '1.5rem' }}>{t.reservation}</h2>
             
             {reservationStep === 'sent' ? (
@@ -248,7 +260,7 @@ function App() {
           </div>
         )}
 
-        {/* === EVENTS TAB (neu hinzugefügt) === */}
+        {/* Events */}
         {activeTab === 'events' && (
           <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
             <h3 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>{t.events}</h3>
@@ -283,8 +295,7 @@ function App() {
         <div style={{ marginTop: '2.5rem', background: '#1a1a1a', padding: '14px', borderRadius: '16px', textAlign: 'center', fontSize: '0.95rem' }}>
           <div>Block Height: <span style={{ color: '#f59e0b' }}>{blockHeight ? `#${blockHeight.toLocaleString()}` : 'Laden...'}</span></div>
           <div style={{ marginTop: '6px' }}>
-            BTC: {btcPrice ? `$${btcPrice.usd.toLocaleString()} • €${btcPrice.eur.toLocaleString()} • ₫${(btcPrice.vnd/1000000000).toFixed(2)}B` : 'Laden...'}
-          </div>
+            BTC: {btcPrice ? `$${btcPrice.usd.toLocaleString()} • €${btcPrice.eur.toLocaleString()} • ₫${(btcPrice.vnd/1000000000).toFixed(2)}B` : 'Laden...'}</div>
         </div>
 
         <div style={{ textAlign: 'center', marginTop: '3rem', color: '#666', fontSize: '0.85rem' }}>
@@ -292,7 +303,7 @@ function App() {
         </div>
       </div>
 
-      {/* Lightning Modal */}
+      {/* Lightning Modal (bleibt aktiv, falls du später wieder Buttons einblendest) */}
       {showPayment && selectedItem && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.95)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
           <div style={{ background: '#111', padding: '2rem', borderRadius: '20px', maxWidth: '360px', textAlign: 'center' }}>
