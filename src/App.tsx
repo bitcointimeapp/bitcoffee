@@ -77,9 +77,33 @@ function App() {
   }, [])
 
   const t = {
-    de: { title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Start", menu: "Menü", reservation: "Tisch reservieren", bitictionary: "Bitictionary", send: "Reservierung absenden", drinks: "Getränke", food: "Essen" },
-    en: { title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Home", menu: "Menu", reservation: "Reserve Table", bitictionary: "Bitictionary", send: "Send Reservation", drinks: "Drinks", food: "Food" },
-    vi: { title: "₿itCoffee", subtitle: "Đà Nẵng • Việt Nam", home: "Trang chủ", menu: "Thực đơn", reservation: "Đặt bàn", bitictionary: "Bitictionary", send: "Gửi đặt bàn", drinks: "Đồ uống", food: "Đồ ăn" }
+    de: { 
+      title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Start", menu: "Menü", reservation: "Tisch reservieren", 
+      bitictionary: "Bitictionary", send: "Reservierung absenden", drinks: "Getränke", food: "Essen",
+      success: "✅ Reservierung erhalten! Wir melden uns bald bei dir.",
+      newReservation: "Neue Reservierung",
+      howToReceive: "Wie möchtest du die Reservierung erhalten?",
+      whatsapp: "Per WhatsApp senden",
+      email: "Per E-Mail senden"
+    },
+    en: { 
+      title: "₿itCoffee", subtitle: "Da Nang • Vietnam", home: "Home", menu: "Menu", reservation: "Reserve Table", 
+      bitictionary: "Bitictionary", send: "Send Reservation", drinks: "Drinks", food: "Food",
+      success: "✅ Reservation received! We'll contact you soon.",
+      newReservation: "New Reservation",
+      howToReceive: "How would you like to receive the reservation?",
+      whatsapp: "Send via WhatsApp",
+      email: "Send via Email"
+    },
+    vi: { 
+      title: "₿itCoffee", subtitle: "Đà Nẵng • Việt Nam", home: "Trang chủ", menu: "Thực đơn", reservation: "Đặt bàn", 
+      bitictionary: "Bitictionary", send: "Gửi đặt bàn", drinks: "Đồ uống", food: "Đồ ăn",
+      success: "✅ Đã nhận đặt bàn! Chúng tôi sẽ liên hệ sớm.",
+      newReservation: "Đặt bàn mới",
+      howToReceive: "Bạn muốn nhận đặt bàn qua?",
+      whatsapp: "Gửi qua WhatsApp",
+      email: "Gửi qua Email"
+    }
   }[language]
 
   const calculateSats = (vndPrice: number) => {
