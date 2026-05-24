@@ -14,7 +14,7 @@ function App() {
   const [reservationStep, setReservationStep] = useState<'form' | 'choice' | 'sent'>('form')
 
   // Lightning Payment (aktuell deaktiviert)
-  const [showPayment, setShowPayment] = useState(false)
+  // const [showPayment, setShowPayment] = useState(false)
 
   // Menu Accordion
   const [openCategory, setOpenCategory] = useState<'drinks' | 'food' | null>('drinks')
@@ -123,15 +123,15 @@ function App() {
       justifyContent: 'center'
     }}>
       
-      {/* Responsiver Container – funktioniert auf allen Tablets & Desktops */}
+      {/* Responsiver Container */}
       <div style={{ 
         width: '100%', 
-        maxWidth: '620px',        // schöne Breite auf iPad, Android-Tablet, Laptop etc.
+        maxWidth: '620px',
         margin: '0 auto',
         padding: '0 1rem' 
       }}>
         
-        {/* Smartphone-Bereich – bleibt exakt bei 460px */}
+        {/* Smartphone-Bereich (bleibt bei 460px) */}
         <div style={{ maxWidth: '460px', margin: '0 auto' }}>
           
           {/* Sprachen */}
@@ -147,7 +147,7 @@ function App() {
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>☕</div>
             
-            {/* Logo mit gedrehtem ₿ */}
+            {/* Logo */}
             <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', margin: '0 0 0.3rem 0' }}>
               <span style={{ 
                 color: '#f59e0b', 
@@ -222,12 +222,11 @@ function App() {
             </div>
           )}
 
-          {/* Reservation, Events, Home, Live Daten ... (Rest bleibt identisch) */}
           {/* Reservation */}
           {activeTab === 'reservation' && (
             <div style={{ background: '#1a1a1a', padding: '1.8rem', borderRadius: '20px' }}>
               <h2 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '1.5rem' }}>{t.reservation}</h2>
-              {/* ... dein kompletter Reservation-Code ... */}
+              
               {reservationStep === 'sent' ? (
                 <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
                   <p style={{ fontSize: '1.4rem', color: '#4ade80' }}>{t.success}</p>
@@ -267,7 +266,12 @@ function App() {
             <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
               <h3 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>{t.events}</h3>
               {eventsData.map((event, i) => (
-                <div key={i} style={{ background: '#222', padding: '1.25rem', borderRadius: '12px', marginBottom: i !== eventsData.length - 1 ? '1rem' : 0 }}>
+                <div key={i} style={{ 
+                  background: '#222', 
+                  padding: '1.25rem', 
+                  borderRadius: '12px', 
+                  marginBottom: i !== eventsData.length - 1 ? '1rem' : 0 
+                }}>
                   <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>{event.emoji}</div>
                   <h4 style={{ margin: '0 0 0.5rem 0', color: '#f59e0b' }}>{event[language].title}</h4>
                   <p style={{ color: '#ddd', marginBottom: '1rem' }}>{event[language].desc}</p>
