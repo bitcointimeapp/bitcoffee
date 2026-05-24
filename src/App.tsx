@@ -133,9 +133,34 @@ function App() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#0a0a0a', color: 'white', paddingBottom: '80px', display: 'flex', justifyContent: 'center' }}>
-      <div style={{ width: '100%', maxWidth: '620px', margin: '0 auto', padding: '0 1rem' }}>
+    <div style={{ 
+      minHeight: '100vh', 
+      backgroundColor: '#0a0a0a', 
+      color: 'white', 
+      paddingBottom: '80px',
+      display: 'flex',
+      justifyContent: 'center'
+    }}>
+      <div style={{ 
+        width: '100%', 
+        maxWidth: '620px',
+        margin: '0 auto',
+        padding: '0 1rem' 
+      }}>
+        
         <div style={{ maxWidth: '460px', margin: '0 auto' }}>
+
+          {/* Hero Bild */}
+          <img 
+            src="/bitcoffee-hero.png" 
+            alt="BitCoffee" 
+            style={{ 
+              width: '100%', 
+              height: '220px', 
+              objectFit: 'cover',
+              borderRadius: '0 0 16px 16px'
+            }} 
+          />
 
           {/* Sprachen */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', margin: '1.5rem 0' }}>
