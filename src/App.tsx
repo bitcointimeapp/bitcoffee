@@ -17,7 +17,7 @@ function App() {
   // Menu Accordion
   const [openCategory, setOpenCategory] = useState<'drinks' | 'food' | null>('drinks')
 
-  // === BITICTIONARY ===
+  // === BITICTIONARY (erweitert) ===
   const bitictionary = [
     { term: "Bitcoin", de: "Die erste dezentrale digitale Währung • Begrenzt auf 21 Millionen • Dezentral und pseudonym • Von Satoshi Nakamoto 2009 geschaffen.", en: "The first decentralized digital currency • Capped at 21 million • Decentralized and pseudonymous • Created by Satoshi Nakamoto in 2009.", vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên • Giới hạn 21 triệu • Phi tập trung và ẩn danh • Được Satoshi Nakamoto tạo năm 2009." },
     { term: "Blockchain", de: "Öffentliche, unveränderliche Kette von Blöcken • Jeder Block enthält Transaktionen • Sehr schwer zu manipulieren.", en: "Public, immutable chain of blocks • Each block contains transactions • Extremely difficult to manipulate.", vi: "Chuỗi khối công khai, không thể thay đổi • Mỗi khối chứa giao dịch • Rất khó bị thao túng." },
@@ -26,29 +26,21 @@ function App() {
     { term: "Wallet", de: "Digitale Geldbörse • Speichert Private Keys • Hot / Cold Varianten.", en: "Digital wallet • Stores private keys • Hot / Cold variants.", vi: "Ví điện tử • Lưu trữ khóa bí mật • Có loại Hot / Cold." },
     { term: "Private Key", de: "Geheimer Schlüssel • Niemals teilen • Verlust = Verlust der Bitcoin.", en: "Secret key • Never share • Loss = loss of coins.", vi: "Khóa bí mật • Không bao giờ chia sẻ • Mất = mất tiền." },
     { term: "Public Key", de: "Öffentliche Adresse • Kann geteilt werden • Zum Empfangen.", en: "Public address • Can be shared • For receiving.", vi: "Địa chỉ công khai • Có thể chia sẻ • Để nhận Bitcoin." },
-    { term: "Halving", de: "Alle ~4 Jahre halbiert sich die Mining-Belohnung • Macht Bitcoin knapper.", en: "Every ~4 years mining reward is halved • Makes Bitcoin scarcer.", vi: "Cứ ~4 năm phần thưởng khai thác giảm một nửa • Làm Bitcoin khan hiếm hơn." },
-    { term: "HODL", de: "Langfristig halten • Aus Tippfehler entstanden • Bitcoiner-Philosophie.", en: "Hold long-term • From a typo • Bitcoin philosophy.", vi: "Giữ dài hạn • Từ lỗi đánh máy • Triết lý Bitcoin." },
+    { term: "Halving", de: "Alle 210.000 Blöcke (~4 Jahre) halbiert sich die Mining-Belohnung • Macht Bitcoin knapper.", en: "Every 210,000 blocks (~4 years) mining reward is halved • Makes Bitcoin scarcer.", vi: "Cứ 210.000 khối (~4 năm) phần thưởng khai thác giảm một nửa • Làm Bitcoin khan hiếm hơn." },
+    { term: "HODL", de: "Langfristig halten statt verkaufen • Aus Tippfehler entstanden • Bitcoiner-Philosophie.", en: "Hold long-term instead of selling • From a typo • Bitcoin philosophy.", vi: "Giữ dài hạn thay vì bán • Từ lỗi đánh máy • Triết lý Bitcoin." },
     { term: "Fiat", de: "Staatliches Geld (Euro, VND...) • Kann inflationiert werden.", en: "Government money (Euro, VND...) • Can be inflated.", vi: "Tiền pháp định • Có thể in thêm gây lạm phát." },
-    { term: "Mining", de: "Rechenleistung für neue Blöcke • Sichert das Netzwerk • Belohnung in BTC.", en: "Computing power for new blocks • Secures the network.", vi: "Sức mạnh tính toán tạo khối • Bảo vệ mạng • Phần thưởng BTC." },
-    { term: "Node", de: "Vollständiger Netzwerk-Teilnehmer • Erhöht Dezentralisierung.", en: "Full network participant • Increases decentralization.", vi: "Người tham gia đầy đủ mạng • Tăng tính phi tập trung." },
-    { term: "Seed Phrase", de: "12–24 Wörter Backup • Wiederherstellung auf jedem Gerät.", en: "12–24 word backup • Recover on any device.", vi: "Cụm từ khôi phục 12–24 từ." },
-    { term: "Cold Wallet", de: "Offline Wallet • Höchste Sicherheit für große Beträge.", en: "Offline wallet • Highest security.", vi: "Ví ngoại tuyến • An toàn cao nhất." },
-    { term: "Hot Wallet", de: "Online Wallet • Bequem für den Alltag.", en: "Online wallet • Convenient for daily use.", vi: "Ví trực tuyến • Tiện lợi sử dụng hàng ngày." },
-    { term: "Hashrate", de: "Gesamtrechenleistung des Netzwerks.", en: "Total computing power of the network.", vi: "Tổng sức mạnh tính toán mạng." },
-    { term: "Difficulty", de: "Automatisch angepasste Mining-Schwierigkeit.", en: "Automatically adjusted mining difficulty.", vi: "Độ khó khai thác tự động điều chỉnh." },
-    { term: "UTXO", de: "Nicht ausgegebene Guthaben • Wie einzelne Münzen.", en: "Unspent funds • Like individual coins.", vi: "Số dư chưa chi tiêu." },
-    { term: "SegWit", de: "Upgrade für mehr Transaktionen pro Block.", en: "Upgrade for more transactions per block.", vi: "Nâng cấp tăng giao dịch mỗi khối." },
-    { term: "Taproot", de: "2021 Upgrade • Mehr Privatsphäre & Smart Contracts.", en: "2021 upgrade • Better privacy & smart contracts.", vi: "Nâng cấp 2021 • Quyền riêng tư tốt hơn." },
-    { term: "Sats", de: "Satoshis • Praktische Einheit im Alltag.", en: "Satoshis • Practical daily unit.", vi: "Satoshis • Đơn vị phổ biến hàng ngày." },
-    { term: "Moon", de: "Starker Kursanstieg (Slang).", en: "Strong price increase (slang).", vi: "Tăng giá mạnh." },
-    { term: "Dip", de: "Preisrückgang • Gute Kaufgelegenheit.", en: "Price drop • Good buying opportunity.", vi: "Giảm giá tạm thời." },
-    { term: "FOMO", de: "Angst, etwas zu verpassen.", en: "Fear Of Missing Out.", vi: "Sợ bỏ lỡ." },
-    { term: "DYOR", de: "Do Your Own Research – eigene Recherche machen.", en: "Do Your Own Research.", vi: "Tự nghiên cứu." },
-    { term: "NGU", de: "Number Go Up – Bitcoin steigt langfristig.", en: "Number Go Up.", vi: "Số tăng dài hạn." },
-    { term: "Rug Pull", de: "Betrug durch Entwickler.", en: "Scam where developers run away with funds.", vi: "Lừa đảo nhà phát triển bỏ chạy." },
-    { term: "Ordinals", de: "Bitcoin NFTs.", en: "Bitcoin NFTs.", vi: "NFT trên Bitcoin." },
-    { term: "Runes", de: "Fungible Tokens auf Bitcoin.", en: "Fungible tokens on Bitcoin.", vi: "Token thay thế trên Bitcoin." },
-    { term: "Sovereignty", de: "Finanzielle Selbstbestimmung.", en: "Financial self-sovereignty.", vi: "Tự chủ tài chính." }
+    { term: "Mining", de: "Rechenleistung für neue Blöcke • Sichert das Netzwerk • Belohnung in BTC.", en: "Computing power for new blocks • Secures the network • Rewarded in BTC.", vi: "Sức mạnh tính toán tạo khối • Bảo vệ mạng • Phần thưởng BTC." },
+    { term: "Bitaxe 601 Miner", de: "Kleiner, energieeffizienter Solo-Miner • Ideal für Zuhause • Vom Blocktrainer • Gut für Einsteiger.", en: "Small, energy-efficient solo miner • Great for home use • From Blocktrainer • Good for beginners.", vi: "Máy đào Bitcoin nhỏ, tiết kiệm điện • Phù hợp dùng tại nhà • Từ Blocktrainer • Tốt cho người mới." },
+    { term: "Fullnode", de: "Vollständiger Bitcoin-Knoten • Speichert die komplette Blockchain (~600 GB) • Erhöht Dezentralisierung und eigene Sicherheit.", en: "Full Bitcoin node • Stores the entire blockchain (~600 GB) • Increases decentralization and your own security.", vi: "Nút Bitcoin đầy đủ • Lưu trữ toàn bộ blockchain (~600 GB) • Tăng tính phi tập trung và an toàn cá nhân." },
+    { term: "Blocktrainer Terminal", de: "Hardware-Terminal vom Blocktrainer • Zeigt Echtzeit-Infos, Mempool, Preis etc. • Perfekt für Cafés.", en: "Hardware terminal from Blocktrainer • Shows real-time info, mempool, price etc. • Perfect for cafés.", vi: "Thiết bị phần cứng từ Blocktrainer • Hiển thị thông tin thời gian thực, mempool • Hoàn hảo cho quán cà phê." },
+    { term: "Mempool", de: "Warteschlange unbestätigter Transaktionen • Zeigt aktuelle Gebühren • https://mempool.blocktrainer.de", en: "Waiting area for unconfirmed transactions • Shows current fees • https://mempool.blocktrainer.de", vi: "Hàng chờ giao dịch chưa xác nhận • Hiển thị phí hiện tại • https://mempool.blocktrainer.de" },
+    { term: "Der Bitcoin Standard", de: "Buch von Saifedean Ammous • Erklärt Bitcoin als gesundes Geld • Sehr empfohlen.", en: "Book by Saifedean Ammous • Explains Bitcoin as sound money • Highly recommended.", vi: "Sách của Saifedean Ammous • Giải thích Bitcoin là tiền lành mạnh • Rất đáng đọc." },
+    { term: "Zeitpräferenz", de: "Hohe Zeitpräferenz = sofortige Belohnung • Niedrige Zeitpräferenz = langfristiges Denken (Bitcoin fördert das).", en: "High time preference = immediate reward • Low time preference = long-term thinking (Bitcoin encourages this).", vi: "Thời gian ưu tiên cao = thưởng ngay • Thấp = nghĩ dài hạn (Bitcoin khuyến khích)." },
+    { term: "FUD", de: "Fear, Uncertainty, Doubt • Absichtliche Panikmache gegen Bitcoin.", en: "Fear, Uncertainty, Doubt • Deliberate panic against Bitcoin.", vi: "Sợ hãi, Không chắc chắn, Nghi ngờ • Tin đồn tiêu cực về Bitcoin." },
+    { term: "Proof of Work (PoW)", de: "Konsensmechanismus • Miner lösen Rechenaufgaben • Macht Bitcoin extrem sicher.", en: "Consensus mechanism • Miners solve computational puzzles • Makes Bitcoin extremely secure.", vi: "Cơ chế đồng thuận • Thợ đào giải toán • Làm Bitcoin cực kỳ an toàn." },
+    { term: "Genesis Block", de: "Erster Block der Bitcoin-Blockchain • 3. Januar 2009 • Enthält Nachricht über Bankenrettung.", en: "First block of the Bitcoin blockchain • January 3, 2009 • Contains message about bank bailouts.", vi: "Khối đầu tiên của blockchain Bitcoin • 3/1/2009 • Chứa thông điệp về cứu trợ ngân hàng." },
+    { term: "2140", de: "Ca. im Jahr 2140 wird der letzte Bitcoin gemined • Danach nur noch Transaktionsgebühren.", en: "Around year 2140 the last Bitcoin will be mined • After that only transaction fees.", vi: "Khoảng năm 2140 Bitcoin cuối cùng sẽ được khai thác • Sau đó chỉ còn phí giao dịch." },
+    { term: "Don’t Trust, Verify", de: "Bitcoin-Motto • Überprüfe alles selbst statt blind zu vertrauen.", en: "Bitcoin motto • Verify everything yourself instead of trusting blindly.", vi: "Khẩu hiệu Bitcoin • Tự kiểm chứng thay vì tin tưởng mù quáng." }
   ]
 
   const filteredTerms = bitictionary
