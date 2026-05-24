@@ -62,7 +62,7 @@ function App() {
     { term: "Elliptic Curve", de: "Mathematische Kurve, auf der die Kryptografie von Bitcoin basiert (ECDSA).", en: "Mathematical curve on which Bitcoin's cryptography is based (ECDSA).", vi: "Đường cong elliptic mà mật mã Bitcoin dựa vào (ECDSA)." },
     { term: "Orphan Block", de: "Gültiger Block, der nicht in die längste Kette aufgenommen wurde.", en: "Valid block that was not included in the longest chain.", vi: "Khối hợp lệ nhưng không nằm trong chuỗi dài nhất." },
 { term: "Seed Phrase", de: "12–24 Wörter Backup • Wiederherstellung auf jedem Gerät.", en: "12–24 word backup • Recover on any device.", vi: "Cụm từ khôi phục 12–24 từ." },
-    { term: "Difficulty", de: "Automatisch angepasste Mining-Schwierigkeit.", en: "Automatically adjusted mining difficulty.", vi: "Độ khó khai thác tự động điều chỉnh." },
+    { term: "Difficulty", de: "Automatisch angepasste Mining-Schwierigkeit alle 2016 Blöcke, ca. 14 Tage.", en: "Automatically adjusted mining difficulty every 2016 blocks, approx. 14 days", vi: "Độ khó khai thác được tự động điều chỉnh sau mỗi 2016 khối, khoảng 14 ngày." },
     { term: "UTXO", de: "Nicht ausgegebene Guthaben • Wie einzelne Münzen.", en: "Unspent funds • Like individual coins.", vi: "Số dư chưa chi tiêu." },
     { term: "SegWit", de: "Upgrade für mehr Transaktionen pro Block.", en: "Upgrade for more transactions per block.", vi: "Nâng cấp tăng giao dịch mỗi khối." },
     { term: "Taproot", de: "2021 Upgrade • Mehr Privatsphäre & Smart Contracts.", en: "2021 upgrade • Better privacy & smart contracts.", vi: "Nâng cấp 2021 • Quyền riêng tư tốt hơn." },
