@@ -17,7 +17,7 @@ function App() {
   // Menu Accordion
   const [openCategory, setOpenCategory] = useState<'drinks' | 'food' | null>('drinks')
 
-  // === BITICTIONARY (erweitert) ===
+  // === ERWEITERTES BITICTIONARY ===
   const bitictionary = [
     { term: "Bitcoin", de: "Die erste dezentrale digitale Währung • Begrenzt auf 21 Millionen • Dezentral und pseudonym • Von Satoshi Nakamoto 2009 geschaffen.", en: "The first decentralized digital currency • Capped at 21 million • Decentralized and pseudonymous • Created by Satoshi Nakamoto in 2009.", vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên • Giới hạn 21 triệu • Phi tập trung và ẩn danh • Được Satoshi Nakamoto tạo năm 2009." },
     { term: "Blockchain", de: "Öffentliche, unveränderliche Kette von Blöcken • Jeder Block enthält Transaktionen • Sehr schwer zu manipulieren.", en: "Public, immutable chain of blocks • Each block contains transactions • Extremely difficult to manipulate.", vi: "Chuỗi khối công khai, không thể thay đổi • Mỗi khối chứa giao dịch • Rất khó bị thao túng." },
@@ -28,13 +28,17 @@ function App() {
     { term: "Public Key", de: "Öffentliche Adresse • Kann geteilt werden • Zum Empfangen.", en: "Public address • Can be shared • For receiving.", vi: "Địa chỉ công khai • Có thể chia sẻ • Để nhận Bitcoin." },
     { term: "Halving", de: "Alle 210.000 Blöcke (~4 Jahre) halbiert sich die Mining-Belohnung • Macht Bitcoin knapper.", en: "Every 210,000 blocks (~4 years) mining reward is halved • Makes Bitcoin scarcer.", vi: "Cứ 210.000 khối (~4 năm) phần thưởng khai thác giảm một nửa • Làm Bitcoin khan hiếm hơn." },
     { term: "HODL", de: "Langfristig halten statt verkaufen • Aus Tippfehler entstanden • Bitcoiner-Philosophie.", en: "Hold long-term instead of selling • From a typo • Bitcoin philosophy.", vi: "Giữ dài hạn thay vì bán • Từ lỗi đánh máy • Triết lý Bitcoin." },
-    { term: "Fiat", de: "Staatliches Geld (Euro, VND...) • Kann inflationiert werden.", en: "Government money (Euro, VND...) • Can be inflated.", vi: "Tiền pháp định • Có thể in thêm gây lạm phát." },
+    { term: "Fiat", de: "Staatliches Geld (Euro, VND...) • Kommt vom lateinischen 'fiat' = 'es werde gemacht' • Kann beliebig vermehrt werden.", en: "Government money (Euro, VND...) • From Latin 'fiat' = 'let it be done' • Can be printed indefinitely.", vi: "Tiền pháp định • Từ tiếng Latin 'fiat' = 'hãy để nó được tạo ra' • Có thể in vô hạn." },
     { term: "Mining", de: "Rechenleistung für neue Blöcke • Sichert das Netzwerk • Belohnung in BTC.", en: "Computing power for new blocks • Secures the network • Rewarded in BTC.", vi: "Sức mạnh tính toán tạo khối • Bảo vệ mạng • Phần thưởng BTC." },
     { term: "Bitaxe 601 Miner", de: "Kleiner, energieeffizienter Solo-Miner • Ideal für Zuhause • Vom Blocktrainer • Gut für Einsteiger.", en: "Small, energy-efficient solo miner • Great for home use • From Blocktrainer • Good for beginners.", vi: "Máy đào Bitcoin nhỏ, tiết kiệm điện • Phù hợp dùng tại nhà • Từ Blocktrainer • Tốt cho người mới." },
-    { term: "Fullnode", de: "Vollständiger Bitcoin-Knoten • Speichert die komplette Blockchain (~600 GB) • Erhöht Dezentralisierung und eigene Sicherheit.", en: "Full Bitcoin node • Stores the entire blockchain (~600 GB) • Increases decentralization and your own security.", vi: "Nút Bitcoin đầy đủ • Lưu trữ toàn bộ blockchain (~600 GB) • Tăng tính phi tập trung và an toàn cá nhân." },
+    { term: "Fullnode", de: "Vollständiger Bitcoin-Knoten • Speichert die komplette Blockchain • Erhöht Dezentralisierung und eigene Sicherheit.", en: "Full Bitcoin node • Stores the entire blockchain • Increases decentralization and your own security.", vi: "Nút Bitcoin đầy đủ • Lưu trữ toàn bộ blockchain • Tăng tính phi tập trung và an toàn cá nhân." },
     { term: "Blocktrainer Terminal", de: "Hardware-Terminal vom Blocktrainer • Zeigt Echtzeit-Infos, Mempool, Preis etc. • Perfekt für Cafés.", en: "Hardware terminal from Blocktrainer • Shows real-time info, mempool, price etc. • Perfect for cafés.", vi: "Thiết bị phần cứng từ Blocktrainer • Hiển thị thông tin thời gian thực, mempool • Hoàn hảo cho quán cà phê." },
     { term: "Mempool", de: "Warteschlange unbestätigter Transaktionen • Zeigt aktuelle Gebühren • https://mempool.blocktrainer.de", en: "Waiting area for unconfirmed transactions • Shows current fees • https://mempool.blocktrainer.de", vi: "Hàng chờ giao dịch chưa xác nhận • Hiển thị phí hiện tại • https://mempool.blocktrainer.de" },
     { term: "Der Bitcoin Standard", de: "Buch von Saifedean Ammous • Erklärt Bitcoin als gesundes Geld • Sehr empfohlen.", en: "Book by Saifedean Ammous • Explains Bitcoin as sound money • Highly recommended.", vi: "Sách của Saifedean Ammous • Giải thích Bitcoin là tiền lành mạnh • Rất đáng đọc." },
+    { term: "Hal Finney", de: "Erster Mensch, der eine Bitcoin-Transaktion von Satoshi erhielt (2009) • Früher Cypherpunk und Bitcoin-Entwickler.", en: "First person to receive a Bitcoin transaction from Satoshi (2009) • Early cypherpunk and Bitcoin developer.", vi: "Người đầu tiên nhận giao dịch Bitcoin từ Satoshi (2009) • Cypherpunk và lập trình viên Bitcoin sớm." },
+    { term: "Cantillon-Effekt", de: "Neues Geld kommt zuerst bei Reichen/Banken an • Diese profitieren, bevor die Inflation alle erreicht.", en: "New money reaches rich/banks first • They benefit before inflation hits everyone.", vi: "Tiền mới đến tay người giàu/ngân hàng trước • Họ hưởng lợi trước khi lạm phát lan ra." },
+    { term: "Block Reward", de: "Belohnung für den Miner, der einen Block findet • Besteht aus neu geschaffenen BTC + Transaktionsgebühren.", en: "Reward for the miner who finds a block • New BTC + transaction fees.", vi: "Phần thưởng cho thợ đào tìm được khối • Bao gồm BTC mới + phí giao dịch." },
+    { term: "FOMO", de: "Fear Of Missing Out • Angst, eine starke Kursbewegung zu verpassen.", en: "Fear Of Missing Out • Fear of missing a big price move.", vi: "Sợ bỏ lỡ • Sợ bỏ lỡ một đợt tăng giá mạnh." },
     { term: "Zeitpräferenz", de: "Hohe Zeitpräferenz = sofortige Belohnung • Niedrige Zeitpräferenz = langfristiges Denken (Bitcoin fördert das).", en: "High time preference = immediate reward • Low time preference = long-term thinking (Bitcoin encourages this).", vi: "Thời gian ưu tiên cao = thưởng ngay • Thấp = nghĩ dài hạn (Bitcoin khuyến khích)." },
     { term: "FUD", de: "Fear, Uncertainty, Doubt • Absichtliche Panikmache gegen Bitcoin.", en: "Fear, Uncertainty, Doubt • Deliberate panic against Bitcoin.", vi: "Sợ hãi, Không chắc chắn, Nghi ngờ • Tin đồn tiêu cực về Bitcoin." },
     { term: "Proof of Work (PoW)", de: "Konsensmechanismus • Miner lösen Rechenaufgaben • Macht Bitcoin extrem sicher.", en: "Consensus mechanism • Miners solve computational puzzles • Makes Bitcoin extremely secure.", vi: "Cơ chế đồng thuận • Thợ đào giải toán • Làm Bitcoin cực kỳ an toàn." },
@@ -155,7 +159,7 @@ function App() {
             ))}
           </div>
 
-          {/* Logo */}
+          {/* Logo + Kontakt */}
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>☕</div>
             <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', margin: '0 0 0.3rem 0' }}>
@@ -164,6 +168,12 @@ function App() {
               <span style={{ color: 'white' }}>Coffee</span>
             </h1>
             <p style={{ color: '#f59e0b' }}>{t.subtitle}</p>
+
+            <div style={{ fontSize: '1rem', color: '#ddd', lineHeight: '1.6', marginTop: '1rem' }}>
+              <p style={{ color: '#f59e0b', cursor: 'pointer', marginBottom: '4px' }} onClick={() => window.open('https://maps.google.com/?q=DEINE_VOLLE_ADRESSE_HIER', '_blank')}>📍 [Deine volle Adresse hier]</p>
+              <p style={{ color: '#f59e0b', cursor: 'pointer', marginBottom: '4px' }} onClick={() => window.open('tel:+849XXXXXXXXX')}>📞 [+84 9XX XXX XXX]</p>
+              <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://x.com/21BitCoffee', '_blank')}>𝕏 @21BitCoffee</p>
+            </div>
           </div>
 
           {/* Tabs */}
@@ -179,6 +189,7 @@ function App() {
             ))}
           </div>
 
+          {/* Menu, Reservation, Bitictionary, Home, Live Daten ... (wie zuvor) */}
           {/* Menu */}
           {activeTab === 'menu' && (
             <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
@@ -314,8 +325,9 @@ function App() {
               BTC: {btcPrice ? `$${btcPrice.usd.toLocaleString()} • €${btcPrice.eur.toLocaleString()} • ₫${(btcPrice.vnd/1000000000).toFixed(2)}B` : 'Laden...'}</div>
           </div>
 
+          {/* Anklickbares Copyright */}
           <div style={{ textAlign: 'center', marginTop: '3rem', color: '#666', fontSize: '0.85rem' }}>
-            Copyright © BitcoinZeit
+            Copyright © <span style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://x.com/BitcoinZeit', '_blank')}>BitcoinZeit</span>
           </div>
         </div>
       </div>
