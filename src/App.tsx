@@ -18,7 +18,7 @@ function App() {
   // Menu Accordion
   const [openCategory, setOpenCategory] = useState<'drinks' | 'food' | null>('drinks')
 
-  // === BITICTIONARY (vollständig + erweitert) ===
+  // === BITICTIONARY ===
   const bitictionary = [
     { term: "Bitcoin", de: "Die erste dezentrale digitale Währung • Begrenzt auf 21 Millionen • Dezentral und pseudonym • Von Satoshi Nakamoto 2009 geschaffen.", en: "The first decentralized digital currency • Capped at 21 million • Decentralized and pseudonymous • Created by Satoshi Nakamoto in 2009.", vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên • Giới hạn 21 triệu • Phi tập trung và ẩn danh • Được Satoshi Nakamoto tạo năm 2009." },
     { term: "Blockchain", de: "Öffentliche, unveränderliche Kette von Blöcken • Jeder Block enthält Transaktionen • Sehr schwer zu manipulieren.", en: "Public, immutable chain of blocks • Each block contains transactions • Extremely difficult to manipulate.", vi: "Chuỗi khối công khai, không thể thay đổi • Mỗi khối chứa giao dịch • Rất khó bị thao túng." },
@@ -105,7 +105,7 @@ function App() {
     }
 
     fetchData()
-    const interval = setInterval(fetchData, 300000)
+    const interval = setInterval(fetchData, 300000) // alle 5 Minuten
     return () => clearInterval(interval)
   }, [])
 
@@ -185,29 +185,21 @@ function App() {
       minHeight: '100vh', 
       backgroundColor: '#0a0a0a', 
       color: 'white', 
-      paddingBottom: '80px'
+      paddingBottom: '80px',
+      display: 'flex',
+      justifyContent: 'center'
     }}>
       <div style={{ 
         width: '100%', 
-        maxWidth: '920px',        // ← Optimale Breite für Tablets
+        maxWidth: '620px',
         margin: '0 auto',
         padding: '0 1rem' 
       }}>
         
-        <div style={{ width: '100%' }}>
+        <div style={{ maxWidth: '460px', margin: '0 auto' }}>
 
           {/* Hero Bild */}
-          <img 
-            src="/bitcoffee-hero.png" 
-            alt="BitCoffee" 
-            style={{ 
-              width: '100%', 
-              height: 'auto', 
-              maxHeight: '280px',
-              objectFit: 'cover', 
-              borderRadius: '0 0 16px 16px' 
-            }} 
-          />
+          <img src="/bitcoffee-hero.png" alt="BitCoffee" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '0 0 16px 16px' }} />
 
           {/* Sprachen */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', margin: '1.5rem 0' }}>
@@ -371,7 +363,7 @@ function App() {
           {/* Home */}
           {activeTab === 'home' && (
             <div style={{ textAlign: 'center', padding: '3rem 1rem', color: '#ddd' }}>
-              Welcome / Willkommen / Chào mừng bạn đến với ₿itCoffee!
+              Welcome / Willkommen / Chào mừng bạn đến mit ₿itCoffee!
             </div>
           )}
 
@@ -394,7 +386,7 @@ function App() {
                 </div>
               )}
             </div>
-            <div style={{ fontSize: '0.85rem', color: '#f59e0b' }}>1-Year Bitcoin Chart</div>
+            <div style={{ fontSize: '0.85rem', color: '#f59e0b' }}>1-Jahres Bitcoin Kurs (VND)</div>
           </div>
 
           {/* Copyright */}
