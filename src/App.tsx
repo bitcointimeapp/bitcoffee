@@ -81,14 +81,14 @@ function App() {
     )
     .sort((a, b) => a.term.localeCompare(b.term))
 
-  // Window Resize
+  // Window Resize Listener
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth)
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Live Daten + Chart
+  // Live Daten + 1-Jahres Chart
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -198,7 +198,6 @@ function App() {
       width: '100%',
       overflowX: 'hidden'
     }}>
-      {/* Haupt-Content Container */}
       <div style={{ 
         width: '100%', 
         maxWidth: windowWidth > 768 ? '920px' : '100%',
@@ -274,13 +273,129 @@ function App() {
         {activeTab === 'menu' && (
           <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
             <h3 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>{t.menu}</h3>
-            {/* ... dein Menu Code ... */}
+
+            <div onClick={() => setOpenCategory(openCategory === 'drinks' ? null : 'drinks')} style={{ cursor: 'pointer', padding: '12px', background: '#222', borderRadius: '12px', marginBottom: '8px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>
+                <span>{t.drinks}</span>
+                <span>{openCategory === 'drinks' ? '−' : '+'}</span>
+              </div>
+              {openCategory === 'drinks' && menuDrinks.map((item, i) => (
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: i !== menuDrinks.length-1 ? '1px solid #333' : 'none' }}>
+                  <div><span style={{ marginRight: '10px' }}>{item.emoji}</span>{item.name}</div>
+                  <div style={{ textAlign: 'right' }}>
+                    <div>{item.priceVnd.toLocaleString()} VND</div>
+                    <div style={{ color: '#f59e0b' }}>~{calculateSats(item.priceVnd)} Sats</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div onClick={() => setOpenCategory(openCategory === 'food' ? null : 'food')} style={{ cursor: 'pointer', padding: '12px', background: '#222', borderRadius: '12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>
+                <span>{t.food}</span>
+                <span>{openCategory === 'food' ? '−' : '+'}</span>
+              </div>
+              {openCategory === 'food' && menuFood.map((item, i) => (
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: i !== menuFood.length-1 ? '1px solid #333' : 'none' }}>
+                  <div><span style={{ marginRight: '10px' }}>{item.emoji}</span>{item.name}</div>
+                  <div style={{ textAlign: 'right' }}>
+                    <div>{item.priceVnd.toLocaleString()} VND</div>
+                    <div style={{ color: '#f59e0b' }}>~{calculateSats(item.priceVnd)} Sats</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* Reservation, Bitictionary, Home, Chart ... (wie in deiner letzten Version) */}
+        {/* Reservation */}
+        {activeTab === 'reservation' && (
+          <div style={{ background: '#1a1a1a', padding: '1.8rem', borderRadius: '20px' }}>
+            <h2 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '1.5rem' }}>{t.reservation}</h2>
+            
+            {reservationStep === 'sent' ? (
+              <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
+                <p style={{ fontSize: '1.4rem', color: '#4ade80' }}>{t.success}</p>
+                <button onClick={() => { setReservationStep('form'); setReservation({ date: '', time: '', people: '2', name: '', phone: '' }); }} style={{ marginTop: '2rem', color: '#888', background: 'none', border: 'none' }}>
+                  {t.newReservation}
+                </button>
+              </div>
+            ) : reservationStep === 'choice' ? (
+              <div style={{ textAlign: 'center' }}>
+                <p style={{ marginBottom: '1.5rem', color: '#ddd', fontSize: '1.1rem' }}>{t.howToReceive}</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <button onClick={handleSendWhatsApp} style={{ background: '#25D366', color: 'white', padding: '16px', borderRadius: '9999px', fontWeight: 'bold', border: 'none' }}>
+                    📱 {t.whatsapp}
+                  </button>
+                  <button onClick={handleSendEmail} style={{ background: '#f59e0b', color: '#111', padding: '16px', borderRadius: '9999px', fontWeight: 'bold', border: 'none' }}>
+                    ✉️ {t.email}
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleReservationSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <input type="date" value={reservation.date} onChange={e => setReservation({...reservation, date: e.target.value})} required style={{ padding: '12px', borderRadius: '12px', background: '#222', color: 'white', border: 'none' }} />
+                <input type="time" value={reservation.time} onChange={e => setReservation({...reservation, time: e.target.value})} required style={{ padding: '12px', borderRadius: '12px', background: '#222', color: 'white', border: 'none' }} />
+                <select value={reservation.people} onChange={e => setReservation({...reservation, people: e.target.value})} style={{ padding: '12px', borderRadius: '12px', background: '#222', color: 'white', border: 'none' }}>
+                  <option value="1">1 Person</option><option value="2">2 Personen</option><option value="3">3 Personen</option><option value="4">4 Personen</option><option value="5">5+ Personen</option>
+                </select>
+                <input type="text" placeholder={language === 'de' ? "Dein Name" : language === 'en' ? "Your Name" : "Tên của bạn"} value={reservation.name} onChange={e => setReservation({...reservation, name: e.target.value})} required style={{ padding: '12px', borderRadius: '12px', background: '#222', color: 'white', border: 'none' }} />
+                <input type="tel" placeholder={language === 'de' ? "Telefonnummer" : language === 'en' ? "Phone Number" : "Số điện thoại"} value={reservation.phone} onChange={e => setReservation({...reservation, phone: e.target.value})} required style={{ padding: '12px', borderRadius: '12px', background: '#222', color: 'white', border: 'none' }} />
+                <button type="submit" style={{ background: '#f59e0b', color: '#111', padding: '16px', borderRadius: '9999px', fontWeight: 'bold' }}>{t.send}</button>
+              </form>
+            )}
+          </div>
+        )}
 
-        {/* Live Daten mit Chart */}
+        {/* Bitictionary */}
+        {activeTab === 'bitictionary' && (
+          <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
+            <h3 style={{ color: '#f59e0b', marginBottom: '1rem' }}>{t.bitictionary}</h3>
+            
+            <input
+              type="text"
+              placeholder={language === 'de' ? "Suchen..." : language === 'en' ? "Search..." : "Tìm kiếm..."}
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+              style={{ 
+                width: '100%', 
+                padding: '14px 16px', 
+                borderRadius: '12px', 
+                background: '#222', 
+                color: 'white', 
+                border: 'none',
+                marginBottom: '1.5rem',
+                fontSize: '1rem',
+                boxSizing: 'border-box'
+              }}
+            />
+
+            {filteredTerms.length === 0 ? (
+              <p style={{ textAlign: 'center', color: '#888', padding: '3rem 1rem' }}>Kein Begriff gefunden.</p>
+            ) : (
+              filteredTerms.map((item, i) => (
+                <div key={i} style={{ 
+                  background: '#222', 
+                  padding: '1.25rem', 
+                  borderRadius: '12px', 
+                  marginBottom: '1rem' 
+                }}>
+                  <h4 style={{ color: '#f59e0b', margin: '0 0 0.8rem 0' }}>{item.term}</h4>
+                  <p style={{ color: '#ddd', lineHeight: '1.55', whiteSpace: 'pre-line' }}>{item[language]}</p>
+                </div>
+              ))
+            )}
+          </div>
+        )}
+
+        {/* Home */}
+        {activeTab === 'home' && (
+          <div style={{ textAlign: 'center', padding: '3rem 1rem', color: '#ddd' }}>
+            Welcome / Willkommen / Chào mừng bạn đến với ₿itCoffee!
+          </div>
+        )}
+
+        {/* Live Daten mit 1-Jahres Chart */}
         <div style={{ marginTop: '2.5rem', background: '#1a1a1a', padding: '16px', borderRadius: '16px', textAlign: 'center', border: '1px solid #f59e0b' }}>
           <div>Block Height: <span style={{ color: '#f59e0b' }}>{blockHeight ? `#${blockHeight.toLocaleString()}` : 'Laden...'}</span></div>
           <div style={{ marginTop: '6px', color: '#f59e0b', fontWeight: '600' }}>
