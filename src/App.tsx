@@ -8,6 +8,7 @@ function App() {
   const [activeTab, setActiveTab] = useState<Tab>('home')
   const [blockHeight, setBlockHeight] = useState<number | null>(null)
   const [btcPrice, setBtcPrice] = useState<any>(null)
+  const [priceHistory, setPriceHistory] = useState<number[]>([])
   const [searchTerm, setSearchTerm] = useState('')
 
   // Reservierung
@@ -17,7 +18,7 @@ function App() {
   // Menu Accordion
   const [openCategory, setOpenCategory] = useState<'drinks' | 'food' | null>('drinks')
 
-    // === BITICTIONARY (vollständig + erweitert) ===
+  // === BITICTIONARY ===
   const bitictionary = [
     { term: "Bitcoin", de: "Die erste dezentrale digitale Währung • Begrenzt auf 21 Millionen • Dezentral und pseudonym • Von Satoshi Nakamoto 2009 geschaffen.", en: "The first decentralized digital currency • Capped at 21 million • Decentralized and pseudonymous • Created by Satoshi Nakamoto in 2009.", vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên • Giới hạn 21 triệu • Phi tập trung và ẩn danh • Được Satoshi Nakamoto tạo năm 2009." },
     { term: "Blockchain", de: "Öffentliche, unveränderliche Kette von Blöcken • Jeder Block enthält Transaktionen • Sehr schwer zu manipulieren.", en: "Public, immutable chain of blocks • Each block contains transactions • Extremely difficult to manipulate.", vi: "Chuỗi khối công khai, không thể thay đổi • Mỗi khối chứa giao dịch • Rất khó bị thao túng." },
@@ -41,7 +42,7 @@ function App() {
     { term: "Cantillon-Effekt", de: "Neues Geld erreicht zuerst Banken und Reiche • Diese profitieren, bevor die Inflation alle trifft.", en: "New money reaches banks and rich first • They benefit before inflation hits everyone.", vi: "Tiền mới đến tay ngân hàng và người giàu trước • Họ hưởng lợi trước khi lạm phát lan ra." },
     { term: "Block Reward", de: "Belohnung für den Miner eines Blocks • Besteht aus neu geschaffenen BTC + Transaktionsgebühren.", en: "Reward for the miner of a block • New BTC + transaction fees.", vi: "Phần thưởng cho thợ đào khối • Bao gồm BTC mới + phí giao dịch." },
     { term: "FOMO", de: "Fear Of Missing Out • Angst, eine starke Kursbewegung zu verpassen.", en: "Fear Of Missing Out • Fear of missing a big price move.", vi: "Sợ bỏ lỡ • Sợ bỏ lỡ một đợt tăng giá mạnh." },
-    { term: "Zeitpräferenz", de: "Hohe Zeitpräferenz = sofortige Belohnung • Niedrige Zeitpräferenz = langfristiges Denken (Bitcoin fördert das).", en: "High time preference = immediate reward • Low time preference = long-term thinking (Bitcoin encourages this).", vi: "Thời gian ưu tiên cao = thưởng ngay • Thấp = nghĩ dài hạn (Bitcoin khuyến khích)." },
+    { term: "Time Preference", de: "Hohe Zeitpräferenz = sofortige Belohnung • Niedrige Zeitpräferenz = langfristiges Denken (Bitcoin fördert das).", en: "High time preference = immediate reward • Low time preference = long-term thinking (Bitcoin encourages this).", vi: "Thời gian ưu tiên cao = thưởng ngay • Thấp = nghĩ dài hạn (Bitcoin khuyến khích)." },
     { term: "FUD", de: "Fear, Uncertainty, Doubt • Absichtliche Panikmache gegen Bitcoin.", en: "Fear, Uncertainty, Doubt • Deliberate panic against Bitcoin.", vi: "Sợ hãi, Không chắc chắn, Nghi ngờ • Tin đồn tiêu cực về Bitcoin." },
     { term: "Proof of Work (PoW)", de: "Konsensmechanismus • Miner lösen Rechenaufgaben • Macht Bitcoin extrem sicher.", en: "Consensus mechanism • Miners solve computational puzzles • Makes Bitcoin extremely secure.", vi: "Cơ chế đồng thuận • Thợ đào giải toán • Làm Bitcoin cực kỳ an toàn." },
     { term: "Genesis Block", de: "Erster Block der Bitcoin-Blockchain • 3. Januar 2009 • Enthält Nachricht über Bankenrettung.", en: "First block of the Bitcoin blockchain • January 3, 2009 • Contains message about bank bailouts.", vi: "Khối đầu tiên của blockchain Bitcoin • 3/1/2009 • Chứa thông điệp về cứu trợ ngân hàng." },
@@ -61,9 +62,9 @@ function App() {
     { term: "Merkle Root", de: "Hash aller Transaktionen in einem Block • Ermöglicht effiziente Überprüfung.", en: "Hash of all transactions in a block • Allows efficient verification.", vi: "Hash của tất cả giao dịch trong khối • Cho phép kiểm tra hiệu quả." },
     { term: "Elliptic Curve", de: "Mathematische Kurve, auf der die Kryptografie von Bitcoin basiert (ECDSA).", en: "Mathematical curve on which Bitcoin's cryptography is based (ECDSA).", vi: "Đường cong elliptic mà mật mã Bitcoin dựa vào (ECDSA)." },
     { term: "Orphan Block", de: "Gültiger Block, der nicht in die längste Kette aufgenommen wurde.", en: "Valid block that was not included in the longest chain.", vi: "Khối hợp lệ nhưng không nằm trong chuỗi dài nhất." },
-{ term: "Seed Phrase", de: "12–24 Wörter Backup • Wiederherstellung auf jedem Gerät.", en: "12–24 word backup • Recover on any device.", vi: "Cụm từ khôi phục 12–24 từ." },
+    { term: "Seed Phrase", de: "12–24 Wörter Backup • Wiederherstellung auf jedem Gerät.", en: "12–24 word backup • Recover on any device.", vi: "Cụm từ khôi phục 12–24 từ." },
     { term: "Difficulty", de: "Automatisch angepasste Mining-Schwierigkeit alle 2016 Blöcke, ca. 14 Tage.", en: "Automatically adjusted mining difficulty every 2016 blocks, approx. 14 days", vi: "Độ khó khai thác được tự động điều chỉnh sau mỗi 2016 khối, khoảng 14 ngày." },
-    { term: "UTXO Unspent Transaction Output", de: "Nicht ausgegebene Guthaben • Wie einzelne Münzen.", en: "Unspent funds • Like individual coins.", vi: "Số dư chưa chi tiêu." },
+    { term: "UTXO (Unspent Transaction Output)", de: "Nicht ausgegebene Guthaben • Wie einzelne Münzen.", en: "Unspent funds • Like individual coins.", vi: "Số dư chưa chi tiêu." },
     { term: "SegWit", de: "Upgrade für mehr Transaktionen pro Block.", en: "Upgrade for more transactions per block.", vi: "Nâng cấp tăng giao dịch mỗi khối." },
     { term: "Taproot", de: "2021 Upgrade • Mehr Privatsphäre & Smart Contracts.", en: "2021 upgrade • Better privacy & smart contracts.", vi: "Nâng cấp 2021 • Quyền riêng tư tốt hơn." },
     { term: "DIP", de: "Preisrückgang • Gute Kaufgelegenheit.", en: "Price drop • Good buying opportunity.", vi: "Giảm giá tạm thời." },
@@ -77,20 +78,34 @@ function App() {
     )
     .sort((a, b) => a.term.localeCompare(b.term))
 
-  // Live Daten
+  // Live Daten + 1-Jahres Chart
   useEffect(() => {
     const fetchData = async () => {
       try {
         const blockRes = await fetch('https://mempool.space/api/blocks/tip/height')
-        setBlockHeight(parseInt(await blockRes.text()))
+        if (blockRes.ok) setBlockHeight(parseInt(await blockRes.text()))
 
         const priceRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur,vnd')
-        const data = await priceRes.json()
-        setBtcPrice(data.bitcoin)
-      } catch (e) {}
+        if (priceRes.ok) {
+          const data = await priceRes.json()
+          setBtcPrice(data.bitcoin)
+        }
+
+        const historyRes = await fetch(
+          'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=vnd&days=365&interval=daily'
+        )
+        if (historyRes.ok) {
+          const historyData = await historyRes.json()
+          const prices = historyData.prices.map((item: [number, number]) => item[1])
+          setPriceHistory(prices)
+        }
+      } catch (e) {
+        console.error("API Fehler:", e)
+      }
     }
+
     fetchData()
-    const interval = setInterval(fetchData, 10000)
+    const interval = setInterval(fetchData, 300000) // alle 5 Minuten
     return () => clearInterval(interval)
   }, [])
 
@@ -101,9 +116,23 @@ function App() {
   }[language]
 
   const calculateSats = (vndPrice: number) => {
-    if (!btcPrice?.vnd) return '0';
+    if (!btcPrice?.vnd || btcPrice.vnd === 0) return '0';
     const sats = Math.round((vndPrice / btcPrice.vnd) * 100000000);
     return sats.toLocaleString();
+  }
+
+  const generateChartPoints = () => {
+    if (priceHistory.length < 5) return "20,65 520,65";
+    const max = Math.max(...priceHistory);
+    const min = Math.min(...priceHistory);
+    const range = max - min || 1;
+
+    const points = priceHistory.map((price, index) => {
+      const x = 20 + (index / (priceHistory.length - 1)) * 480;
+      const y = 70 - ((price - min) / range) * 55;
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(' ');
+    return points;
   }
 
   const menuDrinks = [
@@ -212,13 +241,11 @@ function App() {
             ))}
           </div>
 
-          {/* Menu, Reservation, Bitictionary, Home, Live Daten ... (wie zuvor) */}
           {/* Menu */}
           {activeTab === 'menu' && (
             <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
               <h3 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>{t.menu}</h3>
 
-              {/* Getränke */}
               <div onClick={() => setOpenCategory(openCategory === 'drinks' ? null : 'drinks')} style={{ cursor: 'pointer', padding: '12px', background: '#222', borderRadius: '12px', marginBottom: '8px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>
                   <span>{t.drinks}</span>
@@ -235,7 +262,6 @@ function App() {
                 ))}
               </div>
 
-              {/* Essen */}
               <div onClick={() => setOpenCategory(openCategory === 'food' ? null : 'food')} style={{ cursor: 'pointer', padding: '12px', background: '#222', borderRadius: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>
                   <span>{t.food}</span>
@@ -337,18 +363,33 @@ function App() {
           {/* Home */}
           {activeTab === 'home' && (
             <div style={{ textAlign: 'center', padding: '3rem 1rem', color: '#ddd' }}>
-              Welcome / Willkommen / Chào mừng bạn đến với ₿itCoffee!
+              Welcome / Willkommen / Chào mừng bạn đến mit ₿itCoffee!
             </div>
           )}
 
-          {/* Live Daten */}
-          <div style={{ marginTop: '2.5rem', background: '#1a1a1a', padding: '14px', borderRadius: '16px', textAlign: 'center', fontSize: '0.95rem' }}>
+          {/* Live Daten mit 1-Jahres Chart */}
+          <div style={{ marginTop: '2.5rem', background: '#1a1a1a', padding: '16px', borderRadius: '16px', textAlign: 'center', border: '1px solid #f59e0b' }}>
             <div>Block Height: <span style={{ color: '#f59e0b' }}>{blockHeight ? `#${blockHeight.toLocaleString()}` : 'Laden...'}</span></div>
-            <div style={{ marginTop: '6px' }}>
-              BTC: {btcPrice ? `$${btcPrice.usd.toLocaleString()} • €${btcPrice.eur.toLocaleString()} • ₫${(btcPrice.vnd/1000000000).toFixed(2)}B` : 'Laden...'}</div>
+            <div style={{ marginTop: '6px', color: '#f59e0b', fontWeight: '600' }}>
+              BTC: {btcPrice ? `$${btcPrice.usd.toLocaleString()} • €${btcPrice.eur.toLocaleString()} • ₫${(btcPrice.vnd/1000000000).toFixed(2)}B` : 'Laden...'}
+            </div>
+
+            <div style={{ margin: '16px 0 10px 0', minHeight: '90px' }}>
+              {priceHistory.length > 5 ? (
+                <svg width="100%" height="90" viewBox="0 0 520 90" style={{ filter: 'drop-shadow(0 4px 15px #f59e0b)' }}>
+                  <polyline points={generateChartPoints()} fill="none" stroke="#f59e0b" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+                  <polyline points={generateChartPoints()} fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
+                </svg>
+              ) : (
+                <div style={{ height: '90px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#f59e0b' }}>
+                  Lade Bitcoin Chart...
+                </div>
+              )}
+            </div>
+            <div style={{ fontSize: '0.85rem', color: '#f59e0b' }}>1-Jahres Bitcoin Kurs (VND)</div>
           </div>
 
-          {/* Anklickbares Copyright */}
+          {/* Copyright */}
           <div style={{ textAlign: 'center', marginTop: '3rem', color: '#666', fontSize: '0.85rem' }}>
             Copyright © <span style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://x.com/BitcoinZeit', '_blank')}>BitcoinZeit</span>
           </div>
