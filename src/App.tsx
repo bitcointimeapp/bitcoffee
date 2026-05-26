@@ -11,6 +11,9 @@ function App() {
   const [priceHistory, setPriceHistory] = useState<number[]>([])
   const [searchTerm, setSearchTerm] = useState('')
 
+  // Responsive Window Size
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 390)
+
   // Reservierung
   const [reservation, setReservation] = useState({ date: '', time: '', people: '2', name: '', phone: '' })
   const [reservationStep, setReservationStep] = useState<'form' | 'choice' | 'sent'>('form')
@@ -78,6 +81,13 @@ function App() {
     )
     .sort((a, b) => a.term.localeCompare(b.term))
 
+  // Window Resize Listener
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   // Live Daten + 1-Jahres Chart
   useEffect(() => {
     const fetchData = async () => {
@@ -105,7 +115,7 @@ function App() {
     }
 
     fetchData()
-    const interval = setInterval(fetchData, 300000) // alle 5 Minuten
+    const interval = setInterval(fetchData, 300000)
     return () => clearInterval(interval)
   }, [])
 
@@ -185,21 +195,29 @@ function App() {
       minHeight: '100vh', 
       backgroundColor: '#0a0a0a', 
       color: 'white', 
-      paddingBottom: '80px',
-      display: 'flex',
-      justifyContent: 'center'
+      paddingBottom: '80px'
     }}>
       <div style={{ 
         width: '100%', 
-        maxWidth: '620px',
+        maxWidth: windowWidth > 768 ? '920px' : '100%',   // ← Responsive Max Width
         margin: '0 auto',
-        padding: '0 1rem' 
+        padding: windowWidth > 480 ? '0 1rem' : '0 0.6rem'
       }}>
         
-        <div style={{ maxWidth: '460px', margin: '0 auto' }}>
+        <div style={{ width: '100%' }}>
 
           {/* Hero Bild */}
-          <img src="/bitcoffee-hero.png" alt="BitCoffee" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '0 0 16px 16px' }} />
+          <img 
+            src="/bitcoffee-hero.png" 
+            alt="BitCoffee" 
+            style={{ 
+              width: '100%', 
+              height: 'auto', 
+              maxHeight: windowWidth > 600 ? '280px' : '220px',
+              objectFit: 'cover', 
+              borderRadius: '0 0 16px 16px' 
+            }} 
+          />
 
           {/* Sprachen */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', margin: '1.5rem 0' }}>
@@ -213,8 +231,12 @@ function App() {
 
           {/* Logo + Kontakt */}
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>☕</div>
-            <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', margin: '0 0 0.3rem 0' }}>
+            <div style={{ fontSize: windowWidth > 600 ? '3.6rem' : '3.2rem', marginBottom: '0.3rem' }}>☕</div>
+            <h1 style={{ 
+              fontSize: windowWidth > 600 ? '2.8rem' : '2.4rem', 
+              fontWeight: 'bold', 
+              margin: '0 0 0.3rem 0' 
+            }}>
               <span style={{ color: '#f59e0b', display: 'inline-block', transform: 'rotate(12deg)', marginRight: '-3px' }}>₿</span>
               <span style={{ color: '#f59e0b' }}>it</span>
               <span style={{ color: 'white' }}>Coffee</span>
@@ -232,7 +254,14 @@ function App() {
           <div style={{ display: 'flex', background: '#1a1a1a', borderRadius: '9999px', padding: '4px', margin: '2.2rem 0' }}>
             {['home', 'menu', 'reservation', 'bitictionary'].map(tab => (
               <button key={tab} onClick={() => setActiveTab(tab as Tab)}
-                style={{ flex: 1, padding: '12px', borderRadius: '9999px', fontWeight: '600', background: activeTab === tab ? '#f59e0b' : 'transparent', color: activeTab === tab ? '#111' : '#ccc' }}>
+                style={{ 
+                  flex: 1, 
+                  padding: '12px', 
+                  borderRadius: '9999px', 
+                  fontWeight: '600', 
+                  background: activeTab === tab ? '#f59e0b' : 'transparent', 
+                  color: activeTab === tab ? '#111' : '#ccc' 
+                }}>
                 {tab === 'home' && t.home}
                 {tab === 'menu' && t.menu}
                 {tab === 'reservation' && t.reservation}
