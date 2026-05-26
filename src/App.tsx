@@ -88,7 +88,7 @@ function App() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Live Daten + 1-Jahres Chart
+  // Live Daten + Chart
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -395,7 +395,7 @@ function App() {
           </div>
         )}
 
-        {/* Live Daten mit 1-Jahres Chart */}
+        {/* Live Daten mit Chart */}
         <div style={{ marginTop: '2.5rem', background: '#1a1a1a', padding: '16px', borderRadius: '16px', textAlign: 'center', border: '1px solid #f59e0b' }}>
           <div>Block Height: <span style={{ color: '#f59e0b' }}>{blockHeight ? `#${blockHeight.toLocaleString()}` : 'Laden...'}</span></div>
           <div style={{ marginTop: '6px', color: '#f59e0b', fontWeight: '600' }}>
