@@ -386,7 +386,7 @@ function App() {
                 </div>
               )}
             </div>
-            <div style={{ fontSize: '0.85rem', color: '#f59e0b' }}>1-Jahres Bitcoin Kurs (VND)</div>
+            <div style={{ fontSize: '0.85rem', color: '#f59e0b' }}>1-Jahres Bitcoin Chart</div>
           </div>
 
           {/* Copyright */}
