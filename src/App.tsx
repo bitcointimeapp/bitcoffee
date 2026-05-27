@@ -21,7 +21,7 @@ function App() {
   // Menu Accordion
   const [openCategory, setOpenCategory] = useState<'drinks' | 'food' | null>('drinks')
 
-  // BITICTIONARY
+  // === BITICTIONARY ===
   const bitictionary = [
     { term: "Bitcoin", de: "Die erste dezentrale digitale Währung • Begrenzt auf 21 Millionen • Dezentral und pseudonym • Von Satoshi Nakamoto 2009 geschaffen.", en: "The first decentralized digital currency • Capped at 21 million • Decentralized and pseudonymous • Created by Satoshi Nakamoto in 2009.", vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên • Giới hạn 21 triệu • Phi tập trung và ẩn danh • Được Satoshi Nakamoto tạo năm 2009." },
     { term: "Blockchain", de: "Öffentliche, unveränderliche Kette von Blöcken • Jeder Block enthält Transaktionen • Sehr schwer zu manipulieren.", en: "Public, immutable chain of blocks • Each block contains transactions • Extremely difficult to manipulate.", vi: "Chuỗi khối công khai, không thể thay đổi • Mỗi khối chứa giao dịch • Rất khó bị thao túng." },
@@ -204,13 +204,14 @@ function App() {
         
         <div style={{ maxWidth: innerMaxWidth, margin: '0 auto', position: 'relative' }}>
 
-          {/* Hero Bild + Button */}
-          <div style={{ position: 'relative' }}>
+          {/* Hero Bild + Button links oben */}
+          <div style={{ position: 'relative', display: 'inline-block', width: '100%' }}>
             <img 
               src="/bitcoffee-hero.png" 
               alt="BitCoffee" 
               style={{ width: '100%', height: '280px', objectFit: 'cover', borderRadius: '0 0 16px 16px' }} 
             />
+            
             <button 
               onClick={() => setViewMode(viewMode === 'phone' ? 'pad' : 'phone')}
               style={{
@@ -225,7 +226,9 @@ function App() {
                 borderRadius: '9999px',
                 fontWeight: 'bold',
                 cursor: 'pointer',
-                boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)'
+                boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)',
+                backdropFilter: 'blur(10px)',
+                zIndex: 10
               }}
             >
               {viewMode === 'phone' ? '📱 Phone' : '📟 Pad'}
@@ -272,9 +275,10 @@ function App() {
             ))}
           </div>
 
-          {/* Menu - mit width 100% */}
+          {/* ALLE TABS MIT EINHEITLICHEM PADDING 1.8rem */}
+          {/* Menu */}
           {activeTab === 'menu' && (
-            <div style={{ width: '100%', background: '#1a1a1a', padding: '1.8rem', borderRadius: '16px' }}>
+            <div style={{ background: '#1a1a1a', padding: '1.8rem', borderRadius: '16px' }}>
               <h3 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>{t.menu}</h3>
               {/* Drinks */}
               <div onClick={() => setOpenCategory(openCategory === 'drinks' ? null : 'drinks')} style={{ cursor: 'pointer', padding: '12px', background: '#222', borderRadius: '12px', marginBottom: '8px' }}>
@@ -313,7 +317,7 @@ function App() {
 
           {/* Reservation */}
           {activeTab === 'reservation' && (
-            <div style={{ width: '100%', background: '#1a1a1a', padding: '1.8rem', borderRadius: '20px' }}>
+            <div style={{ background: '#1a1a1a', padding: '1.8rem', borderRadius: '20px' }}>
               <h2 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '1.5rem' }}>{t.reservation}</h2>
               {reservationStep === 'sent' ? (
                 <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
@@ -351,7 +355,7 @@ function App() {
 
           {/* Bitictionary */}
           {activeTab === 'bitictionary' && (
-            <div style={{ width: '100%', background: '#1a1a1a', padding: '1.8rem', borderRadius: '16px' }}>
+            <div style={{ background: '#1a1a1a', padding: '1.8rem', borderRadius: '16px' }}>
               <h3 style={{ color: '#f59e0b', marginBottom: '1rem' }}>{t.bitictionary}</h3>
               <input
                 type="text"
@@ -375,17 +379,18 @@ function App() {
 
           {/* Home */}
           {activeTab === 'home' && (
-            <div style={{ width: '100%', background: '#1a1a1a', padding: '1.8rem', borderRadius: '16px', textAlign: 'center', color: '#ddd' }}>
+            <div style={{ background: '#1a1a1a', padding: '1.8rem', borderRadius: '16px', textAlign: 'center', color: '#ddd' }}>
               Welcome / Willkommen / Chào mừng bạn đến mit ₿itCoffee!
             </div>
           )}
 
           {/* Live Chart */}
-          <div style={{ width: '100%', marginTop: '2.5rem', background: '#1a1a1a', padding: '1.8rem', borderRadius: '16px', textAlign: 'center', border: '1px solid #f59e0b' }}>
+          <div style={{ marginTop: '2.5rem', background: '#1a1a1a', padding: '1.8rem', borderRadius: '16px', textAlign: 'center', border: '1px solid #f59e0b' }}>
             <div>Block Height: <span style={{ color: '#f59e0b' }}>{blockHeight ? `#${blockHeight.toLocaleString()}` : 'Laden...'}</span></div>
             <div style={{ marginTop: '6px', color: '#f59e0b', fontWeight: '600' }}>
               BTC: {btcPrice ? `$${btcPrice.usd.toLocaleString()} • €${btcPrice.eur.toLocaleString()} • ₫${(btcPrice.vnd/1000000000).toFixed(2)}B` : 'Laden...'}
             </div>
+
             <div style={{ margin: '16px 0 10px 0', minHeight: '90px' }}>
               {priceHistory.length > 5 ? (
                 <svg width="100%" height="90" viewBox="0 0 520 90" style={{ filter: 'drop-shadow(0 4px 15px #f59e0b)' }}>
