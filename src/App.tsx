@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 
 type Language = 'de' | 'en' | 'vi'
 type Tab = 'home' | 'menu' | 'reservation' | 'bitictionary'
-type ViewMode = 'phone' | 'pad'   // ← Neu
+type ViewMode = 'phone' | 'pad'
 
 function App() {
   const [language, setLanguage] = useState<Language>('en')
   const [activeTab, setActiveTab] = useState<Tab>('home')
-  const [viewMode, setViewMode] = useState<ViewMode>('phone') // ← Toggle State
+  const [viewMode, setViewMode] = useState<ViewMode>('phone')
 
   const [blockHeight, setBlockHeight] = useState<number | null>(null)
   const [btcPrice, setBtcPrice] = useState<any>(null)
@@ -71,8 +71,7 @@ function App() {
     { term: "SegWit", de: "Upgrade für mehr Transaktionen pro Block.", en: "Upgrade for more transactions per block.", vi: "Nâng cấp tăng giao dịch mỗi khối." },
     { term: "Taproot", de: "2021 Upgrade • Mehr Privatsphäre & Smart Contracts.", en: "2021 upgrade • Better privacy & smart contracts.", vi: "Nâng cấp 2021 • Quyền riêng tư tốt hơn." },
     { term: "DIP", de: "Preisrückgang • Gute Kaufgelegenheit.", en: "Price drop • Good buying opportunity.", vi: "Giảm giá tạm thời." },
-    { term: "DYOR", de: "Do Your Own Research – eigene Recherche machen.", en: "Do Your Own Research.", vi: "Tự nghiên cứu." }
-  ]
+    { term: "DYOR", de: "Do Your Own Research – eigene Recherche machen.", en: "Do Your Own Research.", vi: "Tự nghiên cứu." }]
 
   const filteredTerms = bitictionary
     .filter(item => 
@@ -81,7 +80,7 @@ function App() {
     )
     .sort((a, b) => a.term.localeCompare(b.term))
 
-  // Live Daten + 1-Jahres Chart
+  // Live Daten + Chart
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -94,9 +93,7 @@ function App() {
           setBtcPrice(data.bitcoin)
         }
 
-        const historyRes = await fetch(
-          'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=vnd&days=365&interval=daily'
-        )
+        const historyRes = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=vnd&days=365&interval=daily')
         if (historyRes.ok) {
           const historyData = await historyRes.json()
           const prices = historyData.prices.map((item: [number, number]) => item[1])
@@ -183,8 +180,8 @@ function App() {
     setReservationStep('sent');
   }
 
-  // Dynamische Breite je nach Modus
-  const containerMaxWidth = viewMode === 'pad' ? '920px' : '620px';
+  // Dynamische Breiten – Pad jetzt deutlich größer
+  const containerMaxWidth = viewMode === 'pad' ? '1100px' : '620px';
   const innerMaxWidth = viewMode === 'pad' ? '100%' : '460px';
 
   return (
@@ -196,28 +193,23 @@ function App() {
       display: 'flex',
       justifyContent: 'center'
     }}>
-      {/* View Toggle Button */}
-      <div style={{ 
-        position: 'fixed', 
-        top: '15px', 
-        right: '15px', 
-        zIndex: 1000 
-      }}>
+      {/* Transparenter Toggle Button */}
+      <div style={{ position: 'fixed', top: '15px', right: '15px', zIndex: 1000 }}>
         <button 
           onClick={() => setViewMode(viewMode === 'phone' ? 'pad' : 'phone')}
           style={{
             padding: '10px 18px',
-            background: '#f59e0b',
+            background: 'rgba(245, 158, 11, 0.75)',   // Orange transparent
             color: '#111',
             border: 'none',
             borderRadius: '9999px',
             fontWeight: 'bold',
-            fontSize: '0.95rem',
             cursor: 'pointer',
-            boxShadow: '0 4px 15px rgba(245, 158, 11, 0.5)'
+            boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)',
+            backdropFilter: 'blur(8px)'
           }}
         >
-          {viewMode === 'phone' ? '📱 Phone' : '📟 Pad'}
+          {viewMode === 'phone' ? '📱 Phone View' : '📟 Pad View'}
         </button>
       </div>
 
@@ -231,7 +223,7 @@ function App() {
         <div style={{ maxWidth: innerMaxWidth, margin: '0 auto' }}>
 
           {/* Hero Bild */}
-          <img src="/bitcoffee-hero.png" alt="BitCoffee" style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '0 0 16px 16px' }} />
+          <img src="/bitcoffee-hero.png" alt="BitCoffee" style={{ width: '100%', height: '260px', objectFit: 'cover', borderRadius: '0 0 16px 16px' }} />
 
           {/* Sprachen */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', margin: '1.5rem 0' }}>
@@ -245,8 +237,8 @@ function App() {
 
           {/* Logo + Kontakt */}
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '3.4rem', marginBottom: '0.3rem' }}>☕</div>
-            <h1 style={{ fontSize: '2.6rem', fontWeight: 'bold', margin: '0 0 0.3rem 0' }}>
+            <div style={{ fontSize: '3.6rem', marginBottom: '0.3rem' }}>☕</div>
+            <h1 style={{ fontSize: '2.8rem', fontWeight: 'bold', margin: '0 0 0.3rem 0' }}>
               <span style={{ color: '#f59e0b', display: 'inline-block', transform: 'rotate(12deg)', marginRight: '-3px' }}>₿</span>
               <span style={{ color: '#f59e0b' }}>it</span>
               <span style={{ color: 'white' }}>Coffee</span>
@@ -277,7 +269,7 @@ function App() {
           {activeTab === 'menu' && (
             <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
               <h3 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>{t.menu}</h3>
-
+              {/* Drinks */}
               <div onClick={() => setOpenCategory(openCategory === 'drinks' ? null : 'drinks')} style={{ cursor: 'pointer', padding: '12px', background: '#222', borderRadius: '12px', marginBottom: '8px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>
                   <span>{t.drinks}</span>
@@ -293,7 +285,7 @@ function App() {
                   </div>
                 ))}
               </div>
-
+              {/* Food */}
               <div onClick={() => setOpenCategory(openCategory === 'food' ? null : 'food')} style={{ cursor: 'pointer', padding: '12px', background: '#222', borderRadius: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>
                   <span>{t.food}</span>
@@ -312,11 +304,11 @@ function App() {
             </div>
           )}
 
-          {/* Reservation, Bitictionary, Home, Chart ... (unverändert) */}
+          {/* Reservation, Bitictionary, Home, Live Chart ... (rest bleibt gleich) */}
           {activeTab === 'reservation' && (
             <div style={{ background: '#1a1a1a', padding: '1.8rem', borderRadius: '20px' }}>
               <h2 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '1.5rem' }}>{t.reservation}</h2>
-              {/* ... Rest des Reservation Codes unverändert ... */}
+              {/* ... Reservation Form (unverändert) ... */}
               {reservationStep === 'sent' ? (
                 <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
                   <p style={{ fontSize: '1.4rem', color: '#4ade80' }}>{t.success}</p>
@@ -351,17 +343,10 @@ function App() {
             </div>
           )}
 
-          {/* Bitictionary */}
           {activeTab === 'bitictionary' && (
             <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
               <h3 style={{ color: '#f59e0b', marginBottom: '1rem' }}>{t.bitictionary}</h3>
-              <input
-                type="text"
-                placeholder={language === 'de' ? "Suchen..." : language === 'en' ? "Search..." : "Tìm kiếm..."}
-                value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
-                style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', background: '#222', color: 'white', border: 'none', marginBottom: '1.5rem', fontSize: '1rem', boxSizing: 'border-box' }}
-              />
+              <input type="text" placeholder={language === 'de' ? "Suchen..." : language === 'en' ? "Search..." : "Tìm kiếm..."} value={searchTerm} onChange={e => setSearchTerm(e.target.value)} style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', background: '#222', color: 'white', border: 'none', marginBottom: '1.5rem', fontSize: '1rem', boxSizing: 'border-box' }} />
               {filteredTerms.length === 0 ? (
                 <p style={{ textAlign: 'center', color: '#888', padding: '3rem 1rem' }}>Kein Begriff gefunden.</p>
               ) : (
@@ -375,20 +360,18 @@ function App() {
             </div>
           )}
 
-          {/* Home */}
           {activeTab === 'home' && (
             <div style={{ textAlign: 'center', padding: '3rem 1rem', color: '#ddd' }}>
               Welcome / Willkommen / Chào mừng bạn đến mit ₿itCoffee!
             </div>
           )}
 
-          {/* Live Daten mit Chart */}
+          {/* Live Chart */}
           <div style={{ marginTop: '2.5rem', background: '#1a1a1a', padding: '16px', borderRadius: '16px', textAlign: 'center', border: '1px solid #f59e0b' }}>
             <div>Block Height: <span style={{ color: '#f59e0b' }}>{blockHeight ? `#${blockHeight.toLocaleString()}` : 'Laden...'}</span></div>
             <div style={{ marginTop: '6px', color: '#f59e0b', fontWeight: '600' }}>
-              BTC: {btcPrice ? `$${btcPrice.usd.toLocaleString()} • €${btcPrice.eur.toLocaleString()} • ₫${(btcPrice.vnd/1000000000).toFixed(2)}B` : 'Laden...' }
+              BTC: {btcPrice ? `$${btcPrice.usd.toLocaleString()} • €${btcPrice.eur.toLocaleString()} • ₫${(btcPrice.vnd/1000000000).toFixed(2)}B` : 'Laden...'}
             </div>
-
             <div style={{ margin: '16px 0 10px 0', minHeight: '90px' }}>
               {priceHistory.length > 5 ? (
                 <svg width="100%" height="90" viewBox="0 0 520 90" style={{ filter: 'drop-shadow(0 4px 15px #f59e0b)' }}>
@@ -396,15 +379,12 @@ function App() {
                   <polyline points={generateChartPoints()} fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
                 </svg>
               ) : (
-                <div style={{ height: '90px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#f59e0b' }}>
-                  Lade Bitcoin Chart...
-                </div>
+                <div style={{ height: '90px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#f59e0b' }}>Lade Bitcoin Chart...</div>
               )}
             </div>
             <div style={{ fontSize: '0.85rem', color: '#f59e0b' }}>1-Year Bitcoin Chart</div>
           </div>
 
-          {/* Copyright */}
           <div style={{ textAlign: 'center', marginTop: '3rem', color: '#666', fontSize: '0.85rem' }}>
             Copyright © <span style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://x.com/BitcoinZeit', '_blank')}>BitcoinZeit</span>
           </div>
