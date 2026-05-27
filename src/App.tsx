@@ -182,8 +182,8 @@ function App() {
     setReservationStep('sent');
   }
 
-  // Sehr große Pad-Ansicht
-  const containerMaxWidth = viewMode === 'pad' ? '2600px' : '620px';
+  // Sehr große Pad-Ansicht (3000px)
+  const containerMaxWidth = viewMode === 'pad' ? '3000px' : '620px';
   const innerMaxWidth = viewMode === 'pad' ? '100%' : '460px';
 
   return (
@@ -205,7 +205,7 @@ function App() {
         
         <div style={{ maxWidth: innerMaxWidth, margin: '0 auto', position: 'relative' }}>
 
-          {/* Hero Bild mit Button unten rechts */}
+          {/* Hero Bild mit Button links oben */}
           <div style={{ position: 'relative', display: 'inline-block', width: '100%' }}>
             <img 
               src="/bitcoffee-hero.png" 
@@ -213,14 +213,15 @@ function App() {
               style={{ width: '100%', height: '280px', objectFit: 'cover', borderRadius: '0 0 16px 16px' }} 
             />
             
-            {/* Toggle Button - unten rechts am Bild */}
+            {/* Toggle Button - links oben, kleiner */}
             <button 
               onClick={() => setViewMode(viewMode === 'phone' ? 'pad' : 'phone')}
               style={{
                 position: 'absolute',
-                bottom: '20px',
-                right: '20px',
-                padding: '10px 18px',
+                top: '20px',
+                left: '20px',
+                padding: '8px 14px',
+                fontSize: '0.9rem',
                 background: 'rgba(245, 158, 11, 0.25)',
                 color: '#111',
                 border: 'none',
@@ -232,7 +233,7 @@ function App() {
                 zIndex: 10
               }}
             >
-              {viewMode === 'phone' ? '📱 Phone View' : '📟 Pad View'}
+              {viewMode === 'phone' ? '📱 Phone' : '📟 Pad'}
             </button>
           </div>
 
