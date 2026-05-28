@@ -159,7 +159,7 @@ function App() {
         <div style={{ textAlign: 'center', marginBottom: '25px' }}>
           <div style={{ fontSize: '3.8rem' }}>☕</div>
           <h1 style={{ fontSize: '2.9rem', fontWeight: 'bold', margin: '0' }}>
-            <span style={{ color: '#f59e0b', display: 'inline-block', transform: 'rotate(12deg)', marginRight: '-4px' }}>₿</span>
+            <span style={{ color: '#f59e0b', display: 'inline-block', transform: 'rotate(12deg)', marginRight: '-3px' }}>₿</span>
             itCoffee
           </h1>
           <p style={{ color: '#f59e0b', marginTop: '4px' }}>{t.subtitle}</p>
