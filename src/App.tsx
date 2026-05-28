@@ -19,9 +19,9 @@ function App() {
   const [btcPrice, setBtcPrice] = useState<any>(null)
   const [priceHistory, setPriceHistory] = useState<number[]>([])
 
-  // === BITICTIONARY ===
+  // === VOLLSTÄNDIGES BITICTIONARY ===
   const bitictionary: DictionaryItem[] = [
-    { term: "Bitcoin", de: "Die erste dezentrale digitale Währung • Begrenzt auf 21 Millionen • Dezentral und pseudonym • Von Satoshi Nakamoto 2009 geschaffen.", en: "The first decentralized digital currency • Capped at 21 million • Decentralized and pseudonymous • Created by Satoshi Nakamoto in 2009.", vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên • Giới hạn 21 triệu • Phi tập trung và ẩn danh • Được Satoshi Nakamoto tạo năm 2009." },,
+    { term: "Bitcoin", de: "Die erste dezentrale digitale Währung • Begrenzt auf 21 Millionen • Dezentral und pseudonym • Von Satoshi Nakamoto 2009 geschaffen.", en: "The first decentralized digital currency • Capped at 21 million • Decentralized and pseudonymous • Created by Satoshi Nakamoto in 2009.", vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên • Giới hạn 21 triệu • Phi tập trung và ẩn danh • Được Satoshi Nakamoto tạo năm 2009." },
     { term: "Blockchain", de: "Öffentliche, unveränderliche Kette von Blöcken • Jeder Block enthält Transaktionen • Sehr schwer zu manipulieren.", en: "Public, immutable chain of blocks • Each block contains transactions • Extremely difficult to manipulate.", vi: "Chuỗi khối công khai, không thể thay đổi • Mỗi khối chứa giao dịch • Rất khó bị thao túng." },
     { term: "Whitepaper", de: "Das Bitcoin Whitepaper von Satoshi Nakamoto (2008) • Beschreibt das Grundkonzept von Bitcoin • Titel: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", en: "Bitcoin Whitepaper by Satoshi Nakamoto (2008) • Describes the core concept of Bitcoin • Title: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", vi: "Whitepaper Bitcoin của Satoshi Nakamoto (2008) • Mô tả khái niệm cốt lõi • Tiêu đề: 'Bitcoin: A Peer-to-Peer Electronic Cash System'." },
     { term: "Satoshi Nakamoto", de: "Pseudonym des Bitcoin-Erfinders • Identität bis heute unbekannt • Veröffentlichte Whitepaper 2008 und Genesis Block 2009.", en: "Pseudonym of Bitcoin's creator • Identity still unknown • Published Whitepaper in 2008 and Genesis Block in 2009.", vi: "Bút danh của người tạo Bitcoin • Danh tính vẫn chưa biết • Công bố Whitepaper 2008 và Genesis Block 2009." },
@@ -114,9 +114,27 @@ function App() {
     vi: { title: "₿itCoffee", subtitle: "Đà Nẵng • Việt Nam", bitictionary: "Bitictionary" }
   }[language]
 
+  const calculateSats = (vndPrice: number) => {
+    if (!btcPrice?.vnd || btcPrice.vnd === 0) return '0';
+    return Math.round((vndPrice / btcPrice.vnd) * 100000000).toLocaleString();
+  }
+
+  const generateChartPoints = () => {
+    if (priceHistory.length < 5) return "20,65 520,65";
+    const max = Math.max(...priceHistory);
+    const min = Math.min(...priceHistory);
+    const range = max - min || 1;
+    const points = priceHistory.map((price, index) => {
+      const x = 20 + (index / (priceHistory.length - 1)) * 480;
+      const y = 70 - ((price - min) / range) * 55;
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(' ');
+    return points;
+  }
+
   // Breiten
-  const containerMaxWidth = viewMode === 'pad' ? '3000px' : '620px'
-  const innerMaxWidth = viewMode === 'pad' ? '100%' : '460px'
+  const containerMaxWidth = viewMode === 'pad' ? '3000px' : '620px';
+  const innerMaxWidth = viewMode === 'pad' ? '100%' : '460px';
 
   return (
     <div style={{ 
