@@ -21,7 +21,6 @@ function App() {
 
   // === BITICTIONARY ===
   const bitictionary: DictionaryItem[] = [
-    // ... alle Einträge bleiben gleich ...
     { term: "Bitcoin", de: "Die erste dezentrale digitale Währung • Begrenzt auf 21 Millionen • Dezentral und pseudonym • Von Satoshi Nakamoto 2009 geschaffen.", en: "The first decentralized digital currency • Capped at 21 million • Decentralized and pseudonymous • Created by Satoshi Nakamoto in 2009.", vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên • Giới hạn 21 triệu • Phi tập trung và ẩn danh • Được Satoshi Nakamoto tạo năm 2009." },
     { term: "Blockchain", de: "Öffentliche, unveränderliche Kette von Blöcken • Jeder Block enthält Transaktionen • Sehr schwer zu manipulieren.", en: "Public, immutable chain of blocks • Each block contains transactions • Extremely difficult to manipulate.", vi: "Chuỗi khối công khai, không thể thay đổi • Mỗi khối chứa giao dịch • Rất khó bị thao túng." },
     { term: "Whitepaper", de: "Das Bitcoin Whitepaper von Satoshi Nakamoto (2008) • Beschreibt das Grundkonzept von Bitcoin • Titel: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", en: "Bitcoin Whitepaper by Satoshi Nakamoto (2008) • Describes the core concept of Bitcoin • Title: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", vi: "Whitepaper Bitcoin của Satoshi Nakamoto (2008) • Mô tả khái niệm cốt lõi • Tiêu đề: 'Bitcoin: A Peer-to-Peer Electronic Cash System'." },
@@ -70,7 +69,8 @@ function App() {
     { term: "SegWit", de: "Upgrade für mehr Transaktionen pro Block.", en: "Upgrade for more transactions per block.", vi: "Nâng cấp tăng giao dịch mỗi khối." },
     { term: "Taproot", de: "2021 Upgrade • Mehr Privatsphäre & Smart Contracts.", en: "2021 upgrade • Better privacy & smart contracts.", vi: "Nâng cấp 2021 • Quyền riêng tư tốt hơn." },
     { term: "DIP", de: "Preisrückgang • Gute Kaufgelegenheit.", en: "Price drop • Good buying opportunity.", vi: "Giảm giá tạm thời." },
-    { term: "DYOR", de: "Do Your Own Research – eigene Recherche machen.", en: "Do Your Own Research.", vi: "Tự nghiên cứu." }
+    { term: "DYOR", de: "Do Your Own Research – eigene Recherche machen.", en: "Do Your Own Research.", vi: "Tự nghiên cứu." },
+    { term: "Miner", de: "Ein Miner ist ein Computer, der mit hoher Rechenleistung neue Blöcke zur Bitcoin-Blockchain hinzufügt. Er sichert das Netzwerk, verifiziert Transaktionen und wird mit neu geschaffenen Bitcoins + Gebühren belohnt. Wichtig für die Dezentralität und Sicherheit von Bitcoin.", en: "A miner is a powerful computer that adds new blocks to the Bitcoin blockchain. It secures the network, verifies transactions and gets rewarded with newly created Bitcoin + fees. Essential for decentralization and security.", vi: "Miner là máy tính mạnh dùng để thêm khối mới vào blockchain Bitcoin. Họ bảo vệ mạng, xác minh giao dịch và nhận phần thưởng là Bitcoin mới + phí. Rất quan trọng cho tính phi tập trung và an ninh của Bitcoin." }
   ]
 
   const filteredTerms = bitictionary
@@ -124,6 +124,10 @@ function App() {
     return points
   }
 
+  const formatVND = (vnd: number) => {
+    return (vnd / 1_000_000).toFixed(2) + "M"
+  }
+
   const containerMaxWidth = viewMode === 'pad' ? '3000px' : '620px'
 
   return (
@@ -132,15 +136,9 @@ function App() {
 
         {/* Hero */}
         <div style={{ position: 'relative' }}>
-          <img 
-            src="/bitcoffee-hero.png" 
-            alt="BitCoffee" 
-            style={{ width: '100%', height: '280px', objectFit: 'cover', borderRadius: '0 0 16px 16px' }} 
-          />
-          <button 
-            onClick={() => setViewMode(viewMode === 'phone' ? 'pad' : 'phone')}
-            style={{ position: 'absolute', top: '20px', left: '20px', padding: '8px 16px', background: 'rgba(245,158,11,0.3)', color: '#111', border: 'none', borderRadius: '9999px', fontWeight: 'bold' }}
-          >
+          <img src="/bitcoffee-hero.png" alt="BitCoffee" style={{ width: '100%', height: '280px', objectFit: 'cover', borderRadius: '0 0 16px 16px' }} />
+          <button onClick={() => setViewMode(viewMode === 'phone' ? 'pad' : 'phone')}
+            style={{ position: 'absolute', top: '20px', left: '20px', padding: '8px 16px', background: 'rgba(245,158,11,0.3)', color: '#111', border: 'none', borderRadius: '9999px', fontWeight: 'bold' }}>
             {viewMode === 'phone' ? '📱 Phone' : '📟 Pad'}
           </button>
         </div>
@@ -155,7 +153,7 @@ function App() {
           ))}
         </div>
 
-        {/* Logo mit schiefem B + orange "it" */}
+        {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: '25px' }}>
           <div style={{ fontSize: '3.8rem' }}>☕</div>
           <h1 style={{ fontSize: '2.9rem', fontWeight: 'bold', margin: '0' }}>
@@ -165,23 +163,22 @@ function App() {
           <p style={{ color: '#f59e0b', marginTop: '4px' }}>{t.subtitle}</p>
         </div>
 
-        {/* Kontakt Infos */}
+        {/* Kontakt */}
         <div style={{ textAlign: 'center', color: '#ddd', fontSize: '0.95rem', marginBottom: '30px', lineHeight: '1.7' }}>
-          <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://maps.google.com/?q=DEINE_VOLLE_ADRESSE_HIER', '_blank')}>
-            📍 Da Nang, Vietnam
-          </p>
-          <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('tel:+849XXXXXXXXX')}>
-            📞 +84 9XX XXX XXX
-          </p>
-          <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://x.com/21BitCoffee', '_blank')}>
-            𝕏 @21BitCoffee
-          </p>
+          <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://maps.google.com/?q=DEINE_VOLLE_ADRESSE_HIER', '_blank')}>📍 Da Nang, Vietnam</p>
+          <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('tel:+849XXXXXXXXX')}>📞 +84 9XX XXX XXX</p>
+          <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://x.com/21BitCoffee', '_blank')}>𝕏 @21BitCoffee</p>
         </div>
 
-        {/* Bitictionary Title */}
-        <h2 style={{ textAlign: 'center', color: '#f59e0b', marginBottom: '20px' }}>Bitictionary</h2>
+        {/* Bitictionary Title mit Glow */}
+        <h2 style={{ 
+          textAlign: 'center', 
+          color: '#f59e0b', 
+          marginBottom: '20px',
+          textShadow: '0 0 20px #f59e0b, 0 0 40px #f59e0b'
+        }}>Bitictionary</h2>
 
-        {/* Bitictionary Content - mit leichtem Flow / Glow Effect */}
+        {/* Bitictionary Content */}
         <div style={{ background: '#1a1a1a', padding: '1.6rem', borderRadius: '16px' }}>
           <input
             type="text"
@@ -203,7 +200,7 @@ function App() {
                 transition: 'all 0.3s ease',
                 boxShadow: '0 4px 15px rgba(245, 158, 11, 0.08)'
               }}
-                onMouseOver={(e) => e.currentTarget.style.boxShadow = '0 6px 20px rgba(245, 158, 11, 0.2)'}
+                onMouseOver={(e) => e.currentTarget.style.boxShadow = '0 6px 20px rgba(245, 158, 11, 0.25)'}
                 onMouseOut={(e) => e.currentTarget.style.boxShadow = '0 4px 15px rgba(245, 158, 11, 0.08)'}
               >
                 <h4 style={{ color: '#f59e0b', margin: '0 0 12px 0' }}>{item.term}</h4>
@@ -213,12 +210,12 @@ function App() {
           )}
         </div>
 
-        {/* Live Chart mit VND */}
+        {/* Live Chart */}
         <div style={{ marginTop: '30px', background: '#1a1a1a', padding: '1.6rem', borderRadius: '16px', textAlign: 'center', border: '1px solid #f59e0b' }}>
           <div>Block Height: <span style={{ color: '#f59e0b' }}>{blockHeight ? `#${blockHeight.toLocaleString()}` : 'Laden...'}</span></div>
           <div style={{ margin: '8px 0', color: '#f59e0b', fontWeight: '600' }}>
             BTC: {btcPrice 
-              ? `$${btcPrice.usd?.toLocaleString()} • €${btcPrice.eur?.toLocaleString()} • ₫${btcPrice.vnd?.toLocaleString()}` 
+              ? `$${btcPrice.usd?.toLocaleString()} • €${btcPrice.eur?.toLocaleString()} • ₫${formatVND(btcPrice.vnd)}` 
               : 'Laden...'}
           </div>
 
