@@ -114,11 +114,6 @@ function App() {
     vi: { title: "₿itCoffee", subtitle: "Đà Nẵng • Việt Nam", bitictionary: "Bitictionary" }
   }[language]
 
-  const calculateSats = (vndPrice: number) => {
-    if (!btcPrice?.vnd || btcPrice.vnd === 0) return '0';
-    return Math.round((vndPrice / btcPrice.vnd) * 100000000).toLocaleString();
-  }
-
   const generateChartPoints = () => {
     if (priceHistory.length < 5) return "20,65 520,65";
     const max = Math.max(...priceHistory);
