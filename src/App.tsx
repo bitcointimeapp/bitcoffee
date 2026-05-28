@@ -3,6 +3,13 @@ import { useState, useEffect } from 'react'
 type Language = 'de' | 'en' | 'vi'
 type ViewMode = 'phone' | 'pad'
 
+interface DictionaryItem {
+  term: string
+  de: string
+  en: string
+  vi: string
+}
+
 function App() {
   const [language, setLanguage] = useState<Language>('en')
   const [viewMode, setViewMode] = useState<ViewMode>('phone')
@@ -13,7 +20,7 @@ function App() {
   const [priceHistory, setPriceHistory] = useState<number[]>([])
 
   // === BITICTIONARY ===
-  const bitictionary = [
+  const bitictionary: DictionaryItem[] = [
     { term: "Bitcoin", de: "Die erste dezentrale digitale Währung • Begrenzt auf 21 Millionen • Dezentral und pseudonym • Von Satoshi Nakamoto 2009 geschaffen.", en: "The first decentralized digital currency • Capped at 21 million • Decentralized and pseudonymous • Created by Satoshi Nakamoto in 2009.", vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên • Giới hạn 21 triệu • Phi tập trung và ẩn danh • Được Satoshi Nakamoto tạo năm 2009." },,
     { term: "Blockchain", de: "Öffentliche, unveränderliche Kette von Blöcken • Jeder Block enthält Transaktionen • Sehr schwer zu manipulieren.", en: "Public, immutable chain of blocks • Each block contains transactions • Extremely difficult to manipulate.", vi: "Chuỗi khối công khai, không thể thay đổi • Mỗi khối chứa giao dịch • Rất khó bị thao túng." },
     { term: "Whitepaper", de: "Das Bitcoin Whitepaper von Satoshi Nakamoto (2008) • Beschreibt das Grundkonzept von Bitcoin • Titel: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", en: "Bitcoin Whitepaper by Satoshi Nakamoto (2008) • Describes the core concept of Bitcoin • Title: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", vi: "Whitepaper Bitcoin của Satoshi Nakamoto (2008) • Mô tả khái niệm cốt lõi • Tiêu đề: 'Bitcoin: A Peer-to-Peer Electronic Cash System'." },
@@ -66,7 +73,7 @@ function App() {
   ]
 
   const filteredTerms = bitictionary
-    .filter(item => 
+    .filter((item): item is DictionaryItem => 
       item.term.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item[language].toLowerCase().includes(searchTerm.toLowerCase())
     )
@@ -107,27 +114,9 @@ function App() {
     vi: { title: "₿itCoffee", subtitle: "Đà Nẵng • Việt Nam", bitictionary: "Bitictionary" }
   }[language]
 
-  const calculateSats = (vndPrice: number) => {
-    if (!btcPrice?.vnd || btcPrice.vnd === 0) return '0';
-    return Math.round((vndPrice / btcPrice.vnd) * 100000000).toLocaleString();
-  }
-
-  const generateChartPoints = () => {
-    if (priceHistory.length < 5) return "20,65 520,65";
-    const max = Math.max(...priceHistory);
-    const min = Math.min(...priceHistory);
-    const range = max - min || 1;
-    const points = priceHistory.map((price, index) => {
-      const x = 20 + (index / (priceHistory.length - 1)) * 480;
-      const y = 70 - ((price - min) / range) * 55;
-      return `${x.toFixed(1)},${y.toFixed(1)}`;
-    }).join(' ');
-    return points;
-  }
-
   // Breiten
-  const containerMaxWidth = viewMode === 'pad' ? '3000px' : '620px';
-  const innerMaxWidth = viewMode === 'pad' ? '100%' : '460px';
+  const containerMaxWidth = viewMode === 'pad' ? '3000px' : '620px'
+  const innerMaxWidth = viewMode === 'pad' ? '100%' : '460px'
 
   return (
     <div style={{ 
@@ -204,7 +193,7 @@ function App() {
             </div>
           </div>
 
-          {/* Nur Bitictionary Titel */}
+          {/* Bitictionary Titel */}
           <div style={{ textAlign: 'center', margin: '2rem 0 1.5rem 0' }}>
             <h2 style={{ color: '#f59e0b', fontSize: '1.8rem' }}>{t.bitictionary}</h2>
           </div>
@@ -246,7 +235,7 @@ function App() {
             )}
           </div>
 
-          {/* Live Chart (bleibt sichtbar unter Bitictionary) */}
+          {/* Live Chart */}
           <div style={{ width: '100%', marginTop: '2.5rem', background: '#1a1a1a', padding: '1.8rem', borderRadius: '16px', textAlign: 'center', border: '1px solid #f59e0b' }}>
             <div>Block Height: <span style={{ color: '#f59e0b' }}>{blockHeight ? `#${blockHeight.toLocaleString()}` : 'Laden...'}</span></div>
             <div style={{ marginTop: '6px', color: '#f59e0b', fontWeight: '600' }}>
