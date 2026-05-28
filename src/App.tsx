@@ -21,6 +21,7 @@ function App() {
 
   // === BITICTIONARY ===
   const bitictionary: DictionaryItem[] = [
+    // ... alle Einträge (gleich wie vorher) ...
     { term: "Bitcoin", de: "Die erste dezentrale digitale Währung • Begrenzt auf 21 Millionen • Dezentral und pseudonym • Von Satoshi Nakamoto 2009 geschaffen.", en: "The first decentralized digital currency • Capped at 21 million • Decentralized and pseudonymous • Created by Satoshi Nakamoto in 2009.", vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên • Giới hạn 21 triệu • Phi tập trung và ẩn danh • Được Satoshi Nakamoto tạo năm 2009." },
     { term: "Blockchain", de: "Öffentliche, unveränderliche Kette von Blöcken • Jeder Block enthält Transaktionen • Sehr schwer zu manipulieren.", en: "Public, immutable chain of blocks • Each block contains transactions • Extremely difficult to manipulate.", vi: "Chuỗi khối công khai, không thể thay đổi • Mỗi khối chứa giao dịch • Rất khó bị thao túng." },
     { term: "Whitepaper", de: "Das Bitcoin Whitepaper von Satoshi Nakamoto (2008) • Beschreibt das Grundkonzept von Bitcoin • Titel: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", en: "Bitcoin Whitepaper by Satoshi Nakamoto (2008) • Describes the core concept of Bitcoin • Title: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", vi: "Whitepaper Bitcoin của Satoshi Nakamoto (2008) • Mô tả khái niệm cốt lõi • Tiêu đề: 'Bitcoin: A Peer-to-Peer Electronic Cash System'." },
@@ -129,11 +130,17 @@ function App() {
     <div style={{ minHeight: '100vh', backgroundColor: '#0a0a0a', color: 'white' }}>
       <div style={{ maxWidth: containerMaxWidth, margin: '0 auto', padding: '0 1rem' }}>
 
-        {/* Hero + View Button */}
+        {/* Hero */}
         <div style={{ position: 'relative' }}>
-          <img src="/bitcoffee-hero.png" alt="BitCoffee" style={{ width: '100%', height: '280px', objectFit: 'cover', borderRadius: '0 0 16px 16px' }} />
-          <button onClick={() => setViewMode(viewMode === 'phone' ? 'pad' : 'phone')}
-            style={{ position: 'absolute', top: '20px', left: '20px', padding: '8px 16px', background: 'rgba(245,158,11,0.3)', color: '#111', border: 'none', borderRadius: '9999px', fontWeight: 'bold' }}>
+          <img 
+            src="/bitcoffee-hero.png" 
+            alt="BitCoffee" 
+            style={{ width: '100%', height: '280px', objectFit: 'cover', borderRadius: '0 0 16px 16px' }} 
+          />
+          <button 
+            onClick={() => setViewMode(viewMode === 'phone' ? 'pad' : 'phone')}
+            style={{ position: 'absolute', top: '20px', left: '20px', padding: '8px 16px', background: 'rgba(245,158,11,0.3)', color: '#111', border: 'none', borderRadius: '9999px', fontWeight: 'bold' }}
+          >
             {viewMode === 'phone' ? '📱 Phone' : '📟 Pad'}
           </button>
         </div>
@@ -148,17 +155,31 @@ function App() {
           ))}
         </div>
 
-        {/* Logo */}
-        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+        {/* Logo mit schiefem B */}
+        <div style={{ textAlign: 'center', marginBottom: '25px' }}>
           <div style={{ fontSize: '3.8rem' }}>☕</div>
-          <h1 style={{ fontSize: '2.8rem', fontWeight: 'bold' }}>
-            <span style={{ color: '#f59e0b' }}>₿</span>itCoffee
+          <h1 style={{ fontSize: '2.9rem', fontWeight: 'bold', margin: '0' }}>
+            <span style={{ color: '#f59e0b', display: 'inline-block', transform: 'rotate(12deg)', marginRight: '-4px' }}>₿</span>
+            itCoffee
           </h1>
-          <p style={{ color: '#f59e0b' }}>{t.subtitle}</p>
+          <p style={{ color: '#f59e0b', marginTop: '4px' }}>{t.subtitle}</p>
+        </div>
+
+        {/* Kontakt Infos */}
+        <div style={{ textAlign: 'center', color: '#ddd', fontSize: '0.95rem', marginBottom: '30px', lineHeight: '1.7' }}>
+          <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://maps.google.com/?q=DEINE_VOLLE_ADRESSE_HIER', '_blank')}>
+            📍 Da Nang, Vietnam
+          </p>
+          <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('tel:+849XXXXXXXXX')}>
+            📞 +84 9XX XXX XXX
+          </p>
+          <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://x.com/21BitCoffee', '_blank')}>
+            𝕏 @21BitCoffee
+          </p>
         </div>
 
         {/* Bitictionary Title */}
-        <h2 style={{ textAlign: 'center', color: '#f59e0b', marginBottom: '20px' }}>{t.bitictionary}</h2>
+        <h2 style={{ textAlign: 'center', color: '#f59e0b', marginBottom: '20px' }}>Bitictionary</h2>
 
         {/* Bitictionary Content */}
         <div style={{ background: '#1a1a1a', padding: '1.6rem', borderRadius: '16px' }}>
@@ -167,7 +188,7 @@ function App() {
             placeholder={language === 'de' ? "Suchen..." : language === 'en' ? "Search..." : "Tìm kiếm..."}
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            style={{ width: '100%', padding: '14px', borderRadius: '12px', background: '#222', border: 'none', color: 'white', marginBottom: '20px' }}
+            style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', background: '#222', border: 'none', color: 'white', marginBottom: '20px', boxSizing: 'border-box' }}
           />
 
           {filteredTerms.length === 0 ? (
