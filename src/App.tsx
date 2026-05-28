@@ -21,7 +21,7 @@ function App() {
 
   // === BITICTIONARY ===
   const bitictionary: DictionaryItem[] = [
-    // ... alle Einträge (gleich wie vorher) ...
+    // ... alle Einträge bleiben gleich ...
     { term: "Bitcoin", de: "Die erste dezentrale digitale Währung • Begrenzt auf 21 Millionen • Dezentral und pseudonym • Von Satoshi Nakamoto 2009 geschaffen.", en: "The first decentralized digital currency • Capped at 21 million • Decentralized and pseudonymous • Created by Satoshi Nakamoto in 2009.", vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên • Giới hạn 21 triệu • Phi tập trung và ẩn danh • Được Satoshi Nakamoto tạo năm 2009." },
     { term: "Blockchain", de: "Öffentliche, unveränderliche Kette von Blöcken • Jeder Block enthält Transaktionen • Sehr schwer zu manipulieren.", en: "Public, immutable chain of blocks • Each block contains transactions • Extremely difficult to manipulate.", vi: "Chuỗi khối công khai, không thể thay đổi • Mỗi khối chứa giao dịch • Rất khó bị thao túng." },
     { term: "Whitepaper", de: "Das Bitcoin Whitepaper von Satoshi Nakamoto (2008) • Beschreibt das Grundkonzept von Bitcoin • Titel: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", en: "Bitcoin Whitepaper by Satoshi Nakamoto (2008) • Describes the core concept of Bitcoin • Title: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", vi: "Whitepaper Bitcoin của Satoshi Nakamoto (2008) • Mô tả khái niệm cốt lõi • Tiêu đề: 'Bitcoin: A Peer-to-Peer Electronic Cash System'." },
@@ -155,12 +155,12 @@ function App() {
           ))}
         </div>
 
-        {/* Logo mit schiefem B */}
+        {/* Logo mit schiefem B + orange "it" */}
         <div style={{ textAlign: 'center', marginBottom: '25px' }}>
           <div style={{ fontSize: '3.8rem' }}>☕</div>
           <h1 style={{ fontSize: '2.9rem', fontWeight: 'bold', margin: '0' }}>
             <span style={{ color: '#f59e0b', display: 'inline-block', transform: 'rotate(12deg)', marginRight: '-3px' }}>₿</span>
-            itCoffee
+            <span style={{ color: '#f59e0b' }}>it</span>Coffee
           </h1>
           <p style={{ color: '#f59e0b', marginTop: '4px' }}>{t.subtitle}</p>
         </div>
@@ -181,7 +181,7 @@ function App() {
         {/* Bitictionary Title */}
         <h2 style={{ textAlign: 'center', color: '#f59e0b', marginBottom: '20px' }}>Bitictionary</h2>
 
-        {/* Bitictionary Content */}
+        {/* Bitictionary Content - mit leichtem Flow / Glow Effect */}
         <div style={{ background: '#1a1a1a', padding: '1.6rem', borderRadius: '16px' }}>
           <input
             type="text"
@@ -195,7 +195,17 @@ function App() {
             <p style={{ textAlign: 'center', color: '#888', padding: '40px 0' }}>Kein Begriff gefunden.</p>
           ) : (
             filteredTerms.map((item, i) => (
-              <div key={i} style={{ background: '#222', padding: '1.3rem', borderRadius: '12px', marginBottom: '12px' }}>
+              <div key={i} style={{ 
+                background: '#222', 
+                padding: '1.3rem', 
+                borderRadius: '12px', 
+                marginBottom: '12px',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 4px 15px rgba(245, 158, 11, 0.08)'
+              }}
+                onMouseOver={(e) => e.currentTarget.style.boxShadow = '0 6px 20px rgba(245, 158, 11, 0.2)'}
+                onMouseOut={(e) => e.currentTarget.style.boxShadow = '0 4px 15px rgba(245, 158, 11, 0.08)'}
+              >
                 <h4 style={{ color: '#f59e0b', margin: '0 0 12px 0' }}>{item.term}</h4>
                 <p style={{ color: '#ddd', lineHeight: '1.6' }}>{item[language]}</p>
               </div>
@@ -203,11 +213,13 @@ function App() {
           )}
         </div>
 
-        {/* Live Chart */}
+        {/* Live Chart mit VND */}
         <div style={{ marginTop: '30px', background: '#1a1a1a', padding: '1.6rem', borderRadius: '16px', textAlign: 'center', border: '1px solid #f59e0b' }}>
           <div>Block Height: <span style={{ color: '#f59e0b' }}>{blockHeight ? `#${blockHeight.toLocaleString()}` : 'Laden...'}</span></div>
           <div style={{ margin: '8px 0', color: '#f59e0b', fontWeight: '600' }}>
-            BTC: {btcPrice ? `$${btcPrice.usd?.toLocaleString()} • €${btcPrice.eur?.toLocaleString()}` : 'Laden...'}
+            BTC: {btcPrice 
+              ? `$${btcPrice.usd?.toLocaleString()} • €${btcPrice.eur?.toLocaleString()} • ₫${btcPrice.vnd?.toLocaleString()}` 
+              : 'Laden...'}
           </div>
 
           <div style={{ margin: '20px 0', minHeight: '100px' }}>
