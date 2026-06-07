@@ -21,7 +21,10 @@ function App() {
 
   // === BITICTIONARY ===
   const bitictionary: DictionaryItem[] = [
-    { term: "Bitcoin", de: "Die erste dezentrale digitale Währung • Begrenzt auf 21 Millionen • Dezentral und pseudonym • Von Satoshi Nakamoto 2009 geschaffen.", en: "The first decentralized digital currency • Capped at 21 million • Decentralized and pseudonymous • Created by Satoshi Nakamoto in 2009.", vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên • Giới hạn 21 triệu • Phi tập trung và ẩn danh • Được Satoshi Nakamoto tạo năm 2009." },
+            { term: "Bitcoin", 
+      de: "Die erste dezentrale digitale Währung der Welt • Festgelegt auf maximal 21 Millionen Stück • Vollständig dezentral ohne Banken oder Regierungen • Pseudonym und zensurresistent • 2009 von Satoshi Nakamoto erschaffen.", 
+      en: "The first decentralized digital currency in the world • Hard-capped at 21 million coins • Fully decentralized without banks or governments • Pseudonymous and censorship-resistant • Created in 2009 by Satoshi Nakamoto.", 
+      vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên trên thế giới • Giới hạn cứng tối đa 21 triệu đồng • Hoàn toàn phi tập trung, không cần ngân hàng hay chính phủ • Ẩn danh và chống kiểm duyệt • Được Satoshi Nakamoto tạo ra năm 2009." },
     { term: "Blockchain", de: "Öffentliche, unveränderliche Kette von Blöcken • Jeder Block enthält Transaktionen • Sehr schwer zu manipulieren.", en: "Public, immutable chain of blocks • Each block contains transactions • Extremely difficult to manipulate.", vi: "Chuỗi khối công khai, không thể thay đổi • Mỗi khối chứa giao dịch • Rất khó bị thao túng." },
     { term: "Whitepaper", de: "Das Bitcoin Whitepaper von Satoshi Nakamoto (2008) • Beschreibt das Grundkonzept von Bitcoin • Titel: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", en: "Bitcoin Whitepaper by Satoshi Nakamoto (2008) • Describes the core concept of Bitcoin • Title: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", vi: "Whitepaper Bitcoin của Satoshi Nakamoto (2008) • Mô tả khái niệm cốt lõi • Tiêu đề: 'Bitcoin: A Peer-to-Peer Electronic Cash System'." },
     { term: "Satoshi Nakamoto", de: "Pseudonym des Bitcoin-Erfinders • Identität bis heute unbekannt • Veröffentlichte Whitepaper 2008 und Genesis Block 2009.", en: "Pseudonym of Bitcoin's creator • Identity still unknown • Published Whitepaper in 2008 and Genesis Block in 2009.", vi: "Bút danh của người tạo Bitcoin • Danh tính vẫn chưa biết • Công bố Whitepaper 2008 và Genesis Block 2009." },
@@ -70,7 +73,7 @@ function App() {
     { term: "Taproot", de: "2021 Upgrade • Mehr Privatsphäre & Smart Contracts.", en: "2021 upgrade • Better privacy & smart contracts.", vi: "Nâng cấp 2021 • Quyền riêng tư tốt hơn." },
     { term: "DIP", de: "Preisrückgang • Gute Kaufgelegenheit.", en: "Price drop • Good buying opportunity.", vi: "Giảm giá tạm thời." },
     { term: "DYOR", de: "Do Your Own Research – eigene Recherche machen.", en: "Do Your Own Research.", vi: "Tự nghiên cứu." },
-    { term: "Miner", de: "Ein Miner ist ein Computer, der mit hoher Rechenleistung neue Blöcke zur Bitcoin-Blockchain hinzufügt. Er sichert das Netzwerk, verifiziert Transaktionen und wird mit neu geschaffenen Bitcoins + Gebühren belohnt. Wichtig für die Dezentralität und Sicherheit von Bitcoin.", en: "A miner is a powerful computer that adds new blocks to the Bitcoin blockchain. It secures the network, verifies transactions and gets rewarded with newly created Bitcoin + fees. Essential for decentralization and security.", vi: "Miner là máy tính mạnh dùng để thêm khối mới vào blockchain Bitcoin. Họ bảo vệ mạng, xác minh giao dịch và nhận phần thưởng là Bitcoin mới + phí. Rất quan trọng cho tính phi tập trung và an ninh của Bitcoin." },
+    { term: "Miner", de: "Ein Miner ist ein Computer, der mit hoher Rechenleistung neue Blöcke zur Bitcoin-Blockchain hinzufügt • Er sichert das Netzwerk, verifiziert Transaktionen und wird mit neu geschaffenen Bitcoins + Gebühren belohnt • Wichtig für die Dezentralität und Sicherheit von Bitcoin.", en: "A miner is a powerful computer that adds new blocks to the Bitcoin blockchain • It secures the network, verifies transactions and gets rewarded with newly created Bitcoin + fees • Essential for decentralization and security.", vi: "Miner là máy tính mạnh dùng để thêm khối mới vào blockchain Bitcoin • Họ bảo vệ mạng, xác minh giao dịch và nhận phần thưởng là Bitcoin mới + phí • Rất quan trọng cho tính phi tập trung và an ninh của Bitcoin." },
     { term: "Stratum V1", 
       de: "Älteres Protokoll für die Kommunikation zwischen Mining-Hardware und Mining-Pools • Hat mehrere Schwächen wie hohe Latenz, zentrale Kontrolle durch den Pool und schlechte Skalierbarkeit.", 
       en: "Older protocol for communication between mining hardware and mining pools • Has several weaknesses such as high latency, central control by the pool, and poor scalability.", 
@@ -100,9 +103,9 @@ function App() {
       en: "CEO of MicroStrategy • One of the most prominent Bitcoin maximalists • Has been aggressively buying Bitcoin since 2020 • Views Bitcoin as digital gold.", 
       vi: "CEO của MicroStrategy • Một trong những người ủng hộ Bitcoin nổi bật nhất • Đã mua mạnh Bitcoin từ năm 2020 • Coi Bitcoin là vàng kỹ thuật số." },
     { term: "MicroStrategy", 
-      de: "Börsennotiertes Unternehmen unter Michael Saylor • Verfolgt die aggressivste Bitcoin-Strategie eines Unternehmens • Hält aktuell über 250.000 BTC als primäres Reservevermögen.", 
-      en: "Public company led by Michael Saylor • Pursues the most aggressive corporate Bitcoin strategy • Currently holds over 250,000 BTC as primary reserve asset.", 
-      vi: "Công ty niêm yết do Michael Saylor lãnh đạo • Theo đuổi chiến lược Bitcoin mạnh nhất trong các công ty • Hiện nắm giữ hơn 250.000 BTC làm tài sản dự trữ chính." },
+      de: "Börsennotiertes Unternehmen unter Michael Saylor • Verfolgt die aggressivste Bitcoin-Strategie eines Unternehmens • Hält aktuell über 800.000 BTC als primäres Reservevermögen.", 
+      en: "Public company led by Michael Saylor • Pursues the most aggressive corporate Bitcoin strategy • Currently holds over 800,000 BTC as primary reserve asset.", 
+      vi: "Công ty niêm yết do Michael Saylor lãnh đạo • Theo đuổi chiến lược Bitcoin mạnh nhất trong các công ty • Hiện nắm giữ hơn 800.000 BTC làm tài sản dự trữ chính." },
     { term: "Block Header", 
       de: "Der Kopf eines Blocks (ca. 80 Bytes) • Enthält: Version, Hash des vorherigen Blocks, Merkle Root, Timestamp, Difficulty Target und Nonce • Wird für Mining und Verifizierung verwendet.", 
       en: "The header of a block (about 80 bytes) • Contains: Version, Previous Block Hash, Merkle Root, Timestamp, Difficulty Target and Nonce • Used for mining and verification.", 
@@ -110,7 +113,32 @@ function App() {
     { term: "Block Body", 
       de: "Der eigentliche Inhalt eines Blocks • Enthält alle Transaktionen des Blocks • Die Transaktionen werden in einem Merkle Tree organisiert, dessen Root im Block Header steht.", 
       en: "The actual content of a block • Contains all transactions of the block • Transactions are organized in a Merkle Tree whose root is stored in the Block Header.", 
-      vi: "Nội dung thực sự của khối • Chứa tất cả giao dịch trong khối • Các giao dịch được tổ chức trong Merkle Tree, Root nằm trong Block Header." }
+      vi: "Nội dung thực sự của khối • Chứa tất cả giao dịch trong khối • Các giao dịch được tổ chức trong Merkle Tree, Root nằm trong Block Header." },
+
+    { term: "Nonce", 
+      de: "Number Only Used Once • Eine zufällige Zahl, die Miner im Block Header verändern • Wird beim Mining solange angepasst, bis der Hash des Blocks den aktuellen Difficulty Target erfüllt • Kern des Proof-of-Work Mechanismus.", 
+      en: "Number Only Used Once • A random number that miners change in the Block Header • Continuously adjusted during mining until the block hash meets the current Difficulty Target • Core of the Proof-of-Work mechanism.", 
+      vi: "Number Only Used Once • Một số ngẫu nhiên mà miner thay đổi trong Block Header • Liên tục điều chỉnh trong quá trình đào cho đến khi hash của khối đáp ứng Difficulty Target • Là cốt lõi của cơ chế Proof-of-Work." },
+
+    { term: "Bitcoin Trilemma", 
+      de: "Das grundlegende Spannungsfeld von Bitcoin • Dezentralität • Skalierbarkeit • Sicherheit • Man kann immer nur zwei der drei Eigenschaften stark ausprägen • Bitcoin priorisiert Dezentralität und Sicherheit auf Kosten der Skalierbarkeit (Layer 1).", 
+      en: "Bitcoin's fundamental trilemma • Decentralization • Scalability • Security • You can only strongly achieve two of the three • Bitcoin prioritizes decentralization and security at the expense of scalability (Layer 1).", 
+      vi: "Tam giác cơ bản của Bitcoin • Phi tập trung • Khả năng mở rộng • An ninh • Chỉ có thể mạnh hai trong ba đặc tính • Bitcoin ưu tiên phi tập trung và an ninh, đánh đổi khả năng mở rộng (Layer 1)." },
+
+    { term: "M2", 
+      de: "Geldmengenaggregat M2 • Umfasst Bargeld, Sichteinlagen und kurzfristige Spareinlagen • Wichtiger Indikator für die Geldmenge in der Fiat-Wirtschaft • Starkes Wachstum von M2 führt oft zu Inflation und steigender Bitcoin-Nachfrage als Inflationsschutz.", 
+      en: "M2 money supply • Includes cash, checking deposits and short-term savings • Key indicator of money supply in fiat economies • Strong M2 growth often leads to inflation and increased demand for Bitcoin as an inflation hedge.", 
+      vi: "Cung tiền M2 • Bao gồm tiền mặt, tiền gửi vãng lai và tiền gửi tiết kiệm ngắn hạn • Chỉ số quan trọng về cung tiền trong kinh tế fiat • Tăng mạnh M2 thường dẫn đến lạm phát và nhu cầu Bitcoin tăng như hàng rào chống lạm phát." },
+
+    { term: "Thermodynamik & Bitcoin", 
+      de: "Bitcoin Mining folgt den Gesetzen der Thermodynamik • Erster Hauptsatz (Energieerhaltung): Eingangsenergie = ausgegebene Wärme + nutzbare Arbeit • Zweiter Hauptsatz: Jede Energieumwandlung erzeugt Entropie (Abwärme) • Mining wandelt Strom in Sicherheit des Netzwerks um.", 
+      en: "Bitcoin mining follows the laws of thermodynamics • First Law (energy conservation): Input energy = waste heat + useful work • Second Law: Every energy conversion creates entropy (waste heat) • Mining converts electricity into network security.", 
+      vi: "Bitcoin mining tuân theo định luật Nhiệt động lực học • Định luật thứ nhất (bảo toàn năng lượng): Năng lượng vào = nhiệt thải + công hữu ích • Định luật thứ hai: Mọi chuyển đổi năng lượng tạo entropy (nhiệt thải) • Mining chuyển hóa điện thành an ninh mạng." },
+
+    { term: "Kardashev-Skala", 
+      de: "Skala zur Messung der technologischen Entwicklung einer Zivilisation nach Energieverbrauch • Typ I: Planetare Energie • Typ II: Sternenenergie • Typ III: Galaktische Energie • Bitcoin Mining wird teilweise als Schritt in Richtung Typ I Zivilisation gesehen, da es überschüssige Energie nutzbar macht.", 
+      en: "Scale for measuring a civilization's technological advancement by energy consumption • Type I: Planetary energy • Type II: Stellar energy • Type III: Galactic energy • Bitcoin mining is sometimes seen as a step toward a Type I civilization by making use of surplus energy.", 
+      vi: "Thang đo sự phát triển công nghệ của nền văn minh theo mức tiêu thụ năng lượng • Loại I: Năng lượng hành tinh • Loại II: Năng lượng sao • Loại III: Năng lượng thiên hà • Bitcoin mining đôi khi được xem là bước tiến tới nền văn minh Loại I bằng cách tận dụng năng lượng dư thừa." }
   ]
 
   const filteredTerms = bitictionary
