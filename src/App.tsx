@@ -279,7 +279,9 @@ function App() {
       <div style={{ marginBottom: '1.3rem' }}>
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pad Kra Pao</h3>
         <p style={{ color: '#ccc', lineHeight: '1.5', marginBottom: '0.5rem' }}>
-           Minced meat • Basil leaves • Garlic • Oyster sauce • Soya sauce • Chili • Onion • Rice • Egg
+          {language === 'de' && ' Hackfleisch • Basilikumblätter • Knoblauch • Austernsauce • Sojasauce • Chili • Zwiebel • Reis • Ei'}
+          {language === 'en' && ' Minced meat • Basil leaves • Garlic • Oyster sauce • Soya sauce • Chili • Onion • Rice • Egg'}
+          {language === 'vi' && ' Thịt băm • Lá quế • Tỏi • Sốt hào • Nước tương • Ớt • Hành tây • Cơm • Trứng'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Pork 75.000 VND</p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>Chicken 75.000 VND</p>
@@ -291,7 +293,9 @@ function App() {
       <div style={{ marginBottom: '1.3rem' }}>
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pad Thai</h3>
         <p style={{ color: '#ccc', lineHeight: '1.5', marginBottom: '0.5rem' }}>
-           Noodles • Chives • Bean sprouts • Peanut • Dried Shrimp • Chili
+          {language === 'de' && ' Reisnudeln • Schnittlauch • Sojasprossen • Erdnuss • Getrocknete Garnelen • Chili'}
+          {language === 'en' && ' Noodles • Chives • Bean sprouts • Peanut • Dried Shrimp • Chili'}
+          {language === 'vi' && ' Bún • Hẹ • Giá đỗ • Đậu phộng • Tôm khô • Ớt'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Pork 80.000 VND</p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Chicken 80.000 VND</p>
@@ -304,7 +308,9 @@ function App() {
       <div>
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Tom Yum</h3>
         <p style={{ color: '#ccc', lineHeight: '1.5', marginBottom: '0.5rem' }}>
-           Lemongrass • Galangal root • Coconut milk • Onion • Fish sauce • Chili • Garlic
+          {language === 'de' && ' Zitronengras • Galgantwurzel • Kokosmilch • Zwiebel • Fischsauce • Chili • Knoblauch'}
+          {language === 'en' && ' Lemongrass • Galangal root • Coconut milk • Onion • Fish sauce • Chili • Garlic'}
+          {language === 'vi' && ' Sả • Riềng • Nước cốt dừa • Hành tây • Nước mắm • Ớt • Tỏi'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Chicken 110.000 VND</p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>Shrimp 130.000 VND</p>
@@ -321,9 +327,11 @@ function App() {
 
       <div style={{ marginBottom: '1.2rem' }}>
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pink Dragon Bowl</h3>
-        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>Pink Dragon Fruit, Mango, Banana</p>
+        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>Pink Dragon Fruit • Mango • Banana</p>
         <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-          Toppings: • Coconut flakes • Granola • Chia Seeds • Honey
+          {language === 'de' && 'Toppings:  Kokosflocken • Granola • Chiasamen • Honig'}
+          {language === 'en' && 'Toppings:  Coconut flakes • Granola • Chia Seeds • Honey'}
+          {language === 'vi' && 'Toppings:  Dừa sấy • Granola • Hạt chia • Mật ong'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Fruit Bowl: 60.000 VND</p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>+ Protein: 90.000 VND</p>
@@ -333,9 +341,11 @@ function App() {
 
       <div style={{ marginBottom: '1.2rem' }}>
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Tropical White Bowl</h3>
-        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>White Dragon Fruit, Mango, Banana</p>
+        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>White Dragon Fruit • Mango • Banana</p>
         <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-          Toppings: • Coconut flakes • Granola • Chia Seeds • Honey
+          {language === 'de' && 'Toppings:  Kokosflocken • Granola • Chiasamen • Honig'}
+          {language === 'en' && 'Toppings:  Coconut flakes • Granola • Chia Seeds • Honey'}
+          {language === 'vi' && 'Toppings:  Dừa sấy • Granola • Hạt chia • Mật ong'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Fruit Bowl: 60.000 VND</p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>+ Protein: 90.000 VND</p>
@@ -345,9 +355,11 @@ function App() {
 
       <div>
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Dream Bowl</h3>
-        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>Mango, Pineapple, Banana</p>
+        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>Mango • Pineapple • Banana</p>
         <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-          Toppings: • Coconut flakes • Granola • Chia Seeds • Honey
+          {language === 'de' && 'Toppings:  Kokosflocken • Granola • Chiasamen • Honig'}
+          {language === 'en' && 'Toppings:  Coconut flakes • Granola • Chia Seeds • Honey'}
+          {language === 'vi' && 'Toppings:  Dừa sấy • Granola • Hạt chia • Mật ong'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Fruit Bowl: 60.000 VND</p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>+ Protein: 90.000 VND</p>
@@ -361,7 +373,7 @@ function App() {
         {language === 'en' && 'Protein Shakes'}
         {language === 'vi' && 'Sinh Tố Protein'}
       </h2>
-      <p style={{ color: '#ccc', marginBottom: '0.5rem' }}>Vanilla &nbsp;&nbsp; Chocolate</p>
+      <p style={{ color: '#ccc', marginBottom: '0.5rem' }}>Vanilla • Chocolate</p>
       <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Protein Shake: 60.000 VND</p>
       <p style={{ color: '#f59e0b', fontWeight: '600' }}>+ Fruit: 80.000 VND</p>
     </div>
