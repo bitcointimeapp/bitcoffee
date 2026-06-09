@@ -24,9 +24,10 @@ function App() {
   // === BITICTIONARY ===
   const bitictionary: DictionaryItem[] = [
   
- { term: "Bitcoin", 
+  { term: "Bitcoin", 
       de: "Die erste dezentrale digitale Währung der Welt • Festgelegt auf maximal 21 Millionen Stück • Vollständig dezentral ohne Banken oder Regierungen • Pseudonym und zensurresistent • 2009 von Satoshi Nakamoto erschaffen.", 
-      en: "The first decentralized digital currency in the world • Hard-capped at 21 million coins • Fully decentralized without banks or governments • Pseudonymous and censorship-resistant • Created in 2009 by Satoshi Nakamoto."},
+      en: "The first decentralized digital currency in the world • Hard-capped at 21 million coins • Fully decentralized without banks or governments • Pseudonymous and censorship-resistant • Created in 2009 by Satoshi Nakamoto.", 
+      vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên trên thế giới • Giới hạn cứng tối đa 21 triệu đồng • Hoàn toàn phi tập trung, không cần ngân hàng hay chính phủ • Ẩn danh và chống kiểm duyệt • Được Satoshi Nakamoto tạo ra năm 2009." },
     { term: "Blockchain", de: "Öffentliche, unveränderliche Kette von Blöcken • Jeder Block enthält Transaktionen • Sehr schwer zu manipulieren.", en: "Public, immutable chain of blocks • Each block contains transactions • Extremely difficult to manipulate.", vi: "Chuỗi khối công khai, không thể thay đổi • Mỗi khối chứa giao dịch • Rất khó bị thao túng." },
     { term: "Whitepaper", de: "Das Bitcoin Whitepaper von Satoshi Nakamoto (2008) • Beschreibt das Grundkonzept von Bitcoin • Titel: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", en: "Bitcoin Whitepaper by Satoshi Nakamoto (2008) • Describes the core concept of Bitcoin • Title: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", vi: "Whitepaper Bitcoin của Satoshi Nakamoto (2008) • Mô tả khái niệm cốt lõi • Tiêu đề: 'Bitcoin: A Peer-to-Peer Electronic Cash System'." },
     { term: "Satoshi Nakamoto", de: "Pseudonym des Bitcoin-Erfinders • Identität bis heute unbekannt • Veröffentlichte Whitepaper 2008 und Genesis Block 2009.", en: "Pseudonym of Bitcoin's creator • Identity still unknown • Published Whitepaper in 2008 and Genesis Block in 2009.", vi: "Bút danh của người tạo Bitcoin • Danh tính vẫn chưa biết • Công bố Whitepaper 2008 và Genesis Block 2009." },
