@@ -283,8 +283,16 @@ function App() {
           {language === 'en' && ' Minced meat • Basil leaves • Garlic • Oyster sauce • Soya sauce • Chili • Onion • Rice • Egg'}
           {language === 'vi' && ' Thịt băm • Lá quế • Tỏi • Sốt hào • Nước tương • Ớt • Hành tây • Cơm • Trứng'}
         </p>
-        <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Pork 75.000 VND</p>
-        <p style={{ color: '#f59e0b', fontWeight: '600' }}>Chicken 75.000 VND</p>
+        <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
+          {language === 'de' && 'Schweinefleisch 75.000 VND'}
+          {language === 'en' && 'Pork 75.000 VND'}
+          {language === 'vi' && 'Thịt heo 75.000 VND'}
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+          {language === 'de' && 'Hähnchen 75.000 VND'}
+          {language === 'en' && 'Chicken 75.000 VND'}
+          {language === 'vi' && 'Thịt gà 75.000 VND'}
+        </p>
       </div>
 
       <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '1rem 0' }} />
@@ -297,9 +305,21 @@ function App() {
           {language === 'en' && ' Noodles • Chives • Bean sprouts • Peanut • Dried Shrimp • Chili'}
           {language === 'vi' && ' Bún • Hẹ • Giá đỗ • Đậu phộng • Tôm khô • Ớt'}
         </p>
-        <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Pork 80.000 VND</p>
-        <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Chicken 80.000 VND</p>
-        <p style={{ color: '#f59e0b', fontWeight: '600' }}>Shrimp 95.000 VND</p>
+        <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
+          {language === 'de' && 'Schweinefleisch 80.000 VND'}
+          {language === 'en' && 'Pork 80.000 VND'}
+          {language === 'vi' && 'Thịt heo 80.000 VND'}
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
+          {language === 'de' && 'Hähnchen 80.000 VND'}
+          {language === 'en' && 'Chicken 80.000 VND'}
+          {language === 'vi' && 'Thịt gà 80.000 VND'}
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+          {language === 'de' && 'Garnelen 95.000 VND'}
+          {language === 'en' && 'Shrimp 95.000 VND'}
+          {language === 'vi' && 'Tôm 95.000 VND'}
+        </p>
       </div>
 
       <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '1rem 0' }} />
@@ -312,8 +332,16 @@ function App() {
           {language === 'en' && ' Lemongrass • Galangal root • Coconut milk • Onion • Fish sauce • Chili • Garlic'}
           {language === 'vi' && ' Sả • Riềng • Nước cốt dừa • Hành tây • Nước mắm • Ớt • Tỏi'}
         </p>
-        <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Chicken 110.000 VND</p>
-        <p style={{ color: '#f59e0b', fontWeight: '600' }}>Shrimp 130.000 VND</p>
+        <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
+          {language === 'de' && 'Hähnchen 110.000 VND'}
+          {language === 'en' && 'Chicken 110.000 VND'}
+          {language === 'vi' && 'Thịt gà 110.000 VND'}
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+          {language === 'de' && 'Garnelen 130.000 VND'}
+          {language === 'en' && 'Shrimp 130.000 VND'}
+          {language === 'vi' && 'Tôm 130.000 VND'}
+        </p>
       </div>
     </div>
 
@@ -373,7 +401,11 @@ function App() {
         {language === 'en' && 'Protein Shakes'}
         {language === 'vi' && 'Sinh Tố Protein'}
       </h2>
-      <p style={{ color: '#ccc', marginBottom: '0.5rem' }}>Vanilla • Chocolate</p>
+      <p style={{ color: '#ccc', marginBottom: '0.5rem' }}>
+        {language === 'de' && 'Vanille • Schokolade'}
+        {language === 'en' && 'Vanilla • Chocolate'}
+        {language === 'vi' && 'Vani • Sô-cô-la'}
+      </p>
       <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Protein Shake: 60.000 VND</p>
       <p style={{ color: '#f59e0b', fontWeight: '600' }}>+ Fruit: 80.000 VND</p>
     </div>
@@ -386,7 +418,9 @@ function App() {
         {language === 'vi' && 'Sinh Tố Trái Cây'}
       </h2>
       <p style={{ color: '#ccc', marginBottom: '0.5rem' }}>
-        Red Dragon Fruit • White Dragon Fruit • Mango • Pineapple • Orange • Watermelon • Banana
+        {language === 'de' && 'Rote Drachenfrucht • Weiße Drachenfrucht • Mango • Ananas • Orange • Wassermelone • Banane'}
+        {language === 'en' && 'Red Dragon Fruit • White Dragon Fruit • Mango • Pineapple • Orange • Watermelon • Banana'}
+        {language === 'vi' && 'Thanh long đỏ • Thanh long trắng • Xoài • Dứa • Cam • Dưa hấu • Chuối'}
       </p>
       <p style={{ color: '#f59e0b', fontWeight: '600' }}>30.000 VND</p>
     </div>
@@ -400,17 +434,29 @@ function App() {
       </h2>
 
       <div style={{ marginBottom: '1rem' }}>
-        <p style={{ color: '#fff', marginBottom: '0.2rem' }}>Iced Milk Coffee Saigon</p>
+        <p style={{ color: '#fff', marginBottom: '0.2rem' }}>
+          {language === 'de' && 'Eiskaffee mit Milch Saigon'}
+          {language === 'en' && 'Iced Milk Coffee Saigon'}
+          {language === 'vi' && 'Cà phê sữa đá Sài Gòn'}
+        </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>30.000 VND</p>
       </div>
 
       <div style={{ marginBottom: '1rem' }}>
-        <p style={{ color: '#fff', marginBottom: '0.2rem' }}>Iced Black Coffee Saigon</p>
+        <p style={{ color: '#fff', marginBottom: '0.2rem' }}>
+          {language === 'de' && 'Schwarzer Eiskaffee Saigon'}
+          {language === 'en' && 'Iced Black Coffee Saigon'}
+          {language === 'vi' && 'Cà phê đen đá Sài Gòn'}
+        </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>30.000 VND</p>
       </div>
 
       <div>
-        <p style={{ color: '#fff', marginBottom: '0.2rem' }}>Hot Black Coffee</p>
+        <p style={{ color: '#fff', marginBottom: '0.2rem' }}>
+          {language === 'de' && 'Heißer schwarzer Kaffee'}
+          {language === 'en' && 'Hot Black Coffee'}
+          {language === 'vi' && 'Cà phê đen nóng'}
+        </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>25.000 VND</p>
       </div>
     </div>
