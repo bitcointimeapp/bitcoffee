@@ -285,6 +285,8 @@ function App() {
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>Chicken 75.000 VND</p>
       </div>
 
+      <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '1rem 0' }} />
+
       {/* Pad Thai */}
       <div style={{ marginBottom: '1.3rem' }}>
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pad Thai</h3>
@@ -295,6 +297,8 @@ function App() {
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Chicken 80.000 VND</p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>Shrimp 95.000 VND</p>
       </div>
+
+      <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '1rem 0' }} />
 
       {/* Tom Yum */}
       <div>
@@ -319,27 +323,31 @@ function App() {
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pink Dragon Bowl</h3>
         <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>Pink Dragon Fruit, Mango, Banana</p>
         <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-          Toppings: Coconut flakes • Granola • Chia Seeds • Honey
+          Toppings: • Coconut flakes • Granola • Chia Seeds • Honey
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Fruit Bowl: 60.000 VND</p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>+ Protein: 90.000 VND</p>
       </div>
+
+      <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '1rem 0' }} />
 
       <div style={{ marginBottom: '1.2rem' }}>
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Tropical White Bowl</h3>
         <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>White Dragon Fruit, Mango, Banana</p>
         <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-          Toppings: Coconut flakes • Granola • Chia Seeds • Honey
+          Toppings: • Coconut flakes • Granola • Chia Seeds • Honey
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Fruit Bowl: 60.000 VND</p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>+ Protein: 90.000 VND</p>
       </div>
 
+      <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '1rem 0' }} />
+
       <div>
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Dream Bowl</h3>
         <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>Mango, Pineapple, Banana</p>
         <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-          Toppings: Coconut flakes • Granola • Chia Seeds • Honey
+          Toppings: • Coconut flakes • Granola • Chia Seeds • Honey
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Fruit Bowl: 60.000 VND</p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>+ Protein: 90.000 VND</p>
