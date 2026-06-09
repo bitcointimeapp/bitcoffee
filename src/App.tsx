@@ -272,33 +272,40 @@ function App() {
     textAlign: 'center'
   }}>
     <h3 style={{ color: '#f59e0b', marginBottom: '1rem', fontSize: '1.5rem' }}>
-      Unsere Speisekarte
+      {language === 'de' && 'Unsere Speisekarte'}
+      {language === 'en' && 'Our Menu'}
+      {language === 'vi' && 'Thực đơn của chúng tôi'}
     </h3>
-    <p style={{ color: '#ccc', marginBottom: '2rem', maxWidth: '400px', margin: '0 auto 2rem' }}>
-      Frische vietnamesische und thailändische Gerichte • Protein Bowls • Shakes
+
+    <p style={{ color: '#ccc', marginBottom: '2rem', maxWidth: '420px', margin: '0 auto 2rem' }}>
+      {language === 'de' && 'Frische vietnamesische und thailändische Gerichte • Protein Bowls • Shakes'}
+      {language === 'en' && 'Fresh Vietnamese & Thai dishes • Protein Bowls • Shakes'}
+      {language === 'vi' && 'Món Việt Nam & Thái Lan tươi ngon • Protein Bowls • Shakes'}
     </p>
 
-    <a 
-      href="/menu.pdf" 
-      target="_blank" 
-      rel="noopener noreferrer"
+    <button 
+      onClick={() => window.open('/menu-v6.pdf', '_blank')}
       style={{
-        display: 'inline-block',
         background: '#f59e0b',
         color: '#111',
         padding: '18px 50px',
         borderRadius: '9999px',
         fontWeight: 'bold',
-        fontSize: '1.2rem',
-        textDecoration: 'none',
+        fontSize: '1.15rem',
+        border: 'none',
+        cursor: 'pointer',
         boxShadow: '0 4px 15px rgba(245, 158, 11, 0.3)'
       }}
     >
-      Speisekarte jetzt ansehen ↗
-    </a>
+      {language === 'de' && 'Speisekarte jetzt ansehen ↗'}
+      {language === 'en' && 'View Menu now ↗'}
+      {language === 'vi' && 'Xem thực đơn ngay ↗'}
+    </button>
 
-    <p style={{ color: '#666', marginTop: '2rem', fontSize: '0.9rem' }}>
-      Öffnet sich in einem neuen Tab
+    <p style={{ color: '#666', marginTop: '1.5rem', fontSize: '0.9rem' }}>
+      {language === 'de' && 'Öffnet sich in einem neuen Tab'}
+      {language === 'en' && 'Opens in a new tab'}
+      {language === 'vi' && 'Mở trong tab mới'}
     </p>
   </div>
 )}
