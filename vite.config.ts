@@ -7,6 +7,25 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,webp}'],
+        // Wichtige Zeile: PDF nicht precachen
+        globIgnores: ['**/menu.pdf'],
+        // Optional: Runtime-Caching für PDFs (wird frisch geholt)
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.pathname.endsWith('.pdf'),
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'pdf-cache',
+              expiration: {
+                maxEntries: 5,
+                maxAgeSeconds: 60 * 60 * 24 * 7 // 7 Tage
+              }
+            }
+          }
+        ]
+      },
       manifest: {
         name: '₿itCoffee Da Nang',
         short_name: '₿itCoffee',
