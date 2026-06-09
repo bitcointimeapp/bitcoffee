@@ -263,21 +263,21 @@ function App() {
           ))}
         </div>
 
-{/* === MENÜ (als Text - verbessert) === */}
+{/* === MENÜ (als Text - finale Version) === */}
 {activeTab === 'menu' && (
-  <div style={{ background: '#1a1a1a', padding: '2rem', borderRadius: '16px' }}>
+  <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
 
     {/* AUTHENTIC THAI FOOD */}
-    <div style={{ marginBottom: '2.5rem' }}>
-      <h2 style={{ color: '#f59e0b', marginBottom: '1.2rem', borderBottom: '1px solid #333', paddingBottom: '8px' }}>
+    <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px', marginBottom: '1.5rem' }}>
+      <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
         {language === 'de' && 'Authentische Thailändische Küche'}
         {language === 'en' && 'Authentic Thai Food'}
         {language === 'vi' && 'Món Thái Chính Thống'}
       </h2>
 
-      <div style={{ marginBottom: '1.8rem' }}>
-        <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>Pad Kra Pao</h3>
-        <p style={{ color: '#ccc', lineHeight: '1.6', marginBottom: '0.4rem' }}>
+      <div style={{ marginBottom: '1.4rem' }}>
+        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pad Kra Pao</h3>
+        <p style={{ color: '#ccc', lineHeight: '1.55', marginBottom: '0.4rem' }}>
           • Minced meat • Basil leaves • Garlic • Oyster sauce • Soya sauce • Chili • Onion • Rice • Egg
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
@@ -285,9 +285,9 @@ function App() {
         </p>
       </div>
 
-      <div style={{ marginBottom: '1.8rem' }}>
-        <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>Pad Thai</h3>
-        <p style={{ color: '#ccc', lineHeight: '1.6', marginBottom: '0.4rem' }}>
+      <div style={{ marginBottom: '1.4rem' }}>
+        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pad Thai</h3>
+        <p style={{ color: '#ccc', lineHeight: '1.55', marginBottom: '0.4rem' }}>
           • Noodles • Chives • Bean sprouts • Peanut • Dried Shrimp • Chili
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
@@ -296,8 +296,8 @@ function App() {
       </div>
 
       <div>
-        <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>Tom Yum</h3>
-        <p style={{ color: '#ccc', lineHeight: '1.6', marginBottom: '0.4rem' }}>
+        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Tom Yum</h3>
+        <p style={{ color: '#ccc', lineHeight: '1.55', marginBottom: '0.4rem' }}>
           • Lemongrass • Galangal root • Coconut milk • Onion • Fish sauce • Chili • Garlic
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
@@ -307,14 +307,14 @@ function App() {
     </div>
 
     {/* PROTEIN FRUIT BOWLS */}
-    <div style={{ marginBottom: '2.5rem' }}>
-      <h2 style={{ color: '#f59e0b', marginBottom: '1.2rem', borderBottom: '1px solid #333', paddingBottom: '8px' }}>
+    <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px', marginBottom: '1.5rem' }}>
+      <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
         {language === 'de' && 'Protein Fruit Bowls'}
         {language === 'en' && 'Protein Fruit Bowls'}
         {language === 'vi' && 'Tô Trái Cây Protein'}
       </h2>
 
-      <div style={{ marginBottom: '1.6rem' }}>
+      <div style={{ marginBottom: '1.3rem' }}>
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pink Dragon Bowl</h3>
         <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>Pink Dragon Fruit, Mango, Banana</p>
         <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
@@ -325,7 +325,7 @@ function App() {
         </p>
       </div>
 
-      <div style={{ marginBottom: '1.6rem' }}>
+      <div style={{ marginBottom: '1.3rem' }}>
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Tropical White Bowl</h3>
         <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>White Dragon Fruit, Mango, Banana</p>
         <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
@@ -349,8 +349,8 @@ function App() {
     </div>
 
     {/* PROTEIN SHAKES */}
-    <div style={{ marginBottom: '2.5rem' }}>
-      <h2 style={{ color: '#f59e0b', marginBottom: '1.2rem', borderBottom: '1px solid #333', paddingBottom: '8px' }}>
+    <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px', marginBottom: '1.5rem' }}>
+      <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
         {language === 'de' && 'Protein Shakes'}
         {language === 'en' && 'Protein Shakes'}
         {language === 'vi' && 'Sinh Tố Protein'}
@@ -362,8 +362,8 @@ function App() {
     </div>
 
     {/* FRUIT SMOOTHIES */}
-    <div style={{ marginBottom: '2.5rem' }}>
-      <h2 style={{ color: '#f59e0b', marginBottom: '1.2rem', borderBottom: '1px solid #333', paddingBottom: '8px' }}>
+    <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px', marginBottom: '1.5rem' }}>
+      <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
         {language === 'de' && 'Frucht-Smoothies'}
         {language === 'en' && 'Fruit Smoothies'}
         {language === 'vi' && 'Sinh Tố Trái Cây'}
@@ -375,16 +375,17 @@ function App() {
     </div>
 
     {/* VIETNAMESE COFFEE */}
-    <div>
-      <h2 style={{ color: '#f59e0b', marginBottom: '1.2rem', borderBottom: '1px solid #333', paddingBottom: '8px' }}>
+    <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px' }}>
+      <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
         {language === 'de' && 'Vietnamesischer Kaffee'}
         {language === 'en' && 'Vietnamese Coffee'}
         {language === 'vi' && 'Cà Phê Việt Nam'}
       </h2>
+      <p style={{ color: '#fff', marginBottom: '0.3rem' }}>
+        Iced Milk Coffee Saigon &nbsp;&nbsp; Iced Black Coffee Saigon &nbsp;&nbsp; Hot Black Coffee
+      </p>
       <p style={{ color: '#f59e0b', fontWeight: '600' }}>
-        Iced Milk Coffee Saigon: 30.000 VND &nbsp;&nbsp; 
-        Iced Black Coffee Saigon: 30.000 VND &nbsp;&nbsp; 
-        Hot Black Coffee: 25.000 VND
+        30.000 VND &nbsp;&nbsp; 30.000 VND &nbsp;&nbsp; 25.000 VND
       </p>
     </div>
 
