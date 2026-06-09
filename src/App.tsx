@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import menuPdf from './assets/menu.pdf'
 
 type Language = 'de' | 'en' | 'vi'
 type ViewMode = 'phone' | 'pad'
@@ -268,17 +267,17 @@ function App() {
 {activeTab === 'menu' && (
   <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
     <iframe 
-      src= {menuPdf}
-      style={{ 
-        width: '100%', 
-        height: '1400px', 
-        minHeight: '90vh',
-        border: 'none', 
-        borderRadius: '16px', 
-        background: 'white' 
-      }} 
-      title="BitCoffee Menu" 
-    />
+  src="/menu.pdf?v=3"     // ← Versionsnummer bei jedem Menü-Update hochzählen
+  style={{ 
+    width: '100%', 
+    height: '1400px', 
+    minHeight: '90vh',
+    border: 'none', 
+    borderRadius: '16px', 
+    background: 'white' 
+  }} 
+  title="BitCoffee Menu" 
+/>
   </div>
 )}
 

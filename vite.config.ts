@@ -9,17 +9,17 @@ export default defineConfig({
       registerType: 'autoUpdate',
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,webp}'],
-        // PDFs komplett vom Precaching ausschließen
+        // PDFs komplett vom Caching ausschließen
         globIgnores: ['**/*.pdf'],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.endsWith('.pdf'),
-            handler: 'NetworkFirst',     // Immer zuerst vom Netzwerk holen
+            handler: 'NetworkFirst', // Immer frisch vom Server holen
             options: {
-              cacheName: 'pdf-cache-v2',
+              cacheName: 'pdf-cache',
               expiration: {
-                maxEntries: 3,
-                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 Tage
+                maxEntries: 2,
+                maxAgeSeconds: 60 * 60 * 24 * 7 // 7 Tage
               }
             }
           }
