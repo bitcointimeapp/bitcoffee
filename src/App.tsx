@@ -263,82 +263,130 @@ function App() {
           ))}
         </div>
 
-{/* === MENÜ (als Text) === */}
+{/* === MENÜ (als Text - verbessert) === */}
 {activeTab === 'menu' && (
   <div style={{ background: '#1a1a1a', padding: '2rem', borderRadius: '16px' }}>
 
     {/* AUTHENTIC THAI FOOD */}
-    <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Authentic Thai Food</h2>
-
-    <div style={{ marginBottom: '2rem' }}>
-      <h3 style={{ color: '#fff', marginBottom: '0.5rem' }}>Pad Kra Pao</h3>
-      <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>
-        Minced meat • Basil leaves • Garlic • Oyster sauce • Soya sauce • Chili • Onion • Rice • Egg
-      </p>
-      <p style={{ color: '#f59e0b' }}>Pork 75.000 VND &nbsp;&nbsp; Chicken 75.000 VND</p>
-    </div>
-
-    <div style={{ marginBottom: '2rem' }}>
-      <h3 style={{ color: '#fff', marginBottom: '0.5rem' }}>Pad Thai</h3>
-      <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>
-        Noodles • Chives • Bean sprouts • Peanut • Dried Shrimp • Chili
-      </p>
-      <p style={{ color: '#f59e0b' }}>Pork 80.000 VND &nbsp;&nbsp; Chicken 80.000 VND &nbsp;&nbsp; Shrimp 95.000 VND</p>
-    </div>
-
     <div style={{ marginBottom: '2.5rem' }}>
-      <h3 style={{ color: '#fff', marginBottom: '0.5rem' }}>Tom Yum</h3>
-      <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>
-        Lemongrass • Galangal root • Coconut milk • Onion • Fish sauce • Chili • Garlic
-      </p>
-      <p style={{ color: '#f59e0b' }}>Chicken 110.000 VND &nbsp;&nbsp; Shrimp 130.000 VND</p>
+      <h2 style={{ color: '#f59e0b', marginBottom: '1.2rem', borderBottom: '1px solid #333', paddingBottom: '8px' }}>
+        {language === 'de' && 'Authentische Thailändische Küche'}
+        {language === 'en' && 'Authentic Thai Food'}
+        {language === 'vi' && 'Món Thái Chính Thống'}
+      </h2>
+
+      <div style={{ marginBottom: '1.8rem' }}>
+        <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>Pad Kra Pao</h3>
+        <p style={{ color: '#ccc', lineHeight: '1.6', marginBottom: '0.4rem' }}>
+          • Minced meat • Basil leaves • Garlic • Oyster sauce • Soya sauce • Chili • Onion • Rice • Egg
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+          Pork 75.000 VND &nbsp;&nbsp; Chicken 75.000 VND
+        </p>
+      </div>
+
+      <div style={{ marginBottom: '1.8rem' }}>
+        <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>Pad Thai</h3>
+        <p style={{ color: '#ccc', lineHeight: '1.6', marginBottom: '0.4rem' }}>
+          • Noodles • Chives • Bean sprouts • Peanut • Dried Shrimp • Chili
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+          Pork 80.000 VND &nbsp;&nbsp; Chicken 80.000 VND &nbsp;&nbsp; Shrimp 95.000 VND
+        </p>
+      </div>
+
+      <div>
+        <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>Tom Yum</h3>
+        <p style={{ color: '#ccc', lineHeight: '1.6', marginBottom: '0.4rem' }}>
+          • Lemongrass • Galangal root • Coconut milk • Onion • Fish sauce • Chili • Garlic
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+          Chicken 110.000 VND &nbsp;&nbsp; Shrimp 130.000 VND
+        </p>
+      </div>
     </div>
 
     {/* PROTEIN FRUIT BOWLS */}
-    <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Protein Fruit Bowls</h2>
-
-    <div style={{ marginBottom: '1.5rem' }}>
-      <h3 style={{ color: '#fff' }}>Pink Dragon Bowl</h3>
-      <p style={{ color: '#ccc' }}>Pink Dragon Fruit, Mango, Banana</p>
-      <p style={{ color: '#ccc', fontSize: '0.9rem' }}>Toppings: Coconut flakes • Granola • Chia Seeds • Honey</p>
-      <p style={{ color: '#f59e0b' }}>Fruit Bowl: 60.000 VND &nbsp;&nbsp; + Protein: 90.000 VND</p>
-    </div>
-
-    <div style={{ marginBottom: '1.5rem' }}>
-      <h3 style={{ color: '#fff' }}>Tropical White Bowl</h3>
-      <p style={{ color: '#ccc' }}>White Dragon Fruit, Mango, Banana</p>
-      <p style={{ color: '#ccc', fontSize: '0.9rem' }}>Toppings: Coconut flakes • Granola • Chia Seeds • Honey</p>
-      <p style={{ color: '#f59e0b' }}>Fruit Bowl: 60.000 VND &nbsp;&nbsp; + Protein: 90.000 VND</p>
-    </div>
-
     <div style={{ marginBottom: '2.5rem' }}>
-      <h3 style={{ color: '#fff' }}>Dream Bowl</h3>
-      <p style={{ color: '#ccc' }}>Mango, Pineapple, Banana</p>
-      <p style={{ color: '#ccc', fontSize: '0.9rem' }}>Toppings: Coconut flakes • Granola • Chia Seeds • Honey</p>
-      <p style={{ color: '#f59e0b' }}>Fruit Bowl: 60.000 VND &nbsp;&nbsp; + Protein: 90.000 VND</p>
+      <h2 style={{ color: '#f59e0b', marginBottom: '1.2rem', borderBottom: '1px solid #333', paddingBottom: '8px' }}>
+        {language === 'de' && 'Protein Fruit Bowls'}
+        {language === 'en' && 'Protein Fruit Bowls'}
+        {language === 'vi' && 'Tô Trái Cây Protein'}
+      </h2>
+
+      <div style={{ marginBottom: '1.6rem' }}>
+        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pink Dragon Bowl</h3>
+        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>Pink Dragon Fruit, Mango, Banana</p>
+        <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
+          • Coconut flakes • Granola • Chia Seeds • Honey
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+          Fruit Bowl: 60.000 VND &nbsp;&nbsp; + Protein: 90.000 VND
+        </p>
+      </div>
+
+      <div style={{ marginBottom: '1.6rem' }}>
+        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Tropical White Bowl</h3>
+        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>White Dragon Fruit, Mango, Banana</p>
+        <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
+          • Coconut flakes • Granola • Chia Seeds • Honey
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+          Fruit Bowl: 60.000 VND &nbsp;&nbsp; + Protein: 90.000 VND
+        </p>
+      </div>
+
+      <div>
+        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Dream Bowl</h3>
+        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>Mango, Pineapple, Banana</p>
+        <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
+          • Coconut flakes • Granola • Chia Seeds • Honey
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+          Fruit Bowl: 60.000 VND &nbsp;&nbsp; + Protein: 90.000 VND
+        </p>
+      </div>
     </div>
 
     {/* PROTEIN SHAKES */}
-    <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Protein Shakes</h2>
-    <p style={{ color: '#ccc', marginBottom: '0.5rem' }}>Vanilla &nbsp;&nbsp; Chocolate</p>
-    <p style={{ color: '#f59e0b', marginBottom: '2rem' }}>
-      Protein Shake: 60.000 VND &nbsp;&nbsp; + Fruit: 80.000 VND
-    </p>
+    <div style={{ marginBottom: '2.5rem' }}>
+      <h2 style={{ color: '#f59e0b', marginBottom: '1.2rem', borderBottom: '1px solid #333', paddingBottom: '8px' }}>
+        {language === 'de' && 'Protein Shakes'}
+        {language === 'en' && 'Protein Shakes'}
+        {language === 'vi' && 'Sinh Tố Protein'}
+      </h2>
+      <p style={{ color: '#ccc', marginBottom: '0.5rem' }}>Vanilla &nbsp;&nbsp; Chocolate</p>
+      <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+        Protein Shake: 60.000 VND &nbsp;&nbsp; + Fruit: 80.000 VND
+      </p>
+    </div>
 
     {/* FRUIT SMOOTHIES */}
-    <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Fruit Smoothies</h2>
-    <p style={{ color: '#ccc', marginBottom: '0.5rem' }}>
-      Red Dragon Fruit • White Dragon Fruit • Mango • Pineapple • Orange • Watermelon • Banana
-    </p>
-    <p style={{ color: '#f59e0b', marginBottom: '2.5rem' }}>30.000 VND</p>
+    <div style={{ marginBottom: '2.5rem' }}>
+      <h2 style={{ color: '#f59e0b', marginBottom: '1.2rem', borderBottom: '1px solid #333', paddingBottom: '8px' }}>
+        {language === 'de' && 'Frucht-Smoothies'}
+        {language === 'en' && 'Fruit Smoothies'}
+        {language === 'vi' && 'Sinh Tố Trái Cây'}
+      </h2>
+      <p style={{ color: '#ccc', marginBottom: '0.5rem' }}>
+        Red Dragon Fruit • White Dragon Fruit • Mango • Pineapple • Orange • Watermelon • Banana
+      </p>
+      <p style={{ color: '#f59e0b', fontWeight: '600' }}>30.000 VND</p>
+    </div>
 
     {/* VIETNAMESE COFFEE */}
-    <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Vietnamese Coffee</h2>
-    <p style={{ color: '#f59e0b' }}>
-      Iced Milk Coffee Saigon: 30.000 VND &nbsp;&nbsp; 
-      Iced Black Coffee Saigon: 30.000 VND &nbsp;&nbsp; 
-      Hot Black Coffee: 25.000 VND
-    </p>
+    <div>
+      <h2 style={{ color: '#f59e0b', marginBottom: '1.2rem', borderBottom: '1px solid #333', paddingBottom: '8px' }}>
+        {language === 'de' && 'Vietnamesischer Kaffee'}
+        {language === 'en' && 'Vietnamese Coffee'}
+        {language === 'vi' && 'Cà Phê Việt Nam'}
+      </h2>
+      <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+        Iced Milk Coffee Saigon: 30.000 VND &nbsp;&nbsp; 
+        Iced Black Coffee Saigon: 30.000 VND &nbsp;&nbsp; 
+        Hot Black Coffee: 25.000 VND
+      </p>
+    </div>
 
   </div>
 )}
