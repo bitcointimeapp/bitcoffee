@@ -263,7 +263,7 @@ function App() {
           ))}
         </div>
 
-{/* === MENÜ (als Text - finale Version) === */}
+{/* === MENÜ === */}
 {activeTab === 'menu' && (
   <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
 
@@ -278,7 +278,7 @@ function App() {
       <div style={{ marginBottom: '1.4rem' }}>
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pad Kra Pao</h3>
         <p style={{ color: '#ccc', lineHeight: '1.55', marginBottom: '0.4rem' }}>
-          • Minced meat • Basil leaves • Garlic • Oyster sauce • Soya sauce • Chili • Onion • Rice • Egg
+          Minced meat • Basil leaves • Garlic • Oyster sauce • Soya sauce • Chili • Onion • Rice • Egg
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
           Pork 75.000 VND &nbsp;&nbsp; Chicken 75.000 VND
@@ -288,7 +288,7 @@ function App() {
       <div style={{ marginBottom: '1.4rem' }}>
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pad Thai</h3>
         <p style={{ color: '#ccc', lineHeight: '1.55', marginBottom: '0.4rem' }}>
-          • Noodles • Chives • Bean sprouts • Peanut • Dried Shrimp • Chili
+          Noodles • Chives • Bean sprouts • Peanut • Dried Shrimp • Chili
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
           Pork 80.000 VND &nbsp;&nbsp; Chicken 80.000 VND &nbsp;&nbsp; Shrimp 95.000 VND
@@ -298,7 +298,7 @@ function App() {
       <div>
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Tom Yum</h3>
         <p style={{ color: '#ccc', lineHeight: '1.55', marginBottom: '0.4rem' }}>
-          • Lemongrass • Galangal root • Coconut milk • Onion • Fish sauce • Chili • Garlic
+          Lemongrass • Galangal root • Coconut milk • Onion • Fish sauce • Chili • Garlic
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
           Chicken 110.000 VND &nbsp;&nbsp; Shrimp 130.000 VND
@@ -318,7 +318,7 @@ function App() {
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pink Dragon Bowl</h3>
         <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>Pink Dragon Fruit, Mango, Banana</p>
         <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-          • Coconut flakes • Granola • Chia Seeds • Honey
+          Toppings: Coconut flakes • Granola • Chia Seeds • Honey
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
           Fruit Bowl: 60.000 VND &nbsp;&nbsp; + Protein: 90.000 VND
@@ -329,7 +329,7 @@ function App() {
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Tropical White Bowl</h3>
         <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>White Dragon Fruit, Mango, Banana</p>
         <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-          • Coconut flakes • Granola • Chia Seeds • Honey
+          Toppings: Coconut flakes • Granola • Chia Seeds • Honey
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
           Fruit Bowl: 60.000 VND &nbsp;&nbsp; + Protein: 90.000 VND
@@ -340,7 +340,7 @@ function App() {
         <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Dream Bowl</h3>
         <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>Mango, Pineapple, Banana</p>
         <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-          • Coconut flakes • Granola • Chia Seeds • Honey
+          Toppings: Coconut flakes • Granola • Chia Seeds • Honey
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
           Fruit Bowl: 60.000 VND &nbsp;&nbsp; + Protein: 90.000 VND
@@ -375,19 +375,28 @@ function App() {
     </div>
 
     {/* VIETNAMESE COFFEE */}
-    <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px' }}>
-      <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
-        {language === 'de' && 'Vietnamesischer Kaffee'}
-        {language === 'en' && 'Vietnamese Coffee'}
-        {language === 'vi' && 'Cà Phê Việt Nam'}
-      </h2>
-      <p style={{ color: '#fff', marginBottom: '0.3rem' }}>
-        Iced Milk Coffee Saigon &nbsp;&nbsp; Iced Black Coffee Saigon &nbsp;&nbsp; Hot Black Coffee
-      </p>
-      <p style={{ color: '#f59e0b', fontWeight: '600' }}>
-        30.000 VND &nbsp;&nbsp; 30.000 VND &nbsp;&nbsp; 25.000 VND
-      </p>
-    </div>
+<div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px' }}>
+  <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
+    {language === 'de' && 'Vietnamesischer Kaffee'}
+    {language === 'en' && 'Vietnamese Coffee'}
+    {language === 'vi' && 'Cà Phê Việt Nam'}
+  </h2>
+
+  <div style={{ marginBottom: '1rem' }}>
+    <p style={{ color: '#fff', marginBottom: '0.2rem' }}>Iced Milk Coffee Saigon</p>
+    <p style={{ color: '#f59e0b', fontWeight: '600' }}>30.000 VND</p>
+  </div>
+
+  <div style={{ marginBottom: '1rem' }}>
+    <p style={{ color: '#fff', marginBottom: '0.2rem' }}>Iced Black Coffee Saigon</p>
+    <p style={{ color: '#f59e0b', fontWeight: '600' }}>30.000 VND</p>
+  </div>
+
+  <div>
+    <p style={{ color: '#fff', marginBottom: '0.2rem' }}>Hot Black Coffee</p>
+    <p style={{ color: '#f59e0b', fontWeight: '600' }}>25.000 VND</p>
+  </div>
+</div>
 
   </div>
 )}
