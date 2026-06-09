@@ -9,16 +9,18 @@ export default defineConfig({
       registerType: 'autoUpdate',
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,webp}'],
-        // PDFs NIEMALS precachen
+        // PDFs komplett vom Precaching ausschließen
         globIgnores: ['**/*.pdf'],
-        // PDFs immer frisch vom Netzwerk holen (stärkste Einstellung)
         runtimeCaching: [
           {
-            urlPattern: ({ request, url }) => 
-              request.destination === 'document' && url.pathname.endsWith('.pdf'),
-            handler: 'NetworkOnly',           // ← Wichtigste Zeile
+            urlPattern: ({ url }) => url.pathname.endsWith('.pdf'),
+            handler: 'NetworkFirst',     // Immer zuerst vom Netzwerk holen
             options: {
-              cacheName: 'pdf-cache'
+              cacheName: 'pdf-cache-v2',
+              expiration: {
+                maxEntries: 3,
+                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 Tage
+              }
             }
           }
         ]
