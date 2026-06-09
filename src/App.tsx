@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 type Language = 'de' | 'en' | 'vi'
 type ViewMode = 'phone' | 'pad'
+type Tab = 'menu' | 'mining' | 'node' | 'bitictionary'
 
 interface DictionaryItem {
   term: string
@@ -13,6 +14,7 @@ interface DictionaryItem {
 function App() {
   const [language, setLanguage] = useState<Language>('en')
   const [viewMode, setViewMode] = useState<ViewMode>('phone')
+  const [activeTab, setActiveTab] = useState<Tab>('menu')
   const [searchTerm, setSearchTerm] = useState('')
 
   const [blockHeight, setBlockHeight] = useState<number | null>(null)
@@ -21,10 +23,10 @@ function App() {
 
   // === BITICTIONARY ===
   const bitictionary: DictionaryItem[] = [
-            { term: "Bitcoin", 
+  
+ { term: "Bitcoin", 
       de: "Die erste dezentrale digitale Währung der Welt • Festgelegt auf maximal 21 Millionen Stück • Vollständig dezentral ohne Banken oder Regierungen • Pseudonym und zensurresistent • 2009 von Satoshi Nakamoto erschaffen.", 
-      en: "The first decentralized digital currency in the world • Hard-capped at 21 million coins • Fully decentralized without banks or governments • Pseudonymous and censorship-resistant • Created in 2009 by Satoshi Nakamoto.", 
-      vi: "Tiền tệ kỹ thuật số phi tập trung đầu tiên trên thế giới • Giới hạn cứng tối đa 21 triệu đồng • Hoàn toàn phi tập trung, không cần ngân hàng hay chính phủ • Ẩn danh và chống kiểm duyệt • Được Satoshi Nakamoto tạo ra năm 2009." },
+      en: "The first decentralized digital currency in the world • Hard-capped at 21 million coins • Fully decentralized without banks or governments • Pseudonymous and censorship-resistant • Created in 2009 by Satoshi Nakamoto."},
     { term: "Blockchain", de: "Öffentliche, unveränderliche Kette von Blöcken • Jeder Block enthält Transaktionen • Sehr schwer zu manipulieren.", en: "Public, immutable chain of blocks • Each block contains transactions • Extremely difficult to manipulate.", vi: "Chuỗi khối công khai, không thể thay đổi • Mỗi khối chứa giao dịch • Rất khó bị thao túng." },
     { term: "Whitepaper", de: "Das Bitcoin Whitepaper von Satoshi Nakamoto (2008) • Beschreibt das Grundkonzept von Bitcoin • Titel: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", en: "Bitcoin Whitepaper by Satoshi Nakamoto (2008) • Describes the core concept of Bitcoin • Title: 'Bitcoin: A Peer-to-Peer Electronic Cash System'.", vi: "Whitepaper Bitcoin của Satoshi Nakamoto (2008) • Mô tả khái niệm cốt lõi • Tiêu đề: 'Bitcoin: A Peer-to-Peer Electronic Cash System'." },
     { term: "Satoshi Nakamoto", de: "Pseudonym des Bitcoin-Erfinders • Identität bis heute unbekannt • Veröffentlichte Whitepaper 2008 und Genesis Block 2009.", en: "Pseudonym of Bitcoin's creator • Identity still unknown • Published Whitepaper in 2008 and Genesis Block in 2009.", vi: "Bút danh của người tạo Bitcoin • Danh tính vẫn chưa biết • Công bố Whitepaper 2008 và Genesis Block 2009." },
@@ -139,6 +141,8 @@ function App() {
       de: "Skala zur Messung der technologischen Entwicklung einer Zivilisation nach Energieverbrauch • Typ I: Planetare Energie • Typ II: Sternenenergie • Typ III: Galaktische Energie • Bitcoin Mining wird teilweise als Schritt in Richtung Typ I Zivilisation gesehen, da es überschüssige Energie nutzbar macht.", 
       en: "Scale for measuring a civilization's technological advancement by energy consumption • Type I: Planetary energy • Type II: Stellar energy • Type III: Galactic energy • Bitcoin mining is sometimes seen as a step toward a Type I civilization by making use of surplus energy.", 
       vi: "Thang đo sự phát triển công nghệ của nền văn minh theo mức tiêu thụ năng lượng • Loại I: Năng lượng hành tinh • Loại II: Năng lượng sao • Loại III: Năng lượng thiên hà • Bitcoin mining đôi khi được xem là bước tiến tới nền văn minh Loại I bằng cách tận dụng năng lượng dư thừa." }
+
+
   ]
 
   const filteredTerms = bitictionary
@@ -174,9 +178,9 @@ function App() {
   }, [])
 
   const t = {
-    de: { subtitle: "Da Nang • Vietnam", bitictionary: "Bitictionary" },
-    en: { subtitle: "Da Nang • Vietnam", bitictionary: "Bitictionary" },
-    vi: { subtitle: "Đà Nẵng • Việt Nam", bitictionary: "Bitictionary" }
+    de: { subtitle: "Da Nang • Vietnam", bitictionary: "Bitictionary", menu: "Menü", mining: "Mining", node: "Node", openPdf: "PDF in neuem Tab öffnen" },
+    en: { subtitle: "Da Nang • Vietnam", bitictionary: "Bitictionary", menu: "Menu", mining: "Mining", node: "Node", openPdf: "Open PDF in new tab" },
+    vi: { subtitle: "Đà Nẵng • Việt Nam", bitictionary: "Bitictionary", menu: "Thực đơn", mining: "Mining", node: "Node", openPdf: "Mở PDF trong tab mới" }
   }[language]
 
   const generateChartPoints = () => {
@@ -202,7 +206,7 @@ function App() {
     <div style={{ minHeight: '100vh', backgroundColor: '#0a0a0a', color: 'white' }}>
       <div style={{ maxWidth: containerMaxWidth, margin: '0 auto', padding: '0 1rem' }}>
 
-        {/* Hero */}
+        {/* Hero Bild */}
         <div style={{ position: 'relative' }}>
           <img src="/bitcoffee-hero.png" alt="BitCoffee" style={{ width: '100%', height: '280px', objectFit: 'cover', borderRadius: '0 0 16px 16px' }} />
           <button onClick={() => setViewMode(viewMode === 'phone' ? 'pad' : 'phone')}
@@ -211,7 +215,7 @@ function App() {
           </button>
         </div>
 
-        {/* Language Switcher */}
+        {/* Sprachen */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', margin: '25px 0' }}>
           {(['de','en','vi'] as const).map(l => (
             <button key={l} onClick={() => setLanguage(l)}
@@ -221,70 +225,272 @@ function App() {
           ))}
         </div>
 
-        {/* Logo */}
-        <div style={{ textAlign: 'center', marginBottom: '25px' }}>
-          <div style={{ fontSize: '3.8rem' }}>☕</div>
-          <h1 style={{ fontSize: '2.9rem', fontWeight: 'bold', margin: '0' }}>
-            <span style={{ color: '#f59e0b', display: 'inline-block', transform: 'rotate(12deg)', marginRight: '-3px' }}>₿</span>
-            <span style={{ color: '#f59e0b' }}>it</span>Coffee
-          </h1>
-          <p style={{ color: '#f59e0b', marginTop: '4px' }}>{t.subtitle}</p>
-        </div>
-
+       {/* === LOGO (Custom Logo deines Freundes) === */}
+<div style={{ textAlign: 'center', marginBottom: '20px' }}>
+  <img 
+    src="/bitcoffee-logo.png" 
+    alt="BitCoffee Logo" 
+    style={{ 
+      maxWidth: '420px', 
+      width: '90%', 
+      height: 'auto',
+      marginBottom: '8px'
+    }} 
+  />
+  <p style={{ color: '#f59e0b', marginTop: '4px', fontSize: '1.1rem' }}>
+    {t.subtitle}
+  </p>
+</div>
         {/* Kontakt */}
-        <div style={{ textAlign: 'center', color: '#ddd', fontSize: '0.95rem', marginBottom: '30px', lineHeight: '1.7' }}>
-          <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://maps.google.com/?q=DEINE_VOLLE_ADRESSE_HIER', '_blank')}>📍 Da Nang, Vietnam</p>
-          <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('tel:+849XXXXXXXXX')}>📞 +84 9XX XXX XXX</p>
+        <div style={{ textAlign: 'center', color: '#ddd', fontSize: '0.95rem', marginBottom: '25px', lineHeight: '1.7' }}>
+          <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://maps.google.com/?q=1 Nguyễn Đăng Giai, Đà Nẵng', '_blank')}>📍 1 Nguyễn Đăng Giai, Đà Nẵng</p>
           <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://x.com/21BitCoffee', '_blank')}>𝕏 @21BitCoffee</p>
         </div>
 
-        {/* Bitictionary Title mit Glow */}
-        <h2 style={{ 
-          textAlign: 'center', 
-          color: '#f59e0b', 
-          marginBottom: '20px',
-          textShadow: '0 0 20px #f59e0b, 0 0 40px #f59e0b'
-        }}>Bitictionary</h2>
-
-        {/* Bitictionary Content */}
-        <div style={{ background: '#1a1a1a', padding: '1.6rem', borderRadius: '16px' }}>
-          <input
-            type="text"
-            placeholder={language === 'de' ? "Suchen..." : language === 'en' ? "Search..." : "Tìm kiếm..."}
-            value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
-            style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', background: '#222', border: 'none', color: 'white', marginBottom: '20px', boxSizing: 'border-box' }}
-          />
-
-          {filteredTerms.length === 0 ? (
-            <p style={{ textAlign: 'center', color: '#888', padding: '40px 0' }}>Kein Begriff gefunden.</p>
-          ) : (
-            filteredTerms.map((item, i) => (
-              <div key={i} style={{ 
-                background: '#222', 
-                padding: '1.3rem', 
-                borderRadius: '12px', 
-                marginBottom: '12px',
-                transition: 'all 0.3s ease',
-                boxShadow: '0 4px 15px rgba(245, 158, 11, 0.08)'
-              }}
-                onMouseOver={(e) => e.currentTarget.style.boxShadow = '0 6px 20px rgba(245, 158, 11, 0.25)'}
-                onMouseOut={(e) => e.currentTarget.style.boxShadow = '0 4px 15px rgba(245, 158, 11, 0.08)'}
-              >
-                <h4 style={{ color: '#f59e0b', margin: '0 0 12px 0' }}>{item.term}</h4>
-                <p style={{ color: '#ddd', lineHeight: '1.6' }}>{item[language]}</p>
-              </div>
-            ))
-          )}
+        {/* 4 Reiter */}
+        <div style={{ display: 'flex', background: '#1a1a1a', borderRadius: '9999px', padding: '4px', margin: '20px 0' }}>
+          {[
+            { key: 'menu' as Tab, label: t.menu },
+            { key: 'mining' as Tab, label: t.mining },
+            { key: 'node' as Tab, label: t.node },
+            { key: 'bitictionary' as Tab, label: t.bitictionary }
+          ].map(tab => (
+            <button key={tab.key} onClick={() => setActiveTab(tab.key)}
+              style={{ flex: 1, padding: '14px', borderRadius: '9999px', fontWeight: '600', background: activeTab === tab.key ? '#f59e0b' : 'transparent', color: activeTab === tab.key ? '#111' : '#ccc', border: 'none', cursor: 'pointer' }}>
+              {tab.label}
+            </button>
+          ))}
         </div>
 
-        {/* Live Chart */}
+        {/* === MENÜ === */}
+        {activeTab === 'menu' && (
+          <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
+            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+              <a href="/menu.pdf" target="_blank" rel="noopener noreferrer"
+                style={{ display: 'inline-block', background: '#f59e0b', color: '#111', padding: '4px 12px', borderRadius: '9999px', fontWeight: 'bold', textDecoration: 'none' }}>
+                {t.openPdf} ↗
+              </a>
+            </div>
+            <iframe src="/menu.pdf" width="100%" height="900px" style={{ border: 'none', borderRadius: '12px', background: 'white' }} title="BitCoffee Menu" />
+          </div>
+        )}
+
+        {/* === MINING === */}
+        {activeTab === 'mining' && (
+          <div style={{ background: '#1a1a1a', padding: '2rem', borderRadius: '16px' }}>
+            {language === 'de' && (
+              <>
+                <h2 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>Was ist Bitcoin Mining?</h2>
+                <div style={{ color: '#ddd', lineHeight: '1.7', fontSize: '1.05rem' }}>
+                 
+                  <p>Stell dir Bitcoin wie ein riesiges, dezentrales Kassenbuch vor, das von Tausenden Computern weltweit gleichzeitig geführt wird. Damit neue Transaktionen in dieses Kassenbuch aufgenommen werden dürfen, müssen Computer darum „wetteifern“, wer als nächstes einen neuen Block hinzufügen darf.</p>
+                  <p>Dieser Wettbewerb heißt <strong>Mining</strong>. Die Computer, die daran teilnehmen, nennt man <strong>Miner</strong>. Sie lösen extrem schwierige Rechenaufgaben. Wer als Erster die richtige Lösung findet, darf den neuen Block hinzufügen und wird mit neuen Bitcoins belohnt.</p>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Warum braucht Bitcoin Mining?</strong></p>
+                  <ul style={{ paddingLeft: '1.2rem' }}>
+                    <li> Es sorgt dafür, dass neue Bitcoins kontrolliert und langsam in Umlauf kommen (max. 21 Millionen)</li>
+                    <li> Es schützt das Netzwerk vor Betrug und Fälschungen</li>
+                    <li> Es macht Bitcoin dezentral – niemand kann allein das System kontrollieren</li>
+                  </ul>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Wie funktioniert Mining technisch?</strong></p>
+                  <p>Miner nehmen alle aktuellen Transaktionen, packen sie in einen Block und versuchen, einen speziellen „Stempel“ (Hash) zu finden, der mit vielen Nullen beginnt. Dafür verändern sie ständig eine Zufallszahl im Block (die <strong>Nonce</strong>), bis der Hash die richtige Form hat. Das ist extrem rechenintensiv und verbraucht viel Strom – genau das macht Bitcoin sicher.</p>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Wichtige Begriffe:</strong></p>
+                  <ul style={{ paddingLeft: '1.2rem' }}>
+                    <li><strong>Hashrate</strong> → Die gesamte Rechenleistung aller Miner weltweit</li>
+                    <li><strong>Difficulty</strong> → Wie schwer es gerade ist, einen gültigen Block zu finden</li>
+                    <li><strong>Block Reward</strong> → Die Belohnung für das Finden eines Blocks (aktuell 3,125 BTC + Gebühren)</li>
+                    <li><strong>Halving</strong> → Alle 4 Jahre halbiert sich die Block-Belohnung</li>
+                  </ul>
+                </div>
+              </>
+            )}
+
+            {language === 'en' && (
+              <>
+                <h2 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>What is Bitcoin Mining?</h2>
+                <div style={{ color: '#ddd', lineHeight: '1.7', fontSize: '1.05rem' }}>
+               
+                  <p>Think of Bitcoin as a giant, decentralized ledger that is maintained by thousands of computers around the world at the same time. For new transactions to be added to this ledger, computers compete to be the next one to add a new "page" (block).</p>
+                  <p>This competition is called <strong>Mining</strong>. The computers participating are called <strong>Miners</strong>. They solve extremely difficult mathematical problems. Whoever finds the correct solution first gets to add the new block and is rewarded with new Bitcoins.</p>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Why does Bitcoin need mining?</strong></p>
+                  <ul style={{ paddingLeft: '1.2rem' }}>
+                    <li> It ensures new Bitcoins are released in a controlled and slow manner (max 21 million)</li>
+                    <li> It protects the network from fraud and counterfeiting</li>
+                    <li> It makes Bitcoin decentralized – no single entity can control the system</li>
+                  </ul>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>How does mining work technically?</strong></p>
+                  <p>Miners take all current transactions, put them into a block, and try to find a special "stamp" (hash) that starts with many zeros. To do this, they constantly change a random number in the block (the <strong>Nonce</strong>) until the hash has the correct form. This is extremely computationally intensive and consumes a lot of electricity – which is exactly what makes Bitcoin secure.</p>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Key terms:</strong></p>
+                  <ul style={{ paddingLeft: '1.2rem' }}>
+                    <li><strong>Hashrate</strong> → The total computing power of all miners worldwide</li>
+                    <li><strong>Difficulty</strong> → How hard it currently is to find a valid block</li>
+                    <li><strong>Block Reward</strong> → The reward for finding a block (currently 3.125 BTC + fees)</li>
+                    <li><strong>Halving</strong> → Every 4 years the block reward is halved</li>
+                  </ul>
+                </div>
+              </>
+            )}
+
+            {language === 'vi' && (
+              <>
+                <h2 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>Bitcoin Mining là gì?</h2>
+                <div style={{ color: '#ddd', lineHeight: '1.7', fontSize: '1.05rem' }}>
+           
+                  <p>Hãy tưởng tượng Bitcoin như một cuốn sổ cái khổng lồ, phi tập trung được duy trì bởi hàng nghìn máy tính trên toàn thế giới cùng lúc. Để các giao dịch mới được ghi vào sổ cái này, các máy tính phải cạnh tranh để trở thành người tiếp theo thêm một "trang" mới (khối).</p>
+                  <p>Cuộc cạnh tranh này được gọi là <strong>Mining</strong>. Những máy tính tham gia được gọi là <strong>Miner</strong>. Họ giải các bài toán toán học cực kỳ khó. Ai tìm ra lời giải đúng đầu tiên sẽ được thêm khối mới và nhận phần thưởng là Bitcoin mới.</p>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Tại sao Bitcoin cần Mining?</strong></p>
+                  <ul style={{ paddingLeft: '1.2rem' }}>
+                    <li> Đảm bảo Bitcoin mới được phát hành có kiểm soát và chậm rãi (tối đa 21 triệu)</li>
+                    <li> Bảo vệ mạng lưới khỏi gian lận và làm giả</li>
+                    <li> Giúp Bitcoin phi tập trung – không ai có thể kiểm soát hệ thống một mình</li>
+                  </ul>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Mining hoạt động như thế nào về mặt kỹ thuật?</strong></p>
+                  <p>Miner lấy tất cả giao dịch hiện tại, đóng gói chúng vào một khối và cố gắng tìm một "con dấu" đặc biệt (hash) bắt đầu bằng nhiều số 0. Để làm điều này, họ liên tục thay đổi một số ngẫu nhiên trong khối (gọi là <strong>Nonce</strong>) cho đến khi hash có dạng đúng. Việc này đòi hỏi sức mạnh tính toán cực lớn và tiêu tốn rất nhiều điện – chính điều này làm cho Bitcoin trở nên an toàn.</p>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Các thuật ngữ quan trọng:</strong></p>
+                  <ul style={{ paddingLeft: '1.2rem' }}>
+                    <li><strong>Hashrate</strong> → Tổng sức mạnh tính toán của tất cả miner trên toàn cầu</li>
+                    <li><strong>Difficulty</strong> → Độ khó hiện tại để tìm một khối hợp lệ</li>
+                    <li><strong>Block Reward</strong> → Phần thưởng khi tìm được khối (hiện tại 3.125 BTC + phí)</li>
+                    <li><strong>Halving</strong> → Cứ 4 năm một lần phần thưởng khối bị giảm một nửa</li>
+                  </ul>
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* === NODE === */}
+        {activeTab === 'node' && (
+          <div style={{ background: '#1a1a1a', padding: '2rem', borderRadius: '16px' }}>
+            {language === 'de' && (
+              <>
+                <h2 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>Was ist ein Bitcoin Node?</h2>
+                <div style={{ color: '#ddd', lineHeight: '1.7', fontSize: '1.05rem' }}>
+                  
+                  <p>Ein <strong>Bitcoin Node</strong> ist ein Computer, der die komplette Bitcoin-Blockchain herunterlädt und ständig mit anderen Computern auf der Welt synchronisiert. Er überprüft jede einzelne Transaktion und jeden Block selbstständig, ohne auf irgendjemand anderen vertrauen zu müssen.</p>
+                  <p>Wenn du nur eine Wallet-App auf deinem Handy nutzt, vertraust du darauf, dass jemand anderes dir die richtigen Informationen gibt. Ein Full Node vertraut niemandem – er prüft alles selbst.</p>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Warum sollte man einen Node betreiben?</strong></p>
+                  <ul style={{ paddingLeft: '1.2rem' }}>
+                    <li> Du bist wirklich unabhängig und musst niemandem vertrauen</li>
+                    <li> Du hilfst, das Bitcoin-Netzwerk dezentral und sicher zu halten</li>
+                    <li> Du kannst selbst Transaktionen validieren und senden</li>
+                    <li> Du unterstützt die Zensurresistenz von Bitcoin</li>
+                  </ul>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Was macht ein Full Node genau?</strong></p>
+                  <p>Ein Full Node lädt die gesamte Blockchain herunter und prüft jede Transaktion und jeden Block nach den Regeln von Bitcoin. Er lehnt ungültige Blöcke und Transaktionen automatisch ab. Dadurch trägt er aktiv zur Sicherheit und Dezentralität des Netzwerks bei.</p>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Wichtige Begriffe:</strong></p>
+                  <ul style={{ paddingLeft: '1.2rem' }}>
+                    <li><strong>Full Node</strong> → Speichert die komplette Blockchain und validiert alles selbst</li>
+                    <li><strong>Light Node / SPV</strong> → Nur eine vereinfachte Version (z.B. Handy-Wallets)</li>
+                    <li><strong>Pruned Node</strong> → Speichert nur die letzten Blöcke, um Speicherplatz zu sparen</li>
+                    <li><strong>Running a Node</strong> → Der wichtigste Beitrag, den ein einzelner Mensch für Bitcoin leisten kann</li>
+                  </ul>
+                </div>
+              </>
+            )}
+
+            {language === 'en' && (
+              <>
+                <h2 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>What is a Bitcoin Node?</h2>
+                <div style={{ color: '#ddd', lineHeight: '1.7', fontSize: '1.05rem' }}>
+                 
+                  <p>A <strong>Bitcoin Node</strong> is a computer that downloads the entire Bitcoin blockchain and constantly synchronizes with other computers around the world. It independently verifies every single transaction and every block without having to trust anyone else.</p>
+                  <p>If you only use a wallet app on your phone, you trust that someone else is giving you the correct information. A Full Node trusts no one – it verifies everything itself.</p>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Why should you run a node?</strong></p>
+                  <ul style={{ paddingLeft: '1.2rem' }}>
+                    <li> You are truly independent and don’t have to trust anyone</li>
+                    <li> You help keep the Bitcoin network decentralized and secure</li>
+                    <li> You can validate and send transactions yourself</li>
+                    <li> You support Bitcoin’s censorship resistance</li>
+                  </ul>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>What does a Full Node actually do?</strong></p>
+                  <p>A Full Node downloads the entire blockchain and checks every transaction and every block according to Bitcoin’s rules. It automatically rejects invalid blocks and transactions. This actively contributes to the security and decentralization of the network.</p>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Key terms:</strong></p>
+                  <ul style={{ paddingLeft: '1.2rem' }}>
+                    <li><strong>Full Node</strong> → Stores the complete blockchain and validates everything itself</li>
+                    <li><strong>Light Node / SPV</strong> → A simplified version (e.g. mobile wallets)</li>
+                    <li><strong>Pruned Node</strong> → Only stores the most recent blocks to save storage space</li>
+                    <li><strong>Running a Node</strong> → The most important contribution an individual can make to Bitcoin</li>
+                  </ul>
+                </div>
+              </>
+            )}
+
+            {language === 'vi' && (
+              <>
+                <h2 style={{ color: '#f59e0b', marginBottom: '1.5rem' }}>Bitcoin Node là gì?</h2>
+                <div style={{ color: '#ddd', lineHeight: '1.7', fontSize: '1.05rem' }}>
+               
+                  <p>Một <strong>Bitcoin Node</strong> là một máy tính tải toàn bộ chuỗi khối Bitcoin về và liên tục đồng bộ hóa với các máy tính khác trên toàn thế giới. Nó tự kiểm tra từng giao dịch và từng khối một cách độc lập mà không cần tin tưởng bất kỳ ai khác.</p>
+                  <p>Nếu bạn chỉ sử dụng ứng dụng ví trên điện thoại, bạn đang tin tưởng rằng ai đó đang cung cấp cho bạn thông tin chính xác. Một Full Node không tin ai – nó tự kiểm tra mọi thứ.</p>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Tại sao nên chạy một Node?</strong></p>
+                  <ul style={{ paddingLeft: '1.2rem' }}>
+                    <li> Bạn thực sự độc lập và không cần tin tưởng ai</li>
+                    <li> Bạn giúp giữ cho mạng lưới Bitcoin phi tập trung và an toàn</li>
+                    <li> Bạn có thể tự xác thực và gửi giao dịch</li>
+                    <li> Bạn hỗ trợ khả năng chống kiểm duyệt của Bitcoin</li>
+                  </ul>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Full Node làm gì chính xác?</strong></p>
+                  <p>Full Node tải toàn bộ blockchain về và kiểm tra từng giao dịch, từng khối theo quy tắc của Bitcoin. Nó tự động từ chối các khối và giao dịch không hợp lệ. Điều này đóng góp tích cực vào sự an toàn và phi tập trung của mạng lưới.</p>
+
+                  <p style={{ marginTop: '1.5rem' }}><strong>Các thuật ngữ quan trọng:</strong></p>
+                  <ul style={{ paddingLeft: '1.2rem' }}>
+                    <li><strong>Full Node</strong> → Lưu trữ toàn bộ blockchain và tự xác thực mọi thứ</li>
+                    <li><strong>Light Node / SPV</strong> → Phiên bản đơn giản hóa (ví dụ: ví điện thoại)</li>
+                    <li><strong>Pruned Node</strong> → Chỉ lưu trữ các khối gần nhất để tiết kiệm dung lượng</li>
+                    <li><strong>Running a Node</strong> → Đóng góp quan trọng nhất mà một cá nhân có thể làm cho Bitcoin</li>
+                  </ul>
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* BITICTIONARY */}
+        {activeTab === 'bitictionary' && (
+          <>
+            <h2 style={{ textAlign: 'center', color: '#f59e0b', marginBottom: '20px', textShadow: '0 0 20px #f59e0b' }}>Bitictionary</h2>
+            <div style={{ background: '#1a1a1a', padding: '1.6rem', borderRadius: '16px' }}>
+              <input type="text" placeholder={language === 'de' ? "Suchen..." : language === 'en' ? "Search..." : "Tìm kiếm..."} value={searchTerm} onChange={e => setSearchTerm(e.target.value)}
+                style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', background: '#222', border: 'none', color: 'white', marginBottom: '20px', boxSizing: 'border-box' }} />
+
+              {filteredTerms.length === 0 ? (
+                <p style={{ textAlign: 'center', color: '#888', padding: '40px 0' }}>Kein Begriff gefunden.</p>
+              ) : (
+                filteredTerms.map((item, i) => (
+                  <div key={i} style={{ background: '#222', padding: '1.3rem', borderRadius: '12px', marginBottom: '12px', transition: 'all 0.3s ease', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.08)' }}
+                    onMouseOver={(e) => e.currentTarget.style.boxShadow = '0 6px 20px rgba(245, 158, 11, 0.25)'}
+                    onMouseOut={(e) => e.currentTarget.style.boxShadow = '0 4px 15px rgba(245, 158, 11, 0.08)'}>
+                    <h4 style={{ color: '#f59e0b', margin: '0 0 12px 0' }}>{item.term}</h4>
+                    <p style={{ color: '#ddd', lineHeight: '1.6' }}>{item[language]}</p>
+                  </div>
+                ))
+              )}
+            </div>
+          </>
+        )}
+
+        {/* LIVE CHART + KURS (unter allen Reitern) */}
         <div style={{ marginTop: '30px', background: '#1a1a1a', padding: '1.6rem', borderRadius: '16px', textAlign: 'center', border: '1px solid #f59e0b' }}>
           <div>Block Height: <span style={{ color: '#f59e0b' }}>{blockHeight ? `#${blockHeight.toLocaleString()}` : 'Laden...'}</span></div>
           <div style={{ margin: '8px 0', color: '#f59e0b', fontWeight: '600' }}>
-            BTC: {btcPrice 
-              ? `$${btcPrice.usd?.toLocaleString()} • €${btcPrice.eur?.toLocaleString()} • ₫${formatVND(btcPrice.vnd)}` 
-              : 'Laden...'}
+            BTC: {btcPrice ? `$${btcPrice.usd?.toLocaleString()} • €${btcPrice.eur?.toLocaleString()} • ₫${formatVND(btcPrice.vnd)}` : 'Laden...'}
           </div>
 
           <div style={{ margin: '20px 0', minHeight: '100px' }}>
