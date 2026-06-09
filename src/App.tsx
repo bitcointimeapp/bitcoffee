@@ -267,7 +267,7 @@ function App() {
 {activeTab === 'menu' && (
   <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
  <iframe 
-  src="/menu.pdf?v=5" 
+  src="/menu-v6.pdf" 
   style={{ 
     width: '100%', 
     height: '1400px', 
