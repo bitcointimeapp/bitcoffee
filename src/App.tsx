@@ -285,9 +285,9 @@ function App() {
           style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
         />
         <p style={{ color: '#ccc', lineHeight: '1.5', marginBottom: '0.5rem' }}>
-          {language === 'de' && '• Hackfleisch • Basilikumblätter • Knoblauch • Austernsauce • Sojasauce • Chili • Zwiebel • Reis • Ei'}
-          {language === 'en' && '• Minced meat • Basil leaves • Garlic • Oyster sauce • Soya sauce • Chili • Onion • Rice • Egg'}
-          {language === 'vi' && '• Thịt băm • Lá quế • Tỏi • Sốt hào • Nước tương • Ớt • Hành tây • Cơm • Trứng'}
+          {language === 'de' && ' Hackfleisch • Basilikumblätter • Knoblauch • Austernsauce • Sojasauce • Chili • Zwiebel • Reis • Ei'}
+          {language === 'en' && ' Minced meat • Basil leaves • Garlic • Oyster sauce • Soya sauce • Chili • Onion • Rice • Egg'}
+          {language === 'vi' && ' Thịt băm • Lá quế • Tỏi • Sốt hào • Nước tương • Ớt • Hành tây • Cơm • Trứng'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
           {language === 'de' && 'Schweinefleisch 75.000 VND'}
@@ -312,9 +312,9 @@ function App() {
           style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
         />
         <p style={{ color: '#ccc', lineHeight: '1.5', marginBottom: '0.5rem' }}>
-          {language === 'de' && '• Reisnudeln • Schnittlauch • Sojasprossen • Erdnuss • Getrocknete Garnelen • Chili'}
-          {language === 'en' && '• Noodles • Chives • Bean sprouts • Peanut • Dried Shrimp • Chili'}
-          {language === 'vi' && '• Bún • Hẹ • Giá đỗ • Đậu phộng • Tôm khô • Ớt'}
+          {language === 'de' && ' Reisnudeln • Schnittlauch • Sojasprossen • Erdnuss • Getrocknete Garnelen • Chili'}
+          {language === 'en' && ' Noodles • Chives • Bean sprouts • Peanut • Dried Shrimp • Chili'}
+          {language === 'vi' && ' Bún • Hẹ • Giá đỗ • Đậu phộng • Tôm khô • Ớt'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
           {language === 'de' && 'Schweinefleisch 80.000 VND'}
@@ -344,9 +344,9 @@ function App() {
           style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
         />
         <p style={{ color: '#ccc', lineHeight: '1.5', marginBottom: '0.5rem' }}>
-          {language === 'de' && '• Zitronengras • Galgantwurzel • Kokosmilch • Zwiebel • Fischsauce • Chili • Knoblauch'}
-          {language === 'en' && '• Lemongrass • Galangal root • Coconut milk • Onion • Fish sauce • Chili • Garlic'}
-          {language === 'vi' && '• Sả • Riềng • Nước cốt dừa • Hành tây • Nước mắm • Ớt • Tỏi'}
+          {language === 'de' && ' Zitronengras • Galgantwurzel • Kokosmilch • Zwiebel • Fischsauce • Chili • Knoblauch'}
+          {language === 'en' && ' Lemongrass • Galangal root • Coconut milk • Onion • Fish sauce • Chili • Garlic'}
+          {language === 'vi' && ' Sả • Riềng • Nước cốt dừa • Hành tây • Nước mắm • Ớt • Tỏi'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
           {language === 'de' && 'Hähnchen 110.000 VND'}
