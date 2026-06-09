@@ -266,8 +266,8 @@ function App() {
 {/* === MENÜ ( === */}
 {activeTab === 'menu' && (
   <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
-    <iframe 
-  src="/menu.pdf?v=3"     // ← Versionsnummer bei jedem Menü-Update hochzählen
+ <iframe 
+  src="/menu.pdf?v=5" 
   style={{ 
     width: '100%', 
     height: '1400px', 
