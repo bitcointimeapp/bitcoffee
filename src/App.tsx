@@ -264,17 +264,43 @@ function App() {
         </div>
 
         {/* === MENÜ === */}
-        {activeTab === 'menu' && (
-          <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
-            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-              <a href="/menu.pdf" target="_blank" rel="noopener noreferrer"
-                style={{ display: 'inline-block', background: '#f59e0b', color: '#111', padding: '4px 12px', borderRadius: '9999px', fontWeight: 'bold', textDecoration: 'none' }}>
-                {t.openPdf} ↗
-              </a>
-            </div>
-            <iframe src="/menu.pdf" width="100%" height="900px" style={{ border: 'none', borderRadius: '12px', background: 'white' }} title="BitCoffee Menu" />
-          </div>
-        )}
+{activeTab === 'menu' && (
+  <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
+    <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+      <a 
+        href="/menu.pdf" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        style={{
+          display: 'inline-block',
+          background: '#f59e0b',
+          color: '#111',
+          padding: '14px 36px',
+          borderRadius: '9999px',
+          fontWeight: 'bold',
+          textDecoration: 'none',
+          fontSize: '1.05rem'
+        }}
+      >
+        {t.openPdf} ↗
+      </a>
+    </div>
+
+    {/* PDF mit Cache-Busting */}
+    <iframe 
+      src={`/menu.pdf?v=${Date.now()}`} 
+      style={{ 
+        width: '100%', 
+        height: '1300px', 
+        minHeight: '85vh',
+        border: 'none', 
+        borderRadius: '16px', 
+        background: 'white' 
+      }} 
+      title="BitCoffee Menu" 
+    />
+  </div>
+)}
 
         {/* === MINING === */}
         {activeTab === 'mining' && (
