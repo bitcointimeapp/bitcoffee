@@ -12,6 +12,7 @@ interface DictionaryItem {
 }
 
 function App() {
+  const APP_VERSION = 'V21.0';  
   const [language, setLanguage] = useState<Language>('en')
   const [viewMode, setViewMode] = useState<ViewMode>('phone')
   const [activeTab, setActiveTab] = useState<Tab>('menu')
@@ -353,44 +354,95 @@ function App() {
         {language === 'vi' && 'Tô Trái Cây Protein'}
       </h2>
 
+      {/* Pink Dragon Bowl */}
       <div style={{ marginBottom: '1.2rem' }}>
-        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pink Dragon Bowl</h3>
-        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>Pink Dragon Fruit • Mango • Banana</p>
-        <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-          {language === 'de' && 'Toppings:  Kokosflocken • Granola • Chiasamen • Honig'}
-          {language === 'en' && 'Toppings:  Coconut flakes • Granola • Chia Seeds • Honey'}
-          {language === 'vi' && 'Toppings:  Dừa sấy • Granola • Hạt chia • Mật ong'}
+        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>
+          {language === 'de' && 'Pink Dragon Bowl'}
+          {language === 'en' && 'Pink Dragon Bowl'}
+          {language === 'vi' && 'Tô Thanh Long Hồng'}
+        </h3>
+        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>
+          {language === 'de' && 'Rote Drachenfrucht • Mango • Banane'}
+          {language === 'en' && 'Pink Dragon Fruit • Mango • Banana'}
+          {language === 'vi' && 'Thanh long đỏ • Xoài • Chuối'}
         </p>
-        <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Fruit Bowl: 60.000 VND</p>
-        <p style={{ color: '#f59e0b', fontWeight: '600' }}>+ Protein: 90.000 VND</p>
+        <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
+          {language === 'de' && 'Toppings: Kokosflocken • Granola • Chiasamen • Honig'}
+          {language === 'en' && 'Toppings: Coconut flakes • Granola • Chia Seeds • Honey'}
+          {language === 'vi' && 'Toppings: Dừa sấy • Granola • Hạt chia • Mật ong'}
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
+          {language === 'de' && 'Tô Trái Cây: 60.000 VND'}
+          {language === 'en' && 'Fruit Bowl: 60.000 VND'}
+          {language === 'vi' && 'Tô Trái Cây: 60.000 VND'}
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+          {language === 'de' && '+ Protein: 90.000 VND'}
+          {language === 'en' && '+ Protein: 90.000 VND'}
+          {language === 'vi' && '+ Protein: 90.000 VND'}
+        </p>
       </div>
 
       <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '1rem 0' }} />
 
+      {/* Tropical White Bowl */}
       <div style={{ marginBottom: '1.2rem' }}>
-        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Tropical White Bowl</h3>
-        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>White Dragon Fruit • Mango • Banana</p>
-        <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-          {language === 'de' && 'Toppings:  Kokosflocken • Granola • Chiasamen • Honig'}
-          {language === 'en' && 'Toppings:  Coconut flakes • Granola • Chia Seeds • Honey'}
-          {language === 'vi' && 'Toppings:  Dừa sấy • Granola • Hạt chia • Mật ong'}
+        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>
+          {language === 'de' && 'Tropical White Bowl'}
+          {language === 'en' && 'Tropical White Bowl'}
+          {language === 'vi' && 'Tô Nhiệt Đới Trắng'}
+        </h3>
+        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>
+          {language === 'de' && 'Weiße Drachenfrucht • Mango • Banane'}
+          {language === 'en' && 'White Dragon Fruit • Mango • Banana'}
+          {language === 'vi' && 'Thanh long trắng • Xoài • Chuối'}
         </p>
-        <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Fruit Bowl: 60.000 VND</p>
-        <p style={{ color: '#f59e0b', fontWeight: '600' }}>+ Protein: 90.000 VND</p>
+        <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
+          {language === 'de' && 'Toppings: • Kokosflocken • Granola • Chiasamen • Honig'}
+          {language === 'en' && 'Toppings: • Coconut flakes • Granola • Chia Seeds • Honey'}
+          {language === 'vi' && 'Toppings: • Dừa sấy • Granola • Hạt chia • Mật ong'}
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
+          {language === 'de' && 'Tô Trái Cây: 60.000 VND'}
+          {language === 'en' && 'Fruit Bowl: 60.000 VND'}
+          {language === 'vi' && 'Tô Trái Cây: 60.000 VND'}
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+          {language === 'de' && '+ Protein: 90.000 VND'}
+          {language === 'en' && '+ Protein: 90.000 VND'}
+          {language === 'vi' && '+ Protein: 90.000 VND'}
+        </p>
       </div>
 
       <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '1rem 0' }} />
 
+      {/* Dream Bowl */}
       <div>
-        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Dream Bowl</h3>
-        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>Mango • Pineapple • Banana</p>
-        <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-          {language === 'de' && 'Toppings:  Kokosflocken • Granola • Chiasamen • Honig'}
-          {language === 'en' && 'Toppings:  Coconut flakes • Granola • Chia Seeds • Honey'}
-          {language === 'vi' && 'Toppings:  Dừa sấy • Granola • Hạt chia • Mật ong'}
+        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>
+          {language === 'de' && 'Dream Bowl'}
+          {language === 'en' && 'Dream Bowl'}
+          {language === 'vi' && 'Tô Giấc Mơ'}
+        </h3>
+        <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>
+          {language === 'de' && 'Mango • Ananas • Banane'}
+          {language === 'en' && 'Mango • Pineapple • Banana'}
+          {language === 'vi' && 'Xoài • Dứa • Chuối'}
         </p>
-        <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Fruit Bowl: 60.000 VND</p>
-        <p style={{ color: '#f59e0b', fontWeight: '600' }}>+ Protein: 90.000 VND</p>
+        <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
+          {language === 'de' && 'Toppings: • Kokosflocken • Granola • Chiasamen • Honig'}
+          {language === 'en' && 'Toppings: • Coconut flakes • Granola • Chia Seeds • Honey'}
+          {language === 'vi' && 'Toppings: • Dừa sấy • Granola • Hạt chia • Mật ong'}
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
+          {language === 'de' && 'Tô Trái Cây: 60.000 VND'}
+          {language === 'en' && 'Fruit Bowl: 60.000 VND'}
+          {language === 'vi' && 'Tô Trái Cây: 60.000 VND'}
+        </p>
+        <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+          {language === 'de' && '+ Protein: 90.000 VND'}
+          {language === 'en' && '+ Protein: 90.000 VND'}
+          {language === 'vi' && '+ Protein: 90.000 VND'}
+        </p>
       </div>
     </div>
 
@@ -406,8 +458,16 @@ function App() {
         {language === 'en' && 'Vanilla • Chocolate'}
         {language === 'vi' && 'Vani • Sô-cô-la'}
       </p>
-      <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>Protein Shake: 60.000 VND</p>
-      <p style={{ color: '#f59e0b', fontWeight: '600' }}>+ Fruit: 80.000 VND</p>
+      <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
+        {language === 'de' && 'Sinh tố Protein: 60.000 VND'}
+        {language === 'en' && 'Protein Shake: 60.000 VND'}
+        {language === 'vi' && 'Sinh tố Protein: 60.000 VND'}
+      </p>
+      <p style={{ color: '#f59e0b', fontWeight: '600' }}>
+        {language === 'de' && '+ Trái cây: 80.000 VND'}
+        {language === 'en' && '+ Fruit: 80.000 VND'}
+        {language === 'vi' && '+ Trái cây: 80.000 VND'}
+      </p>
     </div>
 
     {/* FRUIT SMOOTHIES */}
@@ -694,10 +754,16 @@ function App() {
           <div style={{ color: '#f59e0b', fontSize: '0.9rem' }}>1-Year Bitcoin Chart</div>
         </div>
 
-        {/* Copyright */}
-        <div style={{ textAlign: 'center', marginTop: '40px', color: '#555', fontSize: '0.85rem' }}>
-          Copyright © <span style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://x.com/BitcoinZeit', '_blank')}>BitcoinZeit</span>
-        </div>
+         {/* Copyright + Version */}
+      <div style={{ textAlign: 'center', marginTop: '40px', color: '#555', fontSize: '0.85rem' }}>
+        Copyright © <span 
+          style={{ color: '#f59e0b', cursor: 'pointer' }} 
+          onClick={() => window.open('https://x.com/BitcoinZeit', '_blank')}
+        >
+          BitcoinZeit
+        </span> · {APP_VERSION}
+      </div>
+        
       </div>
     </div>
   )
