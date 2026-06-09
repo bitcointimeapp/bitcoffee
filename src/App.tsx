@@ -263,21 +263,43 @@ function App() {
           ))}
         </div>
 
-{/* === MENÜ ( === */}
+{/* === MENÜ === */}
 {activeTab === 'menu' && (
-  <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
- <iframe 
-  src="/menu-v6.pdf" 
-  style={{ 
-    width: '100%', 
-    height: '1400px', 
-    minHeight: '90vh',
-    border: 'none', 
-    borderRadius: '16px', 
-    background: 'white' 
-  }} 
-  title="BitCoffee Menu" 
-/>
+  <div style={{ 
+    background: '#1a1a1a', 
+    padding: '3rem 2rem', 
+    borderRadius: '16px',
+    textAlign: 'center'
+  }}>
+    <h3 style={{ color: '#f59e0b', marginBottom: '1rem', fontSize: '1.5rem' }}>
+      Unsere Speisekarte
+    </h3>
+    <p style={{ color: '#ccc', marginBottom: '2rem', maxWidth: '400px', margin: '0 auto 2rem' }}>
+      Frische vietnamesische und thailändische Gerichte • Protein Bowls • Shakes
+    </p>
+
+    <a 
+      href="/menu.pdf" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      style={{
+        display: 'inline-block',
+        background: '#f59e0b',
+        color: '#111',
+        padding: '18px 50px',
+        borderRadius: '9999px',
+        fontWeight: 'bold',
+        fontSize: '1.2rem',
+        textDecoration: 'none',
+        boxShadow: '0 4px 15px rgba(245, 158, 11, 0.3)'
+      }}
+    >
+      Speisekarte jetzt ansehen ↗
+    </a>
+
+    <p style={{ color: '#666', marginTop: '2rem', fontSize: '0.9rem' }}>
+      Öffnet sich in einem neuen Tab
+    </p>
   </div>
 )}
 
