@@ -278,11 +278,16 @@ function App() {
 
       {/* Pad Kra Pao */}
       <div style={{ marginBottom: '1.3rem' }}>
-        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pad Kra Pao</h3>
+        <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>Pad Kra Pao</h3>
+        <img 
+          src="/images/pad-kra-pao.png" 
+          alt="Pad Kra Pao" 
+          style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
+        />
         <p style={{ color: '#ccc', lineHeight: '1.5', marginBottom: '0.5rem' }}>
-          {language === 'de' && ' Hackfleisch • Basilikumblätter • Knoblauch • Austernsauce • Sojasauce • Chili • Zwiebel • Reis • Ei'}
-          {language === 'en' && ' Minced meat • Basil leaves • Garlic • Oyster sauce • Soya sauce • Chili • Onion • Rice • Egg'}
-          {language === 'vi' && ' Thịt băm • Lá quế • Tỏi • Sốt hào • Nước tương • Ớt • Hành tây • Cơm • Trứng'}
+          {language === 'de' && '• Hackfleisch • Basilikumblätter • Knoblauch • Austernsauce • Sojasauce • Chili • Zwiebel • Reis • Ei'}
+          {language === 'en' && '• Minced meat • Basil leaves • Garlic • Oyster sauce • Soya sauce • Chili • Onion • Rice • Egg'}
+          {language === 'vi' && '• Thịt băm • Lá quế • Tỏi • Sốt hào • Nước tương • Ớt • Hành tây • Cơm • Trứng'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
           {language === 'de' && 'Schweinefleisch 75.000 VND'}
@@ -300,11 +305,16 @@ function App() {
 
       {/* Pad Thai */}
       <div style={{ marginBottom: '1.3rem' }}>
-        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Pad Thai</h3>
+        <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>Pad Thai</h3>
+        <img 
+          src="/images/pad-thai.png" 
+          alt="Pad Thai" 
+          style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
+        />
         <p style={{ color: '#ccc', lineHeight: '1.5', marginBottom: '0.5rem' }}>
-          {language === 'de' && ' Reisnudeln • Schnittlauch • Sojasprossen • Erdnuss • Getrocknete Garnelen • Chili'}
-          {language === 'en' && ' Noodles • Chives • Bean sprouts • Peanut • Dried Shrimp • Chili'}
-          {language === 'vi' && ' Bún • Hẹ • Giá đỗ • Đậu phộng • Tôm khô • Ớt'}
+          {language === 'de' && '• Reisnudeln • Schnittlauch • Sojasprossen • Erdnuss • Getrocknete Garnelen • Chili'}
+          {language === 'en' && '• Noodles • Chives • Bean sprouts • Peanut • Dried Shrimp • Chili'}
+          {language === 'vi' && '• Bún • Hẹ • Giá đỗ • Đậu phộng • Tôm khô • Ớt'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
           {language === 'de' && 'Schweinefleisch 80.000 VND'}
@@ -327,11 +337,16 @@ function App() {
 
       {/* Tom Yum */}
       <div>
-        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>Tom Yum</h3>
+        <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>Tom Yum</h3>
+        <img 
+          src="/images/tom-yum.png" 
+          alt="Tom Yum" 
+          style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
+        />
         <p style={{ color: '#ccc', lineHeight: '1.5', marginBottom: '0.5rem' }}>
-          {language === 'de' && ' Zitronengras • Galgantwurzel • Kokosmilch • Zwiebel • Fischsauce • Chili • Knoblauch'}
-          {language === 'en' && ' Lemongrass • Galangal root • Coconut milk • Onion • Fish sauce • Chili • Garlic'}
-          {language === 'vi' && ' Sả • Riềng • Nước cốt dừa • Hành tây • Nước mắm • Ớt • Tỏi'}
+          {language === 'de' && '• Zitronengras • Galgantwurzel • Kokosmilch • Zwiebel • Fischsauce • Chili • Knoblauch'}
+          {language === 'en' && '• Lemongrass • Galangal root • Coconut milk • Onion • Fish sauce • Chili • Garlic'}
+          {language === 'vi' && '• Sả • Riềng • Nước cốt dừa • Hành tây • Nước mắm • Ớt • Tỏi'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
           {language === 'de' && 'Hähnchen 110.000 VND'}
@@ -356,11 +371,16 @@ function App() {
 
       {/* Pink Dragon Bowl */}
       <div style={{ marginBottom: '1.2rem' }}>
-        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>
+        <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>
           {language === 'de' && 'Pink Dragon Bowl'}
           {language === 'en' && 'Pink Dragon Bowl'}
           {language === 'vi' && 'Tô Thanh Long Hồng'}
         </h3>
+        <img 
+          src="/images/pink-dragon-bowl.png" 
+          alt="Pink Dragon Bowl" 
+          style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
+        />
         <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>
           {language === 'de' && 'Rote Drachenfrucht • Mango • Banane'}
           {language === 'en' && 'Pink Dragon Fruit • Mango • Banana'}
@@ -387,11 +407,16 @@ function App() {
 
       {/* Tropical White Bowl */}
       <div style={{ marginBottom: '1.2rem' }}>
-        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>
+        <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>
           {language === 'de' && 'Tropical White Bowl'}
           {language === 'en' && 'Tropical White Bowl'}
           {language === 'vi' && 'Tô Nhiệt Đới Trắng'}
         </h3>
+        <img 
+          src="/images/tropical-white-bowl.png" 
+          alt="Tropical White Bowl" 
+          style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
+        />
         <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>
           {language === 'de' && 'Weiße Drachenfrucht • Mango • Banane'}
           {language === 'en' && 'White Dragon Fruit • Mango • Banana'}
@@ -418,11 +443,16 @@ function App() {
 
       {/* Dream Bowl */}
       <div>
-        <h3 style={{ color: '#fff', marginBottom: '0.3rem' }}>
+        <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>
           {language === 'de' && 'Dream Bowl'}
           {language === 'en' && 'Dream Bowl'}
           {language === 'vi' && 'Tô Giấc Mơ'}
         </h3>
+        <img 
+          src="/images/dream-bowl.png" 
+          alt="Dream Bowl" 
+          style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
+        />
         <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>
           {language === 'de' && 'Mango • Ananas • Banane'}
           {language === 'en' && 'Mango • Pineapple • Banana'}
@@ -453,6 +483,11 @@ function App() {
         {language === 'en' && 'Protein Shakes'}
         {language === 'vi' && 'Sinh Tố Protein'}
       </h2>
+      <img 
+        src="/images/protein-shake.png" 
+        alt="Protein Shakes" 
+        style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
+      />
       <p style={{ color: '#ccc', marginBottom: '0.5rem' }}>
         {language === 'de' && 'Vanille • Schokolade'}
         {language === 'en' && 'Vanilla • Chocolate'}
@@ -477,6 +512,11 @@ function App() {
         {language === 'en' && 'Fruit Smoothies'}
         {language === 'vi' && 'Sinh Tố Trái Cây'}
       </h2>
+      <img 
+        src="/images/fruit-smoothie.png" 
+        alt="Fruit Smoothies" 
+        style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
+      />
       <p style={{ color: '#ccc', marginBottom: '0.5rem' }}>
         {language === 'de' && 'Rote Drachenfrucht • Weiße Drachenfrucht • Mango • Ananas • Orange • Wassermelone • Banane'}
         {language === 'en' && 'Red Dragon Fruit • White Dragon Fruit • Mango • Pineapple • Orange • Watermelon • Banana'}
@@ -492,6 +532,11 @@ function App() {
         {language === 'en' && 'Vietnamese Coffee'}
         {language === 'vi' && 'Cà Phê Việt Nam'}
       </h2>
+      <img 
+        src="/images/vietnamese-coffee.png" 
+        alt="Vietnamese Coffee" 
+        style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
+      />
 
       <div style={{ marginBottom: '1rem' }}>
         <p style={{ color: '#fff', marginBottom: '0.2rem' }}>
