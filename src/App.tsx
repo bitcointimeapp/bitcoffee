@@ -372,7 +372,7 @@ function App() {
           {language === 'vi' && 'Toppings: Dừa sấy • Granola • Hạt chia • Mật ong'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
-          {language === 'de' && 'Tô Trái Cây: 60.000 VND'}
+          {language === 'de' && 'Fruit Bowl: 60.000 VND'}
           {language === 'en' && 'Fruit Bowl: 60.000 VND'}
           {language === 'vi' && 'Tô Trái Cây: 60.000 VND'}
         </p>
@@ -403,7 +403,7 @@ function App() {
           {language === 'vi' && 'Toppings: • Dừa sấy • Granola • Hạt chia • Mật ong'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
-          {language === 'de' && 'Tô Trái Cây: 60.000 VND'}
+          {language === 'de' && 'Fruit Bowl: 60.000 VND'}
           {language === 'en' && 'Fruit Bowl: 60.000 VND'}
           {language === 'vi' && 'Tô Trái Cây: 60.000 VND'}
         </p>
@@ -434,7 +434,7 @@ function App() {
           {language === 'vi' && 'Toppings: • Dừa sấy • Granola • Hạt chia • Mật ong'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
-          {language === 'de' && 'Tô Trái Cây: 60.000 VND'}
+          {language === 'de' && 'Fruit Bowl: 60.000 VND'}
           {language === 'en' && 'Fruit Bowl: 60.000 VND'}
           {language === 'vi' && 'Tô Trái Cây: 60.000 VND'}
         </p>
@@ -459,12 +459,12 @@ function App() {
         {language === 'vi' && 'Vani • Sô-cô-la'}
       </p>
       <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
-        {language === 'de' && 'Sinh tố Protein: 60.000 VND'}
+        {language === 'de' && 'Protein Shake: 60.000 VND'}
         {language === 'en' && 'Protein Shake: 60.000 VND'}
         {language === 'vi' && 'Sinh tố Protein: 60.000 VND'}
       </p>
       <p style={{ color: '#f59e0b', fontWeight: '600' }}>
-        {language === 'de' && '+ Trái cây: 80.000 VND'}
+        {language === 'de' && '+ Frucht: 80.000 VND'}
         {language === 'en' && '+ Fruit: 80.000 VND'}
         {language === 'vi' && '+ Trái cây: 80.000 VND'}
       </p>
