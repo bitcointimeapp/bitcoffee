@@ -263,36 +263,15 @@ function App() {
           ))}
         </div>
 
-        {/* === MENÜ === */}
+{/* === MENÜ ( === */}
 {activeTab === 'menu' && (
   <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
-    <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-      <a 
-        href="/menu.pdf" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        style={{
-          display: 'inline-block',
-          background: '#f59e0b',
-          color: '#111',
-          padding: '14px 36px',
-          borderRadius: '9999px',
-          fontWeight: 'bold',
-          textDecoration: 'none',
-          fontSize: '1.05rem'
-        }}
-      >
-        {t.openPdf} ↗
-      </a>
-    </div>
-
-    {/* PDF mit Cache-Busting */}
     <iframe 
       src={`/menu.pdf?v=${Date.now()}`} 
       style={{ 
         width: '100%', 
-        height: '1300px', 
-        minHeight: '85vh',
+        height: '1400px', 
+        minHeight: '90vh',
         border: 'none', 
         borderRadius: '16px', 
         background: 'white' 
