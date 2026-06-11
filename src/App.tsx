@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { supabase } from './lib/supabase'
 
 type Language = 'de' | 'en' | 'vi'
 type ViewMode = 'phone' | 'pad'
@@ -21,6 +22,11 @@ function App() {
   const [blockHeight, setBlockHeight] = useState<number | null>(null)
   const [btcPrice, setBtcPrice] = useState<any>(null)
   const [priceHistory, setPriceHistory] = useState<number[]>([])
+
+  // === NEU: Bestell-System ===
+  const [customerName, setCustomerName] = useState('')
+  const [orderCart, setOrderCart] = useState<any[]>([])
+  const [kitchenOrders, setKitchenOrders] = useState<any[]>([])
 
   // === BITICTIONARY ===
   const bitictionary: DictionaryItem[] = [
@@ -201,6 +207,175 @@ function App() {
   const formatVND = (vnd: number) => {
     return (vnd / 1_000_000).toFixed(2) + "M"
   }
+
+// === REALTIME FÜR KÜCHE (verbessert) ===
+useEffect(() => {
+  // Nur im Kitchen-Modus aktivieren
+  if (!window.location.search.includes('mode=kitchen')) return
+
+  console.log("Kitchen Realtime wird gestartet...")
+
+  const channel = supabase
+    .channel('orders-realtime')
+    .on(
+      'postgres_changes',
+      {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'orders'
+      },
+      (payload) => {
+        console.log("Neue Bestellung empfangen:", payload.new)
+        setKitchenOrders(prev => [payload.new, ...prev])
+      }
+    )
+    .subscribe((status) => {
+      console.log("Realtime Status:", status)
+    })
+
+  return () => {
+    console.log("Realtime Channel wird entfernt")
+    supabase.removeChannel(channel)
+  }
+}, [])
+
+  // === NEU: Alle Bestell-Möglichkeiten mit Sprachen ===
+  const getOrderableItems = () => {
+    const items = [
+      // Pad Kra Pao
+      { id: 1, base: "Pad Kra Pao Pork", price: 75000 },
+      { id: 2, base: "Pad Kra Pao Chicken", price: 75000 },
+
+      // Pad Thai
+      { id: 3, base: "Pad Thai Pork", price: 80000 },
+      { id: 4, base: "Pad Thai Chicken", price: 80000 },
+      { id: 5, base: "Pad Thai Shrimp", price: 95000 },
+
+      // Tom Yum
+      { id: 6, base: "Tom Yum Chicken", price: 110000 },
+      { id: 7, base: "Tom Yum Shrimp", price: 130000 },
+
+      // Protein Fruit Bowls
+      { id: 8, base: "Pink Dragon Bowl", price: 60000 },
+      { id: 9, base: "Pink Dragon Bowl + Protein", price: 90000 },
+      { id: 10, base: "Tropical White Bowl", price: 60000 },
+      { id: 11, base: "Tropical White Bowl + Protein", price: 90000 },
+      { id: 12, base: "Dream Bowl", price: 60000 },
+      { id: 13, base: "Dream Bowl + Protein", price: 90000 },
+
+      // Protein Shakes
+      { id: 14, base: "Protein Shake Vanilla", price: 60000 },
+      { id: 15, base: "Protein Shake Chocolate", price: 60000 },
+      { id: 16, base: "Protein Shake + Fruit", price: 80000 },
+
+      // Fruit Smoothies (jede Frucht einzeln)
+      { id: 17, base: "Smoothie Red Dragon Fruit", price: 30000 },
+      { id: 18, base: "Smoothie White Dragon Fruit", price: 30000 },
+      { id: 19, base: "Smoothie Mango", price: 30000 },
+      { id: 20, base: "Smoothie Pineapple", price: 30000 },
+      { id: 21, base: "Smoothie Orange", price: 30000 },
+      { id: 22, base: "Smoothie Watermelon", price: 30000 },
+      { id: 23, base: "Smoothie Banana", price: 30000 },
+
+      // Vietnamese Coffee
+      { id: 24, base: "Iced Milk Coffee Saigon", price: 30000 },
+      { id: 25, base: "Iced Black Coffee Saigon", price: 30000 },
+      { id: 26, base: "Hot Black Coffee", price: 25000 },
+    ]
+
+    return items.map(item => {
+      let name = item.base
+
+      if (language === 'de') {
+        name = item.base
+          .replace("Pork", "Schweinefleisch")
+          .replace("Chicken", "Hähnchen")
+          .replace("Shrimp", "Garnelen")
+          .replace("Pink Dragon Bowl", "Pink Dragon Bowl")
+          .replace("Tropical White Bowl", "Tropical White Bowl")
+          .replace("Dream Bowl", "Dream Bowl")
+          .replace("+ Protein", "+ Protein")
+          .replace("Vanilla", "Vanille")
+          .replace("Chocolate", "Schokolade")
+          .replace("+ Fruit", "+ Frucht")
+          .replace("Smoothie ", "Smoothie ")
+          .replace("Red Dragon Fruit", "Rote Drachenfrucht")
+          .replace("White Dragon Fruit", "Weiße Drachenfrucht")
+          .replace("Mango", "Mango")
+          .replace("Pineapple", "Ananas")
+          .replace("Orange", "Orange")
+          .replace("Watermelon", "Wassermelone")
+          .replace("Banana", "Banane")
+          .replace("Iced Milk Coffee Saigon", "Eiskaffee mit Milch Saigon")
+          .replace("Iced Black Coffee Saigon", "Schwarzer Eiskaffee Saigon")
+          .replace("Hot Black Coffee", "Heißer schwarzer Kaffee")
+      }
+
+      if (language === 'vi') {
+        name = item.base
+          .replace("Pork", "Thịt heo")
+          .replace("Chicken", "Thịt gà")
+          .replace("Shrimp", "Tôm")
+          .replace("Pink Dragon Bowl", "Tô Thanh Long Hồng")
+          .replace("Tropical White Bowl", "Tô Nhiệt Đới Trắng")
+          .replace("Dream Bowl", "Tô Giấc Mơ")
+          .replace("+ Protein", "+ Protein")
+          .replace("Vanilla", "Vani")
+          .replace("Chocolate", "Sô-cô-la")
+          .replace("+ Fruit", "+ Trái cây")
+          .replace("Smoothie ", "Sinh tố ")
+          .replace("Red Dragon Fruit", "Thanh long đỏ")
+          .replace("White Dragon Fruit", "Thanh long trắng")
+          .replace("Mango", "Xoài")
+          .replace("Pineapple", "Dứa")
+          .replace("Orange", "Cam")
+          .replace("Watermelon", "Dưa hấu")
+          .replace("Banana", "Chuối")
+          .replace("Iced Milk Coffee Saigon", "Cà phê sữa đá Sài Gòn")
+          .replace("Iced Black Coffee Saigon", "Cà phê đen đá Sài Gòn")
+          .replace("Hot Black Coffee", "Cà phê đen nóng")
+      }
+
+      return { ...item, name }
+    })
+  }
+
+  // === NEU: Bestellung abschicken ===
+const submitOrder = async () => {
+  console.log("Button geklickt - submitOrder gestartet")
+  console.log("Name:", customerName)
+  console.log("Warenkorb:", orderCart)
+
+  if (!customerName || orderCart.length === 0) {
+    alert("Bitte Name eingeben und mindestens einen Artikel auswählen!")
+    return
+  }
+
+  try {
+    const { error } = await supabase
+      .from('orders')
+      .insert({
+        customer: customerName,
+        items: orderCart,
+        status: 'pending'
+      })
+
+    if (error) {
+      console.error("Supabase Fehler:", error)
+      alert("Fehler beim Senden: " + error.message)
+      return
+    }
+
+    alert("✅ Bestellung erfolgreich in die Küche geschickt!")
+    setOrderCart([])
+    setCustomerName('')
+
+  } catch (err) {
+    console.error("Unerwarteter Fehler:", err)
+    alert("Unerwarteter Fehler beim Senden der Bestellung.")
+  }
+}
+
 
   const containerMaxWidth = viewMode === 'pad' ? '3000px' : '620px'
 
@@ -565,6 +740,228 @@ function App() {
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>25.000 VND</p>
       </div>
     </div>
+
+                {/* ========== NEU: KUNDEN-BESTELLUNG (mit Kategorien + Trennlinien) ========== */}
+            {window.location.search.includes('mode=customer') && (
+              <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px', marginTop: '2rem' }}>
+                <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
+                  {language === 'de' && 'Bestellung aufgeben'}
+                  {language === 'en' && 'Place Order'}
+                  {language === 'vi' && 'Đặt món'}
+                </h2>
+
+                <input
+                  type="text"
+                  placeholder={
+                    language === 'de' ? "Dein Name oder Tischnummer" :
+                    language === 'en' ? "Your Name or Table Number" :
+                    "Tên hoặc số bàn của bạn"
+                  }
+                  value={customerName}
+                  onChange={(e) => setCustomerName(e.target.value)}
+                  style={{ width: '96%', padding: '14px', marginBottom: '1.5rem', borderRadius: '10px', background: '#333', color: 'white', border: 'none', fontSize: '1.05rem' }}
+                />
+
+                {/* === PAD KRA PAO === */}
+                <h3 style={{ color: '#f59e0b', margin: '1rem 0 0.6rem 0' }}>Pad Kra Pao</h3>
+                <div style={{ display: 'grid', gap: '0.5rem', marginBottom: '1rem' }}>
+                  {getOrderableItems().filter(i => i.base.includes("Pad Kra Pao")).map((item, index) => (
+                    <button key={index} onClick={() => setOrderCart([...orderCart, item])}
+                      style={{ padding: '12px 16px', background: '#333', color: 'white', border: 'none', borderRadius: '8px', textAlign: 'left', display: 'flex', justifyContent: 'space-between' }}>
+                      <span>{item.name}</span>
+                      <span style={{ color: '#f59e0b' }}>{item.price.toLocaleString()} VND</span>
+                    </button>
+                  ))}
+                </div>
+
+                <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '1rem 0' }} />
+
+                {/* === PAD THAI === */}
+                <h3 style={{ color: '#f59e0b', margin: '1rem 0 0.6rem 0' }}>Pad Thai</h3>
+                <div style={{ display: 'grid', gap: '0.5rem', marginBottom: '1rem' }}>
+                  {getOrderableItems().filter(i => i.base.includes("Pad Thai")).map((item, index) => (
+                    <button key={index} onClick={() => setOrderCart([...orderCart, item])}
+                      style={{ padding: '12px 16px', background: '#333', color: 'white', border: 'none', borderRadius: '8px', textAlign: 'left', display: 'flex', justifyContent: 'space-between' }}>
+                      <span>{item.name}</span>
+                      <span style={{ color: '#f59e0b' }}>{item.price.toLocaleString()} VND</span>
+                    </button>
+                  ))}
+                </div>
+
+                <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '1rem 0' }} />
+
+                {/* === TOM YUM === */}
+                <h3 style={{ color: '#f59e0b', margin: '1rem 0 0.6rem 0' }}>Tom Yum</h3>
+                <div style={{ display: 'grid', gap: '0.5rem', marginBottom: '1rem' }}>
+                  {getOrderableItems().filter(i => i.base.includes("Tom Yum")).map((item, index) => (
+                    <button key={index} onClick={() => setOrderCart([...orderCart, item])}
+                      style={{ padding: '12px 16px', background: '#333', color: 'white', border: 'none', borderRadius: '8px', textAlign: 'left', display: 'flex', justifyContent: 'space-between' }}>
+                      <span>{item.name}</span>
+                      <span style={{ color: '#f59e0b' }}>{item.price.toLocaleString()} VND</span>
+                    </button>
+                  ))}
+                </div>
+
+                <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '1rem 0' }} />
+
+                {/* === PROTEIN FRUIT BOWLS === */}
+                <h3 style={{ color: '#f59e0b', margin: '1rem 0 0.6rem 0' }}>
+                  {language === 'de' && 'Protein Fruit Bowls'}
+                  {language === 'en' && 'Protein Fruit Bowls'}
+                  {language === 'vi' && 'Tô Trái Cây Protein'}
+                </h3>
+                <div style={{ display: 'grid', gap: '0.5rem', marginBottom: '1rem' }}>
+                  {getOrderableItems().filter(i => i.base.includes("Bowl")).map((item, index) => (
+                    <button key={index} onClick={() => setOrderCart([...orderCart, item])}
+                      style={{ padding: '12px 16px', background: '#333', color: 'white', border: 'none', borderRadius: '8px', textAlign: 'left', display: 'flex', justifyContent: 'space-between' }}>
+                      <span>{item.name}</span>
+                      <span style={{ color: '#f59e0b' }}>{item.price.toLocaleString()} VND</span>
+                    </button>
+                  ))}
+                </div>
+
+                <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '1rem 0' }} />
+
+                {/* === PROTEIN SHAKES === */}
+                <h3 style={{ color: '#f59e0b', margin: '1rem 0 0.6rem 0' }}>
+                  {language === 'de' && 'Protein Shakes'}
+                  {language === 'en' && 'Protein Shakes'}
+                  {language === 'vi' && 'Sinh Tố Protein'}
+                </h3>
+                <div style={{ display: 'grid', gap: '0.5rem', marginBottom: '1rem' }}>
+                  {getOrderableItems().filter(i => i.base.includes("Protein Shake")).map((item, index) => (
+                    <button key={index} onClick={() => setOrderCart([...orderCart, item])}
+                      style={{ padding: '12px 16px', background: '#333', color: 'white', border: 'none', borderRadius: '8px', textAlign: 'left', display: 'flex', justifyContent: 'space-between' }}>
+                      <span>{item.name}</span>
+                      <span style={{ color: '#f59e0b' }}>{item.price.toLocaleString()} VND</span>
+                    </button>
+                  ))}
+                </div>
+
+                <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '1rem 0' }} />
+
+                {/* === FRUIT SMOOTHIES === */}
+                <h3 style={{ color: '#f59e0b', margin: '1rem 0 0.6rem 0' }}>
+                  {language === 'de' && 'Frucht-Smoothies'}
+                  {language === 'en' && 'Fruit Smoothies'}
+                  {language === 'vi' && 'Sinh Tố Trái Cây'}
+                </h3>
+                <div style={{ display: 'grid', gap: '0.5rem', marginBottom: '1rem' }}>
+                  {getOrderableItems().filter(i => i.base.includes("Smoothie")).map((item, index) => (
+                    <button key={index} onClick={() => setOrderCart([...orderCart, item])}
+                      style={{ padding: '12px 16px', background: '#333', color: 'white', border: 'none', borderRadius: '8px', textAlign: 'left', display: 'flex', justifyContent: 'space-between' }}>
+                      <span>{item.name}</span>
+                      <span style={{ color: '#f59e0b' }}>{item.price.toLocaleString()} VND</span>
+                    </button>
+                  ))}
+                </div>
+
+                <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '1rem 0' }} />
+
+                {/* === VIETNAMESE COFFEE === */}
+                <h3 style={{ color: '#f59e0b', margin: '1rem 0 0.6rem 0' }}>
+                  {language === 'de' && 'Vietnamesischer Kaffee'}
+                  {language === 'en' && 'Vietnamese Coffee'}
+                  {language === 'vi' && 'Cà Phê Việt Nam'}
+                </h3>
+                <div style={{ display: 'grid', gap: '0.5rem' }}>
+                  {getOrderableItems().filter(i => i.base.includes("Coffee") || i.base.includes("Hot Black")).map((item, index) => (
+                    <button key={index} onClick={() => setOrderCart([...orderCart, item])}
+                      style={{ padding: '12px 16px', background: '#333', color: 'white', border: 'none', borderRadius: '8px', textAlign: 'left', display: 'flex', justifyContent: 'space-between' }}>
+                      <span>{item.name}</span>
+                      <span style={{ color: '#f59e0b' }}>{item.price.toLocaleString()} VND</span>
+                    </button>
+                  ))}
+                </div>
+
+                {/* Warenkorb */}
+                {orderCart.length > 0 && (
+                  <div style={{ background: '#1a1a1a', padding: '1rem', borderRadius: '10px', margin: '1.5rem 0' }}>
+                    <strong style={{ color: '#f59e0b' }}>
+                      {language === 'de' && 'Deine Bestellung:'}
+                      {language === 'en' && 'Your order:'}
+                      {language === 'vi' && 'Đơn hàng của bạn:'}
+                    </strong>
+                    {orderCart.map((item, index) => (
+                      <div key={index} style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.4rem' }}>
+                        <span>{item.name}</span>
+                        <button onClick={() => {
+                          const newCart = [...orderCart]
+                          newCart.splice(index, 1)
+                          setOrderCart(newCart)
+                        }} style={{ color: '#f59e0b', background: 'none', border: 'none' }}>✕</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <button
+                  onClick={submitOrder}
+                  disabled={!customerName || orderCart.length === 0}
+                  style={{
+                    width: '100%',
+                    padding: '18px',
+                    background: '#f59e0b',
+                    color: '#111',
+                    fontWeight: 'bold',
+                    border: 'none',
+                    borderRadius: '9999px',
+                    fontSize: '1.15rem'
+                  }}
+                >
+                  {language === 'de' && 'Bestellung in die Küche schicken'}
+                  {language === 'en' && 'Send order to kitchen'}
+                  {language === 'vi' && 'Gửi đơn hàng vào bếp'}
+                </button>
+              </div>
+            )}
+
+    {/* ========== NEU: KÜCHEN-ANSICHT ========== */}
+    {window.location.search.includes('mode=kitchen') && (
+      <div style={{ background: '#111', padding: '2rem', borderRadius: '16px', marginTop: '2rem' }}>
+        <h1 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '2rem' }}>🍳 New Orders</h1>
+
+        {kitchenOrders.length === 0 ? (
+          <p style={{ textAlign: 'center', color: '#888' }}>No orders yet.</p>
+        ) : (
+          kitchenOrders.map((order, index) => (
+            <div key={index} style={{ background: '#222', padding: '1.5rem', borderRadius: '16px', marginBottom: '1rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.8rem' }}>
+                <strong style={{ fontSize: '1.4rem' }}>{order.customer}</strong>
+                <span style={{ color: '#888' }}>
+  {new Date(order.created_at).toLocaleTimeString('de-DE', { 
+    hour: '2-digit', 
+    minute: '2-digit' 
+  })}
+</span>
+              </div>
+              <div style={{ color: '#ddd', lineHeight: '1.7' }}>
+                {order.items.map((item: any, i: number) => (
+                  <div key={i}>• {item.name}</div>
+                ))}
+              </div>
+              <button
+                onClick={() => {
+                  const updated = kitchenOrders.filter((_, i) => i !== index)
+                  setKitchenOrders(updated)
+                }}
+                style={{
+                  marginTop: '1rem',
+                  padding: '10px 24px',
+                  background: '#22c55e',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '9999px',
+                  fontWeight: 'bold'
+                }}
+              >
+                Done ✓
+              </button>
+            </div>
+          ))
+        )}
+      </div>
+    )}
 
   </div>
 )}
