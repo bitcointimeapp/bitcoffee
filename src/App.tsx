@@ -464,13 +464,11 @@ const submitOrder = async () => {
 )}
 
 {/* === MENÜ === */}
-{activeTab === 'menu' && (
+{activeTab === 'menu' && 
+ !window.location.search.includes('mode=customer') && 
+ !window.location.search.includes('mode=kitchen') && (
   <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
 
- {/* Menü-Inhalt nur im normalen Modus anzeigen */}
-{!window.location.search.includes('mode=customer') && 
- !window.location.search.includes('mode=kitchen') && (
-  
     {/* AUTHENTIC THAI FOOD */}
     <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px', marginBottom: '1.5rem' }}>
       <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
@@ -538,7 +536,7 @@ const submitOrder = async () => {
       </div>
     </div>
 
-    {/* ========== PROTEIN FRUIT BOWLS ========== */}
+    {/* ========== PROTEIN FRUIT BOWLS (mit allen Details) ========== */}
     <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px', marginBottom: '1.5rem' }}>
       <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
         {language === 'de' && 'Protein Fruit Bowls'}
@@ -694,7 +692,8 @@ const submitOrder = async () => {
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>25.000 VND</p>
       </div>
     </div>
-  </>
+
+  </div>
 )}
 
 {/* ========== KUNDEN-BESTELLUNG (außerhalb des Tabs) ========== */}
