@@ -710,7 +710,14 @@ const submitOrder = async () => {
 
 {/* ========== KUNDEN-BESTELLUNG (außerhalb des Tabs) ========== */}
 {window.location.search.includes('mode=customer') && (
-  <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px', marginTop: '2rem' }}>
+  <div style={{ 
+    background: '#222', 
+    padding: '1.5rem', 
+    borderRadius: '12px', 
+    marginTop: '2rem',
+    maxWidth: containerMaxWidth,
+    margin: '0 auto'
+  }}>
     <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
       {language === 'de' && 'Bestellung aufgeben'}
       {language === 'en' && 'Place Order'}
@@ -937,7 +944,14 @@ const submitOrder = async () => {
 
 {/* ========== KÜCHEN-ANSICHT (außerhalb des Tabs) ========== */}
 {window.location.search.includes('mode=kitchen') && (
-  <div style={{ background: '#111', padding: '2rem', borderRadius: '16px', marginTop: '2rem', maxWidth: '620px', margin: '0 auto' }}>
+  <div style={{ 
+    background: '#111', 
+    padding: '2rem', 
+    borderRadius: '16px', 
+    marginTop: '2rem',
+    maxWidth: containerMaxWidth,
+    margin: '0 auto'
+  }}>
     <h1 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '2rem' }}>
       {language === 'de' && '🍳 Neue Bestellungen'}
       {language === 'en' && '🍳 New Orders'}
