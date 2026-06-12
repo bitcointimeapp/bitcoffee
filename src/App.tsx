@@ -432,22 +432,38 @@ const submitOrder = async () => {
           <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://x.com/21BitCoffee', '_blank')}>𝕏 @21BitCoffee</p>
         </div>
 
-        {/* 4 Reiter */}
-        <div style={{ display: 'flex', background: '#1a1a1a', borderRadius: '9999px', padding: '4px', margin: '20px 0' }}>
-          {[
-            { key: 'menu' as Tab, label: t.menu },
-            { key: 'mining' as Tab, label: t.mining },
-            { key: 'node' as Tab, label: t.node },
-            { key: 'bitictionary' as Tab, label: t.bitictionary }
-          ].map(tab => (
-            <button key={tab.key} onClick={() => setActiveTab(tab.key)}
-              style={{ flex: 1, padding: '14px', borderRadius: '9999px', fontWeight: '600', background: activeTab === tab.key ? '#f59e0b' : 'transparent', color: activeTab === tab.key ? '#111' : '#ccc', border: 'none', cursor: 'pointer' }}>
-              {tab.label}
-            </button>
-          ))}
-        </div>
+        {/* ========== TABS + INHALTE NUR IM NORMALEN MODUS ========== */}
+{!window.location.search.includes('mode=customer') && 
+ !window.location.search.includes('mode=kitchen') && (
+  <>
+    {/* 4 Reiter */}
+    <div style={{ display: 'flex', background: '#1a1a1a', borderRadius: '9999px', padding: '4px', margin: '20px 0' }}>
+      {[
+        { key: 'menu' as Tab, label: t.menu },
+        { key: 'mining' as Tab, label: t.mining },
+        { key: 'node' as Tab, label: t.node },
+        { key: 'bitictionary' as Tab, label: t.bitictionary }
+      ].map(tab => (
+        <button 
+          key={tab.key} 
+          onClick={() => setActiveTab(tab.key)}
+          style={{ 
+            flex: 1, 
+            padding: '14px', 
+            borderRadius: '9999px', 
+            fontWeight: '600', 
+            background: activeTab === tab.key ? '#f59e0b' : 'transparent', 
+            color: activeTab === tab.key ? '#111' : '#ccc', 
+            border: 'none', 
+            cursor: 'pointer' 
+          }}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
 
-{/* === MENÜ === */}
+    {/* === MENÜ === */}
 {activeTab === 'menu' && (
   <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
 
@@ -890,55 +906,30 @@ const submitOrder = async () => {
         {language === 'de' && '📋 Historie'} {language === 'en' && '📋 History'} {language === 'vi' && '📋 Lịch sử'}
       </h2>
 
-      {/* Buttons */}
-<div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-  {[
-    { 
-      label: { de: 'Letzte Stunde', en: 'Last Hour', vi: 'Giờ qua' }, 
-      hours: 1, 
-      title: { de: 'Letzte Stunde', en: 'Last Hour', vi: 'Giờ qua' } 
-    },
-    { 
-      label: { de: 'Letzter Tag', en: 'Last Day', vi: 'Ngày qua' }, 
-      days: 1, 
-      title: { de: 'Letzter Tag', en: 'Last Day', vi: 'Ngày qua' } 
-    },
-    { 
-      label: { de: 'Letzter Monat', en: 'Last Month', vi: 'Tháng qua' }, 
-      days: 30, 
-      title: { de: 'Letzter Monat', en: 'Last Month', vi: 'Tháng qua' } 
-    }
-  ].map((period, idx) => (
-    <button
-      key={idx}
-      onClick={async () => {
-        let dateLimit = new Date()
-        if (period.hours) dateLimit.setHours(dateLimit.getHours() - period.hours)
-        if (period.days) dateLimit.setDate(dateLimit.getDate() - period.days)
+      <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+        {[
+          { label: { de: 'Letzte Stunde', en: 'Last Hour', vi: 'Giờ qua' }, hours: 1, title: 'Letzte Stunde' },
+          { label: { de: 'Letzter Tag', en: 'Last Day', vi: 'Ngày qua' }, days: 1, title: 'Letzter Tag' },
+          { label: { de: 'Letzter Monat', en: 'Last Month', vi: 'Tháng qua' }, days: 30, title: 'Letzter Monat' }
+        ].map((period, idx) => (
+          <button
+            key={idx}
+            onClick={async () => {
+              let dateLimit = new Date();
+              if (period.hours) dateLimit.setHours(dateLimit.getHours() - period.hours);
+              if (period.days) dateLimit.setDate(dateLimit.getDate() - period.days);
 
-        const { data } = await supabase
-          .from('orders')
-          .select('*')
-          .gte('created_at', dateLimit.toISOString())
-          .order('created_at', { ascending: false })
-
-        setHistoryData(data || [])
-        setHistoryTitle(period.title[language] || period.title['de'])
-        setShowHistory(true)
-      }}
-      style={{
-        padding: '10px 18px',
-        background: '#333',
-        color: '#f59e0b',
-        border: 'none',
-        borderRadius: '9999px',
-        fontWeight: '600'
-      }}
-    >
-      {period.label[language]}
-    </button>
-  ))}
-</div>
+              const { data } = await supabase.from('orders').select('*').gte('created_at', dateLimit.toISOString()).order('created_at', { ascending: false });
+              setHistoryData(data || []);
+              setHistoryTitle(period.title[language] || period.title['de']);
+              setShowHistory(true);
+            }}
+            style={{ padding: '10px 18px', background: '#333', color: '#f59e0b', border: 'none', borderRadius: '9999px', fontWeight: '600' }}
+          >
+            {period.label[language]}
+          </button>
+        ))}
+      </div>
 
       {showHistory && historyData.length > 0 && (
         <div style={{ background: '#1f1f1f', padding: '1.5rem', borderRadius: '16px', marginBottom: '1.5rem', maxHeight: '400px', overflowY: 'auto' }}>
@@ -982,7 +973,7 @@ const submitOrder = async () => {
   </div>
 )}
 
-        {/* === MINING === */}
+     {/* === MINING === */}
         {activeTab === 'mining' && (
           <div style={{ background: '#1a1a1a', padding: '2rem', borderRadius: '16px' }}>
             {language === 'de' && (
@@ -1074,7 +1065,8 @@ const submitOrder = async () => {
           </div>
         )}
 
-        {/* === NODE === */}
+
+      {/* === NODE === */}
         {activeTab === 'node' && (
           <div style={{ background: '#1a1a1a', padding: '2rem', borderRadius: '16px' }}>
             {language === 'de' && (
@@ -1169,7 +1161,7 @@ const submitOrder = async () => {
           </div>
         )}
 
-        {/* BITICTIONARY */}
+      {/* BITICTIONARY */}
         {activeTab === 'bitictionary' && (
           <>
             <h2 style={{ textAlign: 'center', color: '#f59e0b', marginBottom: '20px', textShadow: '0 0 20px #f59e0b' }}>Bitictionary</h2>
@@ -1192,6 +1184,9 @@ const submitOrder = async () => {
             </div>
           </>
         )}
+
+  </>
+)}
 
         {/* LIVE CHART + KURS (unter allen Reitern) */}
         <div style={{ marginTop: '30px', background: '#1a1a1a', padding: '1.6rem', borderRadius: '16px', textAlign: 'center', border: '1px solid #f59e0b' }}>
