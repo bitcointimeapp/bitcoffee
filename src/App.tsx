@@ -1052,7 +1052,7 @@ const submitOrder = async () => {
     ))}
   </div>
 
-  {/* Schöne Historie mit Gesamtpreis */}
+  {/* Historie mit Gesamtpreis */}
   {showHistory && historyData.length > 0 && (
     <div style={{ 
       background: '#1f1f1f', 
@@ -1108,7 +1108,11 @@ const submitOrder = async () => {
               justifyContent: 'space-between',
               fontWeight: '600'
             }}>
-              <span style={{ color: '#aaa' }}>Gesamt:</span>
+              <span style={{ color: '#aaa' }}>
+                {language === 'de' && 'Gesamt:'}
+                {language === 'en' && 'Total:'}
+                {language === 'vi' && 'Tổng:'}
+              </span>
               <span style={{ color: '#f59e0b', fontSize: '1.15rem' }}>
                 {total.toLocaleString()} VND
               </span>
