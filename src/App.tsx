@@ -960,181 +960,157 @@ const submitOrder = async () => {
       ))
     )}
 
-    {/* History + Löschen Button */}
-    <div style={{ marginTop: '3rem' }}>
-      <h2 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '1.5rem' }}>
-        {language === 'de' && '📋 Historie'} {language === 'en' && '📋 History'} {language === 'vi' && '📋 Lịch sử'}
-      </h2>
+{/* ========== HISTORIE (mit Gesamtpreis) ========== */}
+<div style={{ marginTop: '3rem' }}>
+  <h2 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '1.5rem' }}>
+    {language === 'de' && '📋 Historie'}
+    {language === 'en' && '📋 History'}
+    {language === 'vi' && '📋 Lịch sử'}
+  </h2>
 
-{/* Buttons für Historie */}
-<div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-  {[
-    { 
-      label: { de: 'Letzte Stunde', en: 'Last Hour', vi: 'Giờ qua' }, 
-      hours: 1, 
-      title: { de: 'Letzte Stunde', en: 'Last Hour', vi: 'Giờ qua' } 
-    },
-    { 
-      label: { de: 'Letzter Tag', en: 'Last Day', vi: 'Ngày qua' }, 
-      days: 1, 
-      title: { de: 'Letzter Tag', en: 'Last Day', vi: 'Ngày qua' } 
-    },
-    { 
-      label: { de: 'Letzter Monat', en: 'Last Month', vi: 'Tháng qua' }, 
-      days: 30, 
-      title: { de: 'Letzter Monat', en: 'Last Month', vi: 'Tháng qua' } 
-    }
-  ].map((period, idx) => (
-    <button
-      key={idx}
-      onClick={async () => {
-        let dateLimit = new Date()
-        if (period.hours) dateLimit.setHours(dateLimit.getHours() - period.hours)
-        if (period.days) dateLimit.setDate(dateLimit.getDate() - period.days)
+  {/* Buttons */}
+  <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+    {[
+      { 
+        label: { de: 'Letzte Stunde', en: 'Last Hour', vi: 'Giờ qua' }, 
+        hours: 1, 
+        title: { de: 'Letzte Stunde', en: 'Last Hour', vi: 'Giờ qua' } 
+      },
+      { 
+        label: { de: 'Letzter Tag', en: 'Last Day', vi: 'Ngày qua' }, 
+        days: 1, 
+        title: { de: 'Letzter Tag', en: 'Last Day', vi: 'Ngày qua' } 
+      },
+      { 
+        label: { de: 'Letzter Monat', en: 'Last Month', vi: 'Tháng qua' }, 
+        days: 30, 
+        title: { de: 'Letzter Monat', en: 'Last Month', vi: 'Tháng qua' } 
+      }
+    ].map((period, idx) => (
+      <button
+        key={idx}
+        onClick={async () => {
+          let dateLimit = new Date()
+          if (period.hours) dateLimit.setHours(dateLimit.getHours() - period.hours)
+          if (period.days) dateLimit.setDate(dateLimit.getDate() - period.days)
 
-        const { data } = await supabase
-          .from('orders')
-          .select('*')
-          .gte('created_at', dateLimit.toISOString())
-          .order('created_at', { ascending: false })
+          const { data } = await supabase
+            .from('orders')
+            .select('*')
+            .gte('created_at', dateLimit.toISOString())
+            .order('created_at', { ascending: false })
 
-        setHistoryData(data || [])
-        setHistoryTitle(period.title[language] || period.title['de'])
-        setShowHistory(true)
-      }}
-      style={{
-        padding: '10px 18px',
-        background: '#333',
-        color: '#f59e0b',
-        border: 'none',
-        borderRadius: '9999px',
-        fontWeight: '600'
-      }}
-    >
-      {period.label[language]}
-    </button>
-  ))}
-</div>
+          setHistoryData(data || [])
+          setHistoryTitle(period.title[language] || period.title['de'])
+          setShowHistory(true)
+        }}
+        style={{
+          padding: '10px 18px',
+          background: '#333',
+          color: '#f59e0b',
+          border: 'none',
+          borderRadius: '9999px',
+          fontWeight: '600'
+        }}
+      >
+        {period.label[language]}
+      </button>
+    ))}
+  </div>
 
-      {showHistory && historyData.length > 0 && (
-        <div style={{ background: '#1f1f1f', padding: '1.5rem', borderRadius: '16px', marginBottom: '1.5rem', maxHeight: '400px', overflowY: 'auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <h3 style={{ color: '#f59e0b', margin: 0 }}>{historyTitle}</h3>
-            <button onClick={() => setShowHistory(false)} style={{ background: 'none', border: 'none', color: '#888', fontSize: '1.2rem' }}>✕</button>
-          </div>
-          {/* Buttons für Historie */}
-<div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-  {[
-    { 
-      label: { de: 'Letzte Stunde', en: 'Last Hour', vi: 'Giờ qua' }, 
-      hours: 1, 
-      title: { de: 'Letzte Stunde', en: 'Last Hour', vi: 'Giờ qua' } 
-    },
-    { 
-      label: { de: 'Letzter Tag', en: 'Last Day', vi: 'Ngày qua' }, 
-      days: 1, 
-      title: { de: 'Letzter Tag', en: 'Last Day', vi: 'Ngày qua' } 
-    },
-    { 
-      label: { de: 'Letzter Monat', en: 'Last Month', vi: 'Tháng qua' }, 
-      days: 30, 
-      title: { de: 'Letzter Monat', en: 'Last Month', vi: 'Tháng qua' } 
-    }
-  ].map((period, idx) => (
-    <button
-      key={idx}
-      onClick={async () => {
-        let dateLimit = new Date()
-        if (period.hours) dateLimit.setHours(dateLimit.getHours() - period.hours)
-        if (period.days) dateLimit.setDate(dateLimit.getDate() - period.days)
+  {/* Schöne Historie mit Gesamtpreis */}
+  {showHistory && historyData.length > 0 && (
+    <div style={{ 
+      background: '#1f1f1f', 
+      padding: '1.5rem', 
+      borderRadius: '16px', 
+      marginBottom: '1.5rem', 
+      maxHeight: '450px', 
+      overflowY: 'auto' 
+    }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <h3 style={{ color: '#f59e0b', margin: 0 }}>{historyTitle}</h3>
+        <button 
+          onClick={() => setShowHistory(false)} 
+          style={{ background: 'none', border: 'none', color: '#888', fontSize: '1.3rem', cursor: 'pointer' }}
+        >
+          ✕
+        </button>
+      </div>
 
-        const { data } = await supabase
-          .from('orders')
-          .select('*')
-          .gte('created_at', dateLimit.toISOString())
-          .order('created_at', { ascending: false })
+      {historyData.map((order, index) => {
+        // Gesamtpreis berechnen
+        const total = order.total_price 
+          ? order.total_price 
+          : calculateTotal(order.items)
 
-        setHistoryData(data || [])
-        setHistoryTitle(period.title[language] || period.title['de'])
-        setShowHistory(true)
-      }}
-      style={{
-        padding: '10px 18px',
-        background: '#333',
-        color: '#f59e0b',
-        border: 'none',
-        borderRadius: '9999px',
-        fontWeight: '600'
-      }}
-    >
-      {period.label[language]}
-    </button>
-  ))}
-</div>
-
-      {showHistory && historyData.length > 0 && (
-        <div style={{ background: '#1f1f1f', padding: '1.5rem', borderRadius: '16px', marginBottom: '1.5rem', maxHeight: '400px', overflowY: 'auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <h3 style={{ color: '#f59e0b', margin: 0 }}>{historyTitle}</h3>
-            <button onClick={() => setShowHistory(false)} style={{ background: 'none', border: 'none', color: '#888', fontSize: '1.2rem' }}>✕</button>
-          </div>
-          {historyData.map((order, index) => (
-            <div key={index} style={{ background: '#2a2a2a', padding: '1rem', borderRadius: '12px', marginBottom: '12px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                <strong style={{ color: '#fff' }}>{order.customer}</strong>
-                <span style={{ color: '#888', fontSize: '0.9rem' }}>
-                  {new Date(order.created_at).toLocaleString('de-DE', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}
-                </span>
-              </div>
-              <div style={{ color: '#ddd', lineHeight: '1.6' }}>
-                {order.items.map((item: any, i: number) => <div key={i}>• {item.name}</div>)}
-              </div>
+        return (
+          <div key={index} style={{ 
+            background: '#2a2a2a', 
+            padding: '1.2rem', 
+            borderRadius: '12px', 
+            marginBottom: '12px' 
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
+              <strong style={{ color: '#fff', fontSize: '1.1rem' }}>{order.customer}</strong>
+              <span style={{ color: '#888', fontSize: '0.9rem' }}>
+                {new Date(order.created_at).toLocaleString('de-DE', { 
+                  day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' 
+                })}
+              </span>
             </div>
-          ))}
-        </div>
-      )}
 
-      <button
-        onClick={async () => {
-          if (!confirm('Alle Bestellungen älter als 30 Tage wirklich löschen?')) return;
-          const dateLimit = new Date();
-          dateLimit.setDate(dateLimit.getDate() - 30);
-          await supabase.from('orders').delete().lt('created_at', dateLimit.toISOString());
-          alert('Alte Bestellungen wurden gelöscht.');
-          setShowHistory(false);
-          setHistoryData([]);
-        }}
-        style={{ width: '100%', padding: '14px', background: '#ef4444', color: 'white', border: 'none', borderRadius: '12px', fontWeight: '600' }}
-      >
-        {language === 'de' && '🗑️ Bestellungen älter als 30 Tage löschen'}
-        {language === 'en' && '🗑️ Delete orders older than 30 days'}
-        {language === 'vi' && '🗑️ Xóa đơn hàng cũ hơn 30 ngày'}
-      </button>
-    </div>
-  </div>
-)}
-        </div>
-      )}
+            <div style={{ color: '#ddd', lineHeight: '1.6', marginBottom: '0.8rem' }}>
+              {order.items.map((item: any, i: number) => (
+                <div key={i}>• {item.name}</div>
+              ))}
+            </div>
 
-      <button
-        onClick={async () => {
-          if (!confirm('Alle Bestellungen älter als 30 Tage wirklich löschen?')) return;
-          const dateLimit = new Date();
-          dateLimit.setDate(dateLimit.getDate() - 30);
-          await supabase.from('orders').delete().lt('created_at', dateLimit.toISOString());
-          alert('Alte Bestellungen wurden gelöscht.');
-          setShowHistory(false);
-          setHistoryData([]);
-        }}
-        style={{ width: '100%', padding: '14px', background: '#ef4444', color: 'white', border: 'none', borderRadius: '12px', fontWeight: '600' }}
-      >
-        {language === 'de' && '🗑️ Bestellungen älter als 30 Tage löschen'}
-        {language === 'en' && '🗑️ Delete orders older than 30 days'}
-        {language === 'vi' && '🗑️ Xóa đơn hàng cũ hơn 30 ngày'}
-      </button>
+            {/* Gesamtpreis */}
+            <div style={{ 
+              borderTop: '1px solid #444', 
+              paddingTop: '0.6rem',
+              display: 'flex', 
+              justifyContent: 'space-between',
+              fontWeight: '600'
+            }}>
+              <span style={{ color: '#aaa' }}>Gesamt:</span>
+              <span style={{ color: '#f59e0b', fontSize: '1.15rem' }}>
+                {total.toLocaleString()} VND
+              </span>
+            </div>
+          </div>
+        )
+      })}
     </div>
-  </div>
-)}
+  )}
+
+  {/* Löschen-Button */}
+  <button
+    onClick={async () => {
+      if (!confirm('Alle Bestellungen älter als 30 Tage wirklich löschen?')) return
+      const dateLimit = new Date()
+      dateLimit.setDate(dateLimit.getDate() - 30)
+      await supabase.from('orders').delete().lt('created_at', dateLimit.toISOString())
+      alert('Alte Bestellungen wurden gelöscht.')
+      setShowHistory(false)
+      setHistoryData([])
+    }}
+    style={{ 
+      width: '100%', 
+      padding: '14px', 
+      background: '#ef4444', 
+      color: 'white', 
+      border: 'none', 
+      borderRadius: '12px', 
+      fontWeight: '600' 
+    }}
+  >
+    {language === 'de' && '🗑️ Bestellungen älter als 30 Tage löschen'}
+    {language === 'en' && '🗑️ Delete orders older than 30 days'}
+    {language === 'vi' && '🗑️ Xóa đơn hàng cũ hơn 30 ngày'}
+  </button>
+</div>
 
         {/* === MINING === */}
         {activeTab === 'mining' && (
