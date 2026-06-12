@@ -470,7 +470,7 @@ const submitOrder = async () => {
  {/* Menü-Inhalt nur im normalen Modus anzeigen */}
 {!window.location.search.includes('mode=customer') && 
  !window.location.search.includes('mode=kitchen') && (
-  <>
+  
     {/* AUTHENTIC THAI FOOD */}
     <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px', marginBottom: '1.5rem' }}>
       <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
