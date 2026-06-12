@@ -966,7 +966,7 @@ const submitOrder = async () => {
         {language === 'de' && '📋 Historie'} {language === 'en' && '📋 History'} {language === 'vi' && '📋 Lịch sử'}
       </h2>
 
-      {/* Buttons */}
+{/* Buttons für Historie */}
 <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
   {[
     { 
@@ -994,13 +994,35 @@ const submitOrder = async () => {
 
         const { data } = await supabase
           .from('orders')
-          .select('*')
+          .select('*')                    // total_price wird automatisch mitgeladen
           .gte('created_at', dateLimit.toISOString())
           .order('created_at', { ascending: false })
 
-        setHistoryData(data || [])
-        setHistoryTitle(period.title[language] || period.title['de'])
-        setShowHistory(true)
+        if (!data || data.length === 0) {
+          alert('Keine Bestellungen in diesem Zeitraum.')
+          return
+        }
+
+        // Historie mit Gesamtpreis formatieren
+        const historyText = data.map(order => {
+          const time = new Date(order.created_at).toLocaleTimeString('de-DE', { 
+            hour: '2-digit', 
+            minute: '2-digit' 
+          })
+          const date = new Date(order.created_at).toLocaleDateString('de-DE')
+
+          const itemsText = order.items
+            .map((item: any) => `   • ${item.name}`)
+            .join('\n')
+
+          const total = order.total_price 
+            ? order.total_price.toLocaleString() 
+            : calculateTotal(order.items).toLocaleString()
+
+          return `${date} ${time} — ${order.customer}\n${itemsText}\n→ Gesamt: ${total} VND`
+        }).join('\n\n')
+
+        alert(historyText)
       }}
       style={{
         padding: '10px 18px',
