@@ -350,7 +350,6 @@ useEffect(() => {
   }
 
   // === NEU: Bestellung abschicken ===
-
 const [orderError, setOrderError] = useState('')
 
 const submitOrder = async () => {
@@ -358,9 +357,11 @@ const submitOrder = async () => {
 
   if (!customerName || orderCart.length === 0) {
     setOrderError(
-      language === 'de' ? 'Bitte Name/Tischnummer eingeben und mindestens ein Gericht auswählen!' :
-      language === 'en' ? 'Please enter your name/table number and select at least one item!' :
-      language === 'vi' ? 'Vui lòng nhập tên/số bàn và chọn ít nhất một món!'
+      language === 'de' 
+        ? 'Bitte Name/Tischnummer eingeben und mindestens ein Gericht auswählen!' 
+        : language === 'en' 
+          ? 'Please enter your name/table number and select at least one item!' 
+          : 'Vui lòng nhập tên/số bàn và chọn ít nhất một món!'
     )
     return
   }
@@ -385,9 +386,12 @@ const submitOrder = async () => {
     setCustomerName('')
     setOrderError('')
 
-    setTimeout(() => setOrderSuccess(false), 4000)
+    setTimeout(() => {
+      setOrderSuccess(false)
+    }, 4000)
+
   } catch (err) {
-    setOrderError('Unerwarteter Fehler.')
+    setOrderError('Unerwarteter Fehler beim Senden.')
   }
 }
 
@@ -883,18 +887,6 @@ const submitOrder = async () => {
       {language === 'en' && 'Send order to kitchen'}
       {language === 'vi' && 'Gửi đơn hàng vào bếp'}
     </button>
-
-{orderError && (
-  <p style={{ 
-    color: '#ef4444', 
-    textAlign: 'center', 
-    marginTop: '10px', 
-    fontSize: '0.95rem',
-    fontWeight: '500'
-  }}>
-    {orderError}
-  </p>
-)}
 
     {/* Erfolgsmeldung nach Bestellung (mehrsprachig) */}
    {orderSuccess && (
