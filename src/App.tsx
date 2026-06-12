@@ -356,12 +356,15 @@ const submitOrder = async () => {
     return
   }
 
+  const total = calculateTotal(orderCart)   // ← Gesamtpreis berechnen
+
   try {
     const { error } = await supabase
       .from('orders')
       .insert({
         customer: customerName,
         items: orderCart,
+        total_price: total,           // ← Hier wird der Preis gespeichert
         status: 'pending'
       })
 
@@ -371,14 +374,10 @@ const submitOrder = async () => {
       return
     }
 
-    // Erfolgsmeldung anzeigen
     setOrderSuccess(true)
-
-    // Warenkorb und Name leeren
     setOrderCart([])
     setCustomerName('')
 
-    // Nach 4 Sekunden Erfolgsmeldung wieder ausblenden
     setTimeout(() => {
       setOrderSuccess(false)
     }, 4000)
