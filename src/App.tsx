@@ -31,9 +31,10 @@ function App() {
   const [historyData, setHistoryData] = useState<any[]>([])
   const [showHistory, setShowHistory] = useState(false)
   const [historyTitle, setHistoryTitle] = useState('')
+  const [orderError, setOrderError] = useState('')
 
 // Gesamtpreis berechnen
-const calculateTotal = (items: any[]) => {
+  const calculateTotal = (items: any[]) => {
   return items.reduce((sum, item) => sum + (item.price || 0), 0);
 }
 
@@ -350,7 +351,7 @@ useEffect(() => {
   }
 
   // === NEU: Bestellung abschicken ===
-const [orderError, setOrderError] = useState('')
+
 
 const submitOrder = async () => {
   setOrderError('')
