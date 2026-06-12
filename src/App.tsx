@@ -350,41 +350,44 @@ useEffect(() => {
   }
 
   // === NEU: Bestellung abschicken ===
+
+const [orderError, setOrderError] = useState('')
+
 const submitOrder = async () => {
+  setOrderError('')
+
   if (!customerName || orderCart.length === 0) {
-    alert("Bitte Name eingeben und mindestens einen Artikel auswählen!")
+    setOrderError(
+      language === 'de' ? 'Bitte Name/Tischnummer eingeben und mindestens ein Gericht auswählen!' :
+      language === 'en' ? 'Please enter your name/table number and select at least one item!' :
+      language === 'vi' ? 'Vui lòng nhập tên/số bàn và chọn ít nhất một món!'
+    )
     return
   }
 
-  const total = calculateTotal(orderCart)   // ← Gesamtpreis berechnen
+  const total = calculateTotal(orderCart)
 
   try {
-    const { error } = await supabase
-      .from('orders')
-      .insert({
-        customer: customerName,
-        items: orderCart,
-        total_price: total,           // ← Hier wird der Preis gespeichert
-        status: 'pending'
-      })
+    const { error } = await supabase.from('orders').insert({
+      customer: customerName,
+      items: orderCart,
+      total_price: total,
+      status: 'pending'
+    })
 
     if (error) {
-      console.error("Supabase Fehler:", error)
-      alert("Fehler beim Senden: " + error.message)
+      setOrderError('Fehler beim Senden der Bestellung.')
       return
     }
 
     setOrderSuccess(true)
     setOrderCart([])
     setCustomerName('')
+    setOrderError('')
 
-    setTimeout(() => {
-      setOrderSuccess(false)
-    }, 4000)
-
+    setTimeout(() => setOrderSuccess(false), 4000)
   } catch (err) {
-    console.error("Unerwarteter Fehler:", err)
-    alert("Unerwarteter Fehler beim Senden der Bestellung.")
+    setOrderError('Unerwarteter Fehler.')
   }
 }
 
@@ -880,6 +883,18 @@ const submitOrder = async () => {
       {language === 'en' && 'Send order to kitchen'}
       {language === 'vi' && 'Gửi đơn hàng vào bếp'}
     </button>
+
+{orderError && (
+  <p style={{ 
+    color: '#ef4444', 
+    textAlign: 'center', 
+    marginTop: '10px', 
+    fontSize: '0.95rem',
+    fontWeight: '500'
+  }}>
+    {orderError}
+  </p>
+)}
 
     {/* Erfolgsmeldung nach Bestellung (mehrsprachig) */}
    {orderSuccess && (
