@@ -854,12 +854,23 @@ const submitOrder = async () => {
       {language === 'vi' && 'Gửi đơn hàng vào bếp'}
     </button>
 
-    {/* Erfolgsmeldung */}
-    {orderSuccess && (
-      <div style={{ marginTop: '1rem', padding: '16px', background: '#166534', color: '#4ade80', borderRadius: '12px', textAlign: 'center', fontWeight: '600' }}>
-        ✅ Bestellung erfolgreich in die Küche geschickt!
-      </div>
-    )}
+    {/* Erfolgsmeldung nach Bestellung (mehrsprachig) */}
+   {orderSuccess && (
+     <div style={{
+       marginTop: '1rem',
+       padding: '16px',
+       background: '#166534',
+       color: '#4ade80',
+       borderRadius: '12px',
+       textAlign: 'center',
+       fontWeight: '600',
+       fontSize: '1.05rem'
+     }}>
+       {language === 'de' && '✅ Bestellung erfolgreich in die Küche geschickt!'}
+       {language === 'en' && '✅ Order successfully sent to the kitchen!'}
+       {language === 'vi' && '✅ Đơn hàng đã được gửi thành công vào bếp!'}
+     </div>
+   )}
   </div>
 )}
 
