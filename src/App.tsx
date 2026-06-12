@@ -889,6 +889,18 @@ const submitOrder = async () => {
       {language === 'vi' && 'Gửi đơn hàng vào bếp'}
     </button>
 
+{orderError && (
+  <p style={{ 
+    color: '#ef4444', 
+    textAlign: 'center', 
+    marginTop: '10px', 
+    fontSize: '0.95rem',
+    fontWeight: '500'
+  }}>
+    {orderError}
+  </p>
+)}
+
     {/* Erfolgsmeldung nach Bestellung (mehrsprachig) */}
    {orderSuccess && (
      <div style={{
