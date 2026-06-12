@@ -432,38 +432,38 @@ const submitOrder = async () => {
           <p style={{ color: '#f59e0b', cursor: 'pointer' }} onClick={() => window.open('https://x.com/21BitCoffee', '_blank')}>𝕏 @21BitCoffee</p>
         </div>
 
-        {/* ========== TABS + INHALTE NUR IM NORMALEN MODUS ========== */}
+        {/* 4 Reiter */}
+        {/* Tab-Leiste nur anzeigen, wenn NICHT im Customer- oder Kitchen-Modus */}
 {!window.location.search.includes('mode=customer') && 
  !window.location.search.includes('mode=kitchen') && (
-  <>
-    {/* 4 Reiter */}
-    <div style={{ display: 'flex', background: '#1a1a1a', borderRadius: '9999px', padding: '4px', margin: '20px 0' }}>
-      {[
-        { key: 'menu' as Tab, label: t.menu },
-        { key: 'mining' as Tab, label: t.mining },
-        { key: 'node' as Tab, label: t.node },
-        { key: 'bitictionary' as Tab, label: t.bitictionary }
-      ].map(tab => (
-        <button 
-          key={tab.key} 
-          onClick={() => setActiveTab(tab.key)}
-          style={{ 
-            flex: 1, 
-            padding: '14px', 
-            borderRadius: '9999px', 
-            fontWeight: '600', 
-            background: activeTab === tab.key ? '#f59e0b' : 'transparent', 
-            color: activeTab === tab.key ? '#111' : '#ccc', 
-            border: 'none', 
-            cursor: 'pointer' 
-          }}
-        >
-          {tab.label}
-        </button>
-      ))}
-    </div>
+  <div style={{ display: 'flex', background: '#1a1a1a', borderRadius: '9999px', padding: '4px', margin: '20px 0' }}>
+    {[
+      { key: 'menu' as Tab, label: t.menu },
+      { key: 'mining' as Tab, label: t.mining },
+      { key: 'node' as Tab, label: t.node },
+      { key: 'bitictionary' as Tab, label: t.bitictionary }
+    ].map(tab => (
+      <button 
+        key={tab.key} 
+        onClick={() => setActiveTab(tab.key)}
+        style={{ 
+          flex: 1, 
+          padding: '14px', 
+          borderRadius: '9999px', 
+          fontWeight: '600', 
+          background: activeTab === tab.key ? '#f59e0b' : 'transparent', 
+          color: activeTab === tab.key ? '#111' : '#ccc', 
+          border: 'none', 
+          cursor: 'pointer' 
+        }}
+      >
+        {tab.label}
+      </button>
+    ))}
+  </div>
+)}
 
-    {/* === MENÜ === */}
+{/* === MENÜ === */}
 {activeTab === 'menu' && (
   <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '16px' }}>
 
@@ -901,7 +901,12 @@ const submitOrder = async () => {
     )}
 
     {/* History + Löschen Button */}
-    
+    <div style={{ marginTop: '3rem' }}>
+      <h2 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '1.5rem' }}>
+        {language === 'de' && '📋 Historie'} {language === 'en' && '📋 History'} {language === 'vi' && '📋 Lịch sử'}
+      </h2>
+
+      {/* Buttons */}
 <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
   {[
     { 
@@ -993,7 +998,7 @@ const submitOrder = async () => {
   </div>
 )}
 
-     {/* === MINING === */}
+        {/* === MINING === */}
         {activeTab === 'mining' && (
           <div style={{ background: '#1a1a1a', padding: '2rem', borderRadius: '16px' }}>
             {language === 'de' && (
@@ -1085,8 +1090,7 @@ const submitOrder = async () => {
           </div>
         )}
 
-
-      {/* === NODE === */}
+        {/* === NODE === */}
         {activeTab === 'node' && (
           <div style={{ background: '#1a1a1a', padding: '2rem', borderRadius: '16px' }}>
             {language === 'de' && (
@@ -1181,7 +1185,7 @@ const submitOrder = async () => {
           </div>
         )}
 
-      {/* BITICTIONARY */}
+        {/* BITICTIONARY */}
         {activeTab === 'bitictionary' && (
           <>
             <h2 style={{ textAlign: 'center', color: '#f59e0b', marginBottom: '20px', textShadow: '0 0 20px #f59e0b' }}>Bitictionary</h2>
@@ -1204,9 +1208,6 @@ const submitOrder = async () => {
             </div>
           </>
         )}
-
-  </>
-)}
 
         {/* LIVE CHART + KURS (unter allen Reitern) */}
         <div style={{ marginTop: '30px', background: '#1a1a1a', padding: '1.6rem', borderRadius: '16px', textAlign: 'center', border: '1px solid #f59e0b' }}>
