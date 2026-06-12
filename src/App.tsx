@@ -13,7 +13,7 @@ interface DictionaryItem {
 }
 
 function App() {
-  const APP_VERSION = 'V21.0';  
+  const APP_VERSION = 'V21.1';  
   const [language, setLanguage] = useState<Language>('en')
   const [viewMode, setViewMode] = useState<ViewMode>('phone')
   const [activeTab, setActiveTab] = useState<Tab>('menu')
@@ -27,6 +27,10 @@ function App() {
   const [customerName, setCustomerName] = useState('')
   const [orderCart, setOrderCart] = useState<any[]>([])
   const [kitchenOrders, setKitchenOrders] = useState<any[]>([])
+  const [orderSuccess, setOrderSuccess] = useState(false)
+  const [historyData, setHistoryData] = useState<any[]>([])
+  const [showHistory, setShowHistory] = useState(false)
+  const [historyTitle, setHistoryTitle] = useState('')
 
   // === BITICTIONARY ===
   const bitictionary: DictionaryItem[] = [
@@ -342,10 +346,6 @@ useEffect(() => {
 
   // === NEU: Bestellung abschicken ===
 const submitOrder = async () => {
-  console.log("Button geklickt - submitOrder gestartet")
-  console.log("Name:", customerName)
-  console.log("Warenkorb:", orderCart)
-
   if (!customerName || orderCart.length === 0) {
     alert("Bitte Name eingeben und mindestens einen Artikel auswählen!")
     return
@@ -366,9 +366,17 @@ const submitOrder = async () => {
       return
     }
 
-    alert("✅ Bestellung erfolgreich in die Küche geschickt!")
+    // Erfolgsmeldung anzeigen
+    setOrderSuccess(true)
+
+    // Warenkorb und Name leeren
     setOrderCart([])
     setCustomerName('')
+
+    // Nach 4 Sekunden Erfolgsmeldung wieder ausblenden
+    setTimeout(() => {
+      setOrderSuccess(false)
+    }, 4000)
 
   } catch (err) {
     console.error("Unerwarteter Fehler:", err)
@@ -454,25 +462,17 @@ const submitOrder = async () => {
       {/* Pad Kra Pao */}
       <div style={{ marginBottom: '1.3rem' }}>
         <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>Pad Kra Pao</h3>
-        <img 
-          src="/images/pad-kra-pao.png" 
-          alt="Pad Kra Pao" 
-          style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
-        />
+        <img src="/images/pad-kra-pao.png" alt="Pad Kra Pao" style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} />
         <p style={{ color: '#ccc', lineHeight: '1.5', marginBottom: '0.5rem' }}>
           {language === 'de' && ' Hackfleisch • Basilikumblätter • Knoblauch • Austernsauce • Sojasauce • Chili • Zwiebel • Reis • Ei'}
           {language === 'en' && ' Minced meat • Basil leaves • Garlic • Oyster sauce • Soya sauce • Chili • Onion • Rice • Egg'}
           {language === 'vi' && ' Thịt băm • Lá quế • Tỏi • Sốt hào • Nước tương • Ớt • Hành tây • Cơm • Trứng'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
-          {language === 'de' && 'Schweinefleisch 75.000 VND'}
-          {language === 'en' && 'Pork 75.000 VND'}
-          {language === 'vi' && 'Thịt heo 75.000 VND'}
+          {language === 'de' && 'Schweinefleisch 75.000 VND'} {language === 'en' && 'Pork 75.000 VND'} {language === 'vi' && 'Thịt heo 75.000 VND'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
-          {language === 'de' && 'Hähnchen 75.000 VND'}
-          {language === 'en' && 'Chicken 75.000 VND'}
-          {language === 'vi' && 'Thịt gà 75.000 VND'}
+          {language === 'de' && 'Hähnchen 75.000 VND'} {language === 'en' && 'Chicken 75.000 VND'} {language === 'vi' && 'Thịt gà 75.000 VND'}
         </p>
       </div>
 
@@ -481,30 +481,20 @@ const submitOrder = async () => {
       {/* Pad Thai */}
       <div style={{ marginBottom: '1.3rem' }}>
         <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>Pad Thai</h3>
-        <img 
-          src="/images/pad-thai.png" 
-          alt="Pad Thai" 
-          style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
-        />
+        <img src="/images/pad-thai.png" alt="Pad Thai" style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} />
         <p style={{ color: '#ccc', lineHeight: '1.5', marginBottom: '0.5rem' }}>
           {language === 'de' && ' Reisnudeln • Schnittlauch • Sojasprossen • Erdnuss • Getrocknete Garnelen • Chili'}
           {language === 'en' && ' Noodles • Chives • Bean sprouts • Peanut • Dried Shrimp • Chili'}
           {language === 'vi' && ' Bún • Hẹ • Giá đỗ • Đậu phộng • Tôm khô • Ớt'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
-          {language === 'de' && 'Schweinefleisch 80.000 VND'}
-          {language === 'en' && 'Pork 80.000 VND'}
-          {language === 'vi' && 'Thịt heo 80.000 VND'}
+          {language === 'de' && 'Schweinefleisch 80.000 VND'} {language === 'en' && 'Pork 80.000 VND'} {language === 'vi' && 'Thịt heo 80.000 VND'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
-          {language === 'de' && 'Hähnchen 80.000 VND'}
-          {language === 'en' && 'Chicken 80.000 VND'}
-          {language === 'vi' && 'Thịt gà 80.000 VND'}
+          {language === 'de' && 'Hähnchen 80.000 VND'} {language === 'en' && 'Chicken 80.000 VND'} {language === 'vi' && 'Thịt gà 80.000 VND'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
-          {language === 'de' && 'Garnelen 95.000 VND'}
-          {language === 'en' && 'Shrimp 95.000 VND'}
-          {language === 'vi' && 'Tôm 95.000 VND'}
+          {language === 'de' && 'Garnelen 95.000 VND'} {language === 'en' && 'Shrimp 95.000 VND'} {language === 'vi' && 'Tôm 95.000 VND'}
         </p>
       </div>
 
@@ -513,30 +503,22 @@ const submitOrder = async () => {
       {/* Tom Yum */}
       <div>
         <h3 style={{ color: '#fff', marginBottom: '0.4rem' }}>Tom Yum</h3>
-        <img 
-          src="/images/tom-yum.png" 
-          alt="Tom Yum" 
-          style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
-        />
+        <img src="/images/tom-yum.png" alt="Tom Yum" style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} />
         <p style={{ color: '#ccc', lineHeight: '1.5', marginBottom: '0.5rem' }}>
           {language === 'de' && ' Zitronengras • Galgantwurzel • Kokosmilch • Zwiebel • Fischsauce • Chili • Knoblauch'}
           {language === 'en' && ' Lemongrass • Galangal root • Coconut milk • Onion • Fish sauce • Chili • Garlic'}
           {language === 'vi' && ' Sả • Riềng • Nước cốt dừa • Hành tây • Nước mắm • Ớt • Tỏi'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
-          {language === 'de' && 'Hähnchen 110.000 VND'}
-          {language === 'en' && 'Chicken 110.000 VND'}
-          {language === 'vi' && 'Thịt gà 110.000 VND'}
+          {language === 'de' && 'Hähnchen 110.000 VND'} {language === 'en' && 'Chicken 110.000 VND'} {language === 'vi' && 'Thịt gà 110.000 VND'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
-          {language === 'de' && 'Garnelen 130.000 VND'}
-          {language === 'en' && 'Shrimp 130.000 VND'}
-          {language === 'vi' && 'Tôm 130.000 VND'}
+          {language === 'de' && 'Garnelen 130.000 VND'} {language === 'en' && 'Shrimp 130.000 VND'} {language === 'vi' && 'Tôm 130.000 VND'}
         </p>
       </div>
     </div>
 
-    {/* PROTEIN FRUIT BOWLS */}
+    {/* ========== PROTEIN FRUIT BOWLS (mit allen Details) ========== */}
     <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px', marginBottom: '1.5rem' }}>
       <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
         {language === 'de' && 'Protein Fruit Bowls'}
@@ -551,11 +533,7 @@ const submitOrder = async () => {
           {language === 'en' && 'Pink Dragon Bowl'}
           {language === 'vi' && 'Tô Thanh Long Hồng'}
         </h3>
-        <img 
-          src="/images/pink-dragon-bowl.png" 
-          alt="Pink Dragon Bowl" 
-          style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
-        />
+        <img src="/images/pink-dragon-bowl.png" alt="Pink Dragon Bowl" style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} />
         <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>
           {language === 'de' && 'Rote Drachenfrucht • Mango • Banane'}
           {language === 'en' && 'Pink Dragon Fruit • Mango • Banana'}
@@ -567,14 +545,10 @@ const submitOrder = async () => {
           {language === 'vi' && 'Toppings: Dừa sấy • Granola • Hạt chia • Mật ong'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
-          {language === 'de' && 'Fruit Bowl: 60.000 VND'}
-          {language === 'en' && 'Fruit Bowl: 60.000 VND'}
-          {language === 'vi' && 'Tô Trái Cây: 60.000 VND'}
+          {language === 'de' && 'Fruit Bowl: 60.000 VND'} {language === 'en' && 'Fruit Bowl: 60.000 VND'} {language === 'vi' && 'Tô Trái Cây: 60.000 VND'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
-          {language === 'de' && '+ Protein: 90.000 VND'}
-          {language === 'en' && '+ Protein: 90.000 VND'}
-          {language === 'vi' && '+ Protein: 90.000 VND'}
+          {language === 'de' && '+ Protein: 90.000 VND'} {language === 'en' && '+ Protein: 90.000 VND'} {language === 'vi' && '+ Protein: 90.000 VND'}
         </p>
       </div>
 
@@ -587,30 +561,22 @@ const submitOrder = async () => {
           {language === 'en' && 'Tropical White Bowl'}
           {language === 'vi' && 'Tô Nhiệt Đới Trắng'}
         </h3>
-        <img 
-          src="/images/tropical-white-bowl.png" 
-          alt="Tropical White Bowl" 
-          style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
-        />
+        <img src="/images/tropical-white-bowl.png" alt="Tropical White Bowl" style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} />
         <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>
           {language === 'de' && 'Weiße Drachenfrucht • Mango • Banane'}
           {language === 'en' && 'White Dragon Fruit • Mango • Banana'}
           {language === 'vi' && 'Thanh long trắng • Xoài • Chuối'}
         </p>
         <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-          {language === 'de' && 'Toppings: • Kokosflocken • Granola • Chiasamen • Honig'}
-          {language === 'en' && 'Toppings: • Coconut flakes • Granola • Chia Seeds • Honey'}
-          {language === 'vi' && 'Toppings: • Dừa sấy • Granola • Hạt chia • Mật ong'}
+          {language === 'de' && 'Toppings: Kokosflocken • Granola • Chiasamen • Honig'}
+          {language === 'en' && 'Toppings: Coconut flakes • Granola • Chia Seeds • Honey'}
+          {language === 'vi' && 'Toppings: Dừa sấy • Granola • Hạt chia • Mật ong'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
-          {language === 'de' && 'Fruit Bowl: 60.000 VND'}
-          {language === 'en' && 'Fruit Bowl: 60.000 VND'}
-          {language === 'vi' && 'Tô Trái Cây: 60.000 VND'}
+          {language === 'de' && 'Fruit Bowl: 60.000 VND'} {language === 'en' && 'Fruit Bowl: 60.000 VND'} {language === 'vi' && 'Tô Trái Cây: 60.000 VND'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
-          {language === 'de' && '+ Protein: 90.000 VND'}
-          {language === 'en' && '+ Protein: 90.000 VND'}
-          {language === 'vi' && '+ Protein: 90.000 VND'}
+          {language === 'de' && '+ Protein: 90.000 VND'} {language === 'en' && '+ Protein: 90.000 VND'} {language === 'vi' && '+ Protein: 90.000 VND'}
         </p>
       </div>
 
@@ -623,75 +589,55 @@ const submitOrder = async () => {
           {language === 'en' && 'Dream Bowl'}
           {language === 'vi' && 'Tô Giấc Mơ'}
         </h3>
-        <img 
-          src="/images/dream-bowl.png" 
-          alt="Dream Bowl" 
-          style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
-        />
+        <img src="/images/dream-bowl.png" alt="Dream Bowl" style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} />
         <p style={{ color: '#ccc', marginBottom: '0.3rem' }}>
           {language === 'de' && 'Mango • Ananas • Banane'}
           {language === 'en' && 'Mango • Pineapple • Banana'}
           {language === 'vi' && 'Xoài • Dứa • Chuối'}
         </p>
         <p style={{ color: '#aaa', fontSize: '0.9rem', marginBottom: '0.4rem' }}>
-          {language === 'de' && 'Toppings: • Kokosflocken • Granola • Chiasamen • Honig'}
-          {language === 'en' && 'Toppings: • Coconut flakes • Granola • Chia Seeds • Honey'}
-          {language === 'vi' && 'Toppings: • Dừa sấy • Granola • Hạt chia • Mật ong'}
+          {language === 'de' && 'Toppings: Kokosflocken • Granola • Chiasamen • Honig'}
+          {language === 'en' && 'Toppings: Coconut flakes • Granola • Chia Seeds • Honey'}
+          {language === 'vi' && 'Toppings: Dừa sấy • Granola • Hạt chia • Mật ong'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
-          {language === 'de' && 'Fruit Bowl: 60.000 VND'}
-          {language === 'en' && 'Fruit Bowl: 60.000 VND'}
-          {language === 'vi' && 'Tô Trái Cây: 60.000 VND'}
+          {language === 'de' && 'Fruit Bowl: 60.000 VND'} {language === 'en' && 'Fruit Bowl: 60.000 VND'} {language === 'vi' && 'Tô Trái Cây: 60.000 VND'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>
-          {language === 'de' && '+ Protein: 90.000 VND'}
-          {language === 'en' && '+ Protein: 90.000 VND'}
-          {language === 'vi' && '+ Protein: 90.000 VND'}
+          {language === 'de' && '+ Protein: 90.000 VND'} {language === 'en' && '+ Protein: 90.000 VND'} {language === 'vi' && '+ Protein: 90.000 VND'}
         </p>
       </div>
     </div>
 
-    {/* PROTEIN SHAKES */}
+    {/* ========== PROTEIN SHAKES ========== */}
     <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px', marginBottom: '1.5rem' }}>
       <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
         {language === 'de' && 'Protein Shakes'}
         {language === 'en' && 'Protein Shakes'}
         {language === 'vi' && 'Sinh Tố Protein'}
       </h2>
-      <img 
-        src="/images/protein-shake.png" 
-        alt="Protein Shakes" 
-        style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
-      />
+      <img src="/images/protein-shake.png" alt="Protein Shakes" style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} />
       <p style={{ color: '#ccc', marginBottom: '0.5rem' }}>
         {language === 'de' && 'Vanille • Schokolade'}
         {language === 'en' && 'Vanilla • Chocolate'}
         {language === 'vi' && 'Vani • Sô-cô-la'}
       </p>
       <p style={{ color: '#f59e0b', fontWeight: '600', marginBottom: '0.2rem' }}>
-        {language === 'de' && 'Protein Shake: 60.000 VND'}
-        {language === 'en' && 'Protein Shake: 60.000 VND'}
-        {language === 'vi' && 'Sinh tố Protein: 60.000 VND'}
+        {language === 'de' && 'Protein Shake: 60.000 VND'} {language === 'en' && 'Protein Shake: 60.000 VND'} {language === 'vi' && 'Sinh tố Protein: 60.000 VND'}
       </p>
       <p style={{ color: '#f59e0b', fontWeight: '600' }}>
-        {language === 'de' && '+ Frucht: 80.000 VND'}
-        {language === 'en' && '+ Fruit: 80.000 VND'}
-        {language === 'vi' && '+ Trái cây: 80.000 VND'}
+        {language === 'de' && '+ Frucht: 80.000 VND'} {language === 'en' && '+ Fruit: 80.000 VND'} {language === 'vi' && '+ Trái cây: 80.000 VND'}
       </p>
     </div>
 
-    {/* FRUIT SMOOTHIES */}
+    {/* ========== FRUIT SMOOTHIES ========== */}
     <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px', marginBottom: '1.5rem' }}>
       <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
         {language === 'de' && 'Frucht-Smoothies'}
         {language === 'en' && 'Fruit Smoothies'}
         {language === 'vi' && 'Sinh Tố Trái Cây'}
       </h2>
-      <img 
-        src="/images/fruit-smoothie.png" 
-        alt="Fruit Smoothies" 
-        style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
-      />
+      <img src="/images/fruit-smoothie.png" alt="Fruit Smoothies" style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} />
       <p style={{ color: '#ccc', marginBottom: '0.5rem' }}>
         {language === 'de' && 'Rote Drachenfrucht • Weiße Drachenfrucht • Mango • Ananas • Orange • Wassermelone • Banane'}
         {language === 'en' && 'Red Dragon Fruit • White Dragon Fruit • Mango • Pineapple • Orange • Watermelon • Banana'}
@@ -700,69 +646,56 @@ const submitOrder = async () => {
       <p style={{ color: '#f59e0b', fontWeight: '600' }}>30.000 VND</p>
     </div>
 
-    {/* VIETNAMESE COFFEE */}
+    {/* ========== VIETNAMESE COFFEE ========== */}
     <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px' }}>
       <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
         {language === 'de' && 'Vietnamesischer Kaffee'}
         {language === 'en' && 'Vietnamese Coffee'}
         {language === 'vi' && 'Cà Phê Việt Nam'}
       </h2>
-      <img 
-        src="/images/vietnamese-coffee.png" 
-        alt="Vietnamese Coffee" 
-        style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} 
-      />
+      <img src="/images/vietnamese-coffee.png" alt="Vietnamese Coffee" style={{ width: '100%', maxWidth: '320px', borderRadius: '12px', marginBottom: '0.8rem', objectFit: 'cover' }} />
 
       <div style={{ marginBottom: '1rem' }}>
         <p style={{ color: '#fff', marginBottom: '0.2rem' }}>
-          {language === 'de' && 'Eiskaffee mit Milch Saigon'}
-          {language === 'en' && 'Iced Milk Coffee Saigon'}
-          {language === 'vi' && 'Cà phê sữa đá Sài Gòn'}
+          {language === 'de' && 'Eiskaffee mit Milch Saigon'} {language === 'en' && 'Iced Milk Coffee Saigon'} {language === 'vi' && 'Cà phê sữa đá Sài Gòn'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>30.000 VND</p>
       </div>
-
       <div style={{ marginBottom: '1rem' }}>
         <p style={{ color: '#fff', marginBottom: '0.2rem' }}>
-          {language === 'de' && 'Schwarzer Eiskaffee Saigon'}
-          {language === 'en' && 'Iced Black Coffee Saigon'}
-          {language === 'vi' && 'Cà phê đen đá Sài Gòn'}
+          {language === 'de' && 'Schwarzer Eiskaffee Saigon'} {language === 'en' && 'Iced Black Coffee Saigon'} {language === 'vi' && 'Cà phê đen đá Sài Gòn'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>30.000 VND</p>
       </div>
-
       <div>
         <p style={{ color: '#fff', marginBottom: '0.2rem' }}>
-          {language === 'de' && 'Heißer schwarzer Kaffee'}
-          {language === 'en' && 'Hot Black Coffee'}
-          {language === 'vi' && 'Cà phê đen nóng'}
+          {language === 'de' && 'Heißer schwarzer Kaffee'} {language === 'en' && 'Hot Black Coffee'} {language === 'vi' && 'Cà phê đen nóng'}
         </p>
         <p style={{ color: '#f59e0b', fontWeight: '600' }}>25.000 VND</p>
       </div>
     </div>
 
-                {/* ========== NEU: KUNDEN-BESTELLUNG (mit Kategorien + Trennlinien) ========== */}
-            {window.location.search.includes('mode=customer') && (
-              <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px', marginTop: '2rem' }}>
-                <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
-                  {language === 'de' && 'Bestellung aufgeben'}
-                  {language === 'en' && 'Place Order'}
-                  {language === 'vi' && 'Đặt món'}
-                </h2>
+  </div>
+)}
 
-                <input
-                  type="text"
-                  placeholder={
-                    language === 'de' ? "Dein Name oder Tischnummer" :
-                    language === 'en' ? "Your Name or Table Number" :
-                    "Tên hoặc số bàn của bạn"
-                  }
-                  value={customerName}
-                  onChange={(e) => setCustomerName(e.target.value)}
-                  style={{ width: '96%', padding: '14px', marginBottom: '1.5rem', borderRadius: '10px', background: '#333', color: 'white', border: 'none', fontSize: '1.05rem' }}
-                />
+{/* ========== KUNDEN-BESTELLUNG (außerhalb des Tabs) ========== */}
+{window.location.search.includes('mode=customer') && (
+  <div style={{ background: '#222', padding: '1.5rem', borderRadius: '12px', marginTop: '2rem' }}>
+    <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>
+      {language === 'de' && 'Bestellung aufgeben'}
+      {language === 'en' && 'Place Order'}
+      {language === 'vi' && 'Đặt món'}
+    </h2>
 
-                {/* === PAD KRA PAO === */}
+    <input
+      type="text"
+      placeholder={language === 'de' ? "Dein Name oder Tischnummer" : language === 'en' ? "Your Name or Table Number" : "Tên hoặc số bàn của bạn"}
+      value={customerName}
+      onChange={(e) => setCustomerName(e.target.value)}
+      style={{ width: '96%', padding: '14px', marginBottom: '1.5rem', borderRadius: '10px', background: '#333', color: 'white', border: 'none', fontSize: '1.05rem' }}
+    />
+
+    {/* === PAD KRA PAO === */}
                 <h3 style={{ color: '#f59e0b', margin: '1rem 0 0.6rem 0' }}>Pad Kra Pao</h3>
                 <div style={{ display: 'grid', gap: '0.5rem', marginBottom: '1rem' }}>
                   {getOrderableItems().filter(i => i.base.includes("Pad Kra Pao")).map((item, index) => (
@@ -874,95 +807,153 @@ const submitOrder = async () => {
                   ))}
                 </div>
 
-                {/* Warenkorb */}
-                {orderCart.length > 0 && (
-                  <div style={{ background: '#1a1a1a', padding: '1rem', borderRadius: '10px', margin: '1.5rem 0' }}>
-                    <strong style={{ color: '#f59e0b' }}>
-                      {language === 'de' && 'Deine Bestellung:'}
-                      {language === 'en' && 'Your order:'}
-                      {language === 'vi' && 'Đơn hàng của bạn:'}
-                    </strong>
-                    {orderCart.map((item, index) => (
-                      <div key={index} style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.4rem' }}>
-                        <span>{item.name}</span>
-                        <button onClick={() => {
-                          const newCart = [...orderCart]
-                          newCart.splice(index, 1)
-                          setOrderCart(newCart)
-                        }} style={{ color: '#f59e0b', background: 'none', border: 'none' }}>✕</button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                <button
-                  onClick={submitOrder}
-                  disabled={!customerName || orderCart.length === 0}
-                  style={{
-                    width: '100%',
-                    padding: '18px',
-                    background: '#f59e0b',
-                    color: '#111',
-                    fontWeight: 'bold',
-                    border: 'none',
-                    borderRadius: '9999px',
-                    fontSize: '1.15rem'
-                  }}
-                >
-                  {language === 'de' && 'Bestellung in die Küche schicken'}
-                  {language === 'en' && 'Send order to kitchen'}
-                  {language === 'vi' && 'Gửi đơn hàng vào bếp'}
-                </button>
-              </div>
-            )}
-
-    {/* ========== NEU: KÜCHEN-ANSICHT ========== */}
-    {window.location.search.includes('mode=kitchen') && (
-      <div style={{ background: '#111', padding: '2rem', borderRadius: '16px', marginTop: '2rem' }}>
-        <h1 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '2rem' }}>🍳 New Orders</h1>
-
-        {kitchenOrders.length === 0 ? (
-          <p style={{ textAlign: 'center', color: '#888' }}>No orders yet.</p>
-        ) : (
-          kitchenOrders.map((order, index) => (
-            <div key={index} style={{ background: '#222', padding: '1.5rem', borderRadius: '16px', marginBottom: '1rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.8rem' }}>
-                <strong style={{ fontSize: '1.4rem' }}>{order.customer}</strong>
-                <span style={{ color: '#888' }}>
-  {new Date(order.created_at).toLocaleTimeString('de-DE', { 
-    hour: '2-digit', 
-    minute: '2-digit' 
-  })}
-</span>
-              </div>
-              <div style={{ color: '#ddd', lineHeight: '1.7' }}>
-                {order.items.map((item: any, i: number) => (
-                  <div key={i}>• {item.name}</div>
-                ))}
-              </div>
-              <button
-                onClick={() => {
-                  const updated = kitchenOrders.filter((_, i) => i !== index)
-                  setKitchenOrders(updated)
-                }}
-                style={{
-                  marginTop: '1rem',
-                  padding: '10px 24px',
-                  background: '#22c55e',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '9999px',
-                  fontWeight: 'bold'
-                }}
-              >
-                Done ✓
-              </button>
-            </div>
-          ))
-        )}
+    {/* Warenkorb */}
+    {orderCart.length > 0 && (
+      <div style={{ background: '#1a1a1a', padding: '1rem', borderRadius: '10px', margin: '1.5rem 0' }}>
+        <strong style={{ color: '#f59e0b' }}>
+          {language === 'de' && 'Deine Bestellung:'} {language === 'en' && 'Your order:'} {language === 'vi' && 'Đơn hàng của bạn:'}
+        </strong>
+        {orderCart.map((item, index) => (
+          <div key={index} style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.4rem' }}>
+            <span>{item.name}</span>
+            <button onClick={() => {
+              const newCart = [...orderCart];
+              newCart.splice(index, 1);
+              setOrderCart(newCart);
+            }} style={{ color: '#f59e0b', background: 'none', border: 'none' }}>✕</button>
+          </div>
+        ))}
       </div>
     )}
 
+    <button
+      onClick={submitOrder}
+      disabled={!customerName || orderCart.length === 0}
+      style={{ width: '100%', padding: '18px', background: '#f59e0b', color: '#111', fontWeight: 'bold', border: 'none', borderRadius: '9999px', fontSize: '1.15rem' }}
+    >
+      {language === 'de' && 'Bestellung in die Küche schicken'}
+      {language === 'en' && 'Send order to kitchen'}
+      {language === 'vi' && 'Gửi đơn hàng vào bếp'}
+    </button>
+
+    {/* Erfolgsmeldung */}
+    {orderSuccess && (
+      <div style={{ marginTop: '1rem', padding: '16px', background: '#166534', color: '#4ade80', borderRadius: '12px', textAlign: 'center', fontWeight: '600' }}>
+        ✅ Bestellung erfolgreich in die Küche geschickt!
+      </div>
+    )}
+  </div>
+)}
+
+{/* ========== KÜCHEN-ANSICHT (außerhalb des Tabs) ========== */}
+{window.location.search.includes('mode=kitchen') && (
+  <div style={{ background: '#111', padding: '2rem', borderRadius: '16px', marginTop: '2rem', maxWidth: '620px', margin: '0 auto' }}>
+    <h1 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '2rem' }}>
+      {language === 'de' && '🍳 Neue Bestellungen'}
+      {language === 'en' && '🍳 New Orders'}
+      {language === 'vi' && '🍳 Đơn hàng mới'}
+    </h1>
+
+    {/* Aktuelle Bestellungen */}
+    {kitchenOrders.length === 0 ? (
+      <p style={{ textAlign: 'center', color: '#888' }}>
+        {language === 'de' && 'Noch keine Bestellungen eingegangen.'}
+        {language === 'en' && 'No orders yet.'}
+        {language === 'vi' && 'Chưa có đơn hàng nào.'}
+      </p>
+    ) : (
+      kitchenOrders.map((order, index) => (
+        <div key={index} style={{ background: '#222', padding: '1.5rem', borderRadius: '16px', marginBottom: '1rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.8rem' }}>
+            <strong style={{ fontSize: '1.4rem' }}>{order.customer}</strong>
+            <span style={{ color: '#888' }}>{new Date(order.created_at).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}</span>
+          </div>
+          <div style={{ color: '#ddd', lineHeight: '1.7', marginBottom: '1rem' }}>
+            {order.items.map((item: any, i: number) => <div key={i}>• {item.name}</div>)}
+          </div>
+          <button
+            onClick={async () => {
+              if (order.id) await supabase.from('orders').update({ status: 'done' }).eq('id', order.id);
+              setKitchenOrders(kitchenOrders.filter((_, i) => i !== index));
+            }}
+            style={{ padding: '10px 24px', background: '#22c55e', color: 'white', border: 'none', borderRadius: '9999px', fontWeight: 'bold' }}
+          >
+            {language === 'de' && 'Erledigt ✓'} {language === 'en' && 'Done ✓'} {language === 'vi' && 'Hoàn thành ✓'}
+          </button>
+        </div>
+      ))
+    )}
+
+    {/* History + Löschen Button */}
+    <div style={{ marginTop: '3rem' }}>
+      <h2 style={{ color: '#f59e0b', textAlign: 'center', marginBottom: '1.5rem' }}>
+        {language === 'de' && '📋 Historie'} {language === 'en' && '📋 History'} {language === 'vi' && '📋 Lịch sử'}
+      </h2>
+
+      <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+        {[
+          { label: { de: 'Letzte Stunde', en: 'Last Hour', vi: 'Giờ qua' }, hours: 1, title: 'Letzte Stunde' },
+          { label: { de: 'Letzter Tag', en: 'Last Day', vi: 'Ngày qua' }, days: 1, title: 'Letzter Tag' },
+          { label: { de: 'Letzter Monat', en: 'Last Month', vi: 'Tháng qua' }, days: 30, title: 'Letzter Monat' }
+        ].map((period, idx) => (
+          <button
+            key={idx}
+            onClick={async () => {
+              let dateLimit = new Date();
+              if (period.hours) dateLimit.setHours(dateLimit.getHours() - period.hours);
+              if (period.days) dateLimit.setDate(dateLimit.getDate() - period.days);
+
+              const { data } = await supabase.from('orders').select('*').gte('created_at', dateLimit.toISOString()).order('created_at', { ascending: false });
+              setHistoryData(data || []);
+              setHistoryTitle(period.title[language] || period.title['de']);
+              setShowHistory(true);
+            }}
+            style={{ padding: '10px 18px', background: '#333', color: '#f59e0b', border: 'none', borderRadius: '9999px', fontWeight: '600' }}
+          >
+            {period.label[language]}
+          </button>
+        ))}
+      </div>
+
+      {showHistory && historyData.length > 0 && (
+        <div style={{ background: '#1f1f1f', padding: '1.5rem', borderRadius: '16px', marginBottom: '1.5rem', maxHeight: '400px', overflowY: 'auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+            <h3 style={{ color: '#f59e0b', margin: 0 }}>{historyTitle}</h3>
+            <button onClick={() => setShowHistory(false)} style={{ background: 'none', border: 'none', color: '#888', fontSize: '1.2rem' }}>✕</button>
+          </div>
+          {historyData.map((order, index) => (
+            <div key={index} style={{ background: '#2a2a2a', padding: '1rem', borderRadius: '12px', marginBottom: '12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                <strong style={{ color: '#fff' }}>{order.customer}</strong>
+                <span style={{ color: '#888', fontSize: '0.9rem' }}>
+                  {new Date(order.created_at).toLocaleString('de-DE', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}
+                </span>
+              </div>
+              <div style={{ color: '#ddd', lineHeight: '1.6' }}>
+                {order.items.map((item: any, i: number) => <div key={i}>• {item.name}</div>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <button
+        onClick={async () => {
+          if (!confirm('Alle Bestellungen älter als 30 Tage wirklich löschen?')) return;
+          const dateLimit = new Date();
+          dateLimit.setDate(dateLimit.getDate() - 30);
+          await supabase.from('orders').delete().lt('created_at', dateLimit.toISOString());
+          alert('Alte Bestellungen wurden gelöscht.');
+          setShowHistory(false);
+          setHistoryData([]);
+        }}
+        style={{ width: '100%', padding: '14px', background: '#ef4444', color: 'white', border: 'none', borderRadius: '12px', fontWeight: '600' }}
+      >
+        {language === 'de' && '🗑️ Bestellungen älter als 30 Tage löschen'}
+        {language === 'en' && '🗑️ Delete orders older than 30 days'}
+        {language === 'vi' && '🗑️ Xóa đơn hàng cũ hơn 30 ngày'}
+      </button>
+    </div>
   </div>
 )}
 
