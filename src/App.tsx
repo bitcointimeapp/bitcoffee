@@ -1111,6 +1111,8 @@ const submitOrder = async () => {
     {language === 'vi' && '🗑️ Xóa đơn hàng cũ hơn 30 ngày'}
   </button>
 </div>
+  </div>
+)}
 
         {/* === MINING === */}
         {activeTab === 'mining' && (
