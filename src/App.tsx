@@ -32,6 +32,11 @@ function App() {
   const [showHistory, setShowHistory] = useState(false)
   const [historyTitle, setHistoryTitle] = useState('')
 
+// Gesamtpreis berechnen
+const calculateTotal = (items: any[]) => {
+  return items.reduce((sum, item) => sum + (item.price || 0), 0);
+}
+
   // === BITICTIONARY ===
   const bitictionary: DictionaryItem[] = [
   
@@ -825,24 +830,47 @@ const submitOrder = async () => {
                   ))}
                 </div>
 
-    {/* Warenkorb */}
-    {orderCart.length > 0 && (
-      <div style={{ background: '#1a1a1a', padding: '1rem', borderRadius: '10px', margin: '1.5rem 0' }}>
-        <strong style={{ color: '#f59e0b' }}>
-          {language === 'de' && 'Deine Bestellung:'} {language === 'en' && 'Your order:'} {language === 'vi' && 'Đơn hàng của bạn:'}
-        </strong>
-        {orderCart.map((item, index) => (
-          <div key={index} style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.4rem' }}>
-            <span>{item.name}</span>
-            <button onClick={() => {
-              const newCart = [...orderCart];
-              newCart.splice(index, 1);
-              setOrderCart(newCart);
-            }} style={{ color: '#f59e0b', background: 'none', border: 'none' }}>✕</button>
-          </div>
-        ))}
+    {/* Warenkorb mit Gesamtpreis */}
+{orderCart.length > 0 && (
+  <div style={{ background: '#1a1a1a', padding: '1rem', borderRadius: '10px', margin: '1.5rem 0' }}>
+    <strong style={{ color: '#f59e0b' }}>
+      {language === 'de' && 'Deine Bestellung:'}
+      {language === 'en' && 'Your order:'}
+      {language === 'vi' && 'Đơn hàng của bạn:'}
+    </strong>
+
+    {orderCart.map((item, index) => (
+      <div key={index} style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.4rem' }}>
+        <span>{item.name}</span>
+        <button onClick={() => {
+          const newCart = [...orderCart]
+          newCart.splice(index, 1)
+          setOrderCart(newCart)
+        }} style={{ color: '#f59e0b', background: 'none', border: 'none' }}>✕</button>
       </div>
-    )}
+    ))}
+
+    {/* Gesamtpreis */}
+    <div style={{ 
+      marginTop: '1rem', 
+      paddingTop: '0.8rem', 
+      borderTop: '1px solid #444',
+      display: 'flex', 
+      justifyContent: 'space-between',
+      fontWeight: 'bold',
+      fontSize: '1.1rem'
+    }}>
+      <span>
+        {language === 'de' && 'Gesamt:'}
+        {language === 'en' && 'Total:'}
+        {language === 'vi' && 'Tổng:'}
+      </span>
+      <span style={{ color: '#f59e0b' }}>
+        {calculateTotal(orderCart).toLocaleString()} VND
+      </span>
+    </div>
+  </div>
+)}
 
     <button
       onClick={submitOrder}
@@ -900,6 +928,26 @@ const submitOrder = async () => {
           <div style={{ color: '#ddd', lineHeight: '1.7', marginBottom: '1rem' }}>
             {order.items.map((item: any, i: number) => <div key={i}>• {item.name}</div>)}
           </div>
+
+  {/* Gesamtpreis in der Küche */}
+  <div style={{ 
+    marginBottom: '1rem', 
+    paddingTop: '0.6rem', 
+    borderTop: '1px solid #444',
+    display: 'flex', 
+    justifyContent: 'space-between',
+    fontWeight: '600'
+  }}>
+    <span style={{ color: '#aaa' }}>
+      {language === 'de' && 'Gesamt:'}
+      {language === 'en' && 'Total:'}
+      {language === 'vi' && 'Tổng:'}
+    </span>
+    <span style={{ color: '#f59e0b', fontSize: '1.1rem' }}>
+      {calculateTotal(order.items).toLocaleString()} VND
+    </span>
+  </div>
+
           <button
             onClick={async () => {
               if (order.id) await supabase.from('orders').update({ status: 'done' }).eq('id', order.id);
