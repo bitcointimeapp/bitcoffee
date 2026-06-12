@@ -890,30 +890,55 @@ const submitOrder = async () => {
         {language === 'de' && '📋 Historie'} {language === 'en' && '📋 History'} {language === 'vi' && '📋 Lịch sử'}
       </h2>
 
-      <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-        {[
-          { label: { de: 'Letzte Stunde', en: 'Last Hour', vi: 'Giờ qua' }, hours: 1, title: 'Letzte Stunde' },
-          { label: { de: 'Letzter Tag', en: 'Last Day', vi: 'Ngày qua' }, days: 1, title: 'Letzter Tag' },
-          { label: { de: 'Letzter Monat', en: 'Last Month', vi: 'Tháng qua' }, days: 30, title: 'Letzter Monat' }
-        ].map((period, idx) => (
-          <button
-            key={idx}
-            onClick={async () => {
-              let dateLimit = new Date();
-              if (period.hours) dateLimit.setHours(dateLimit.getHours() - period.hours);
-              if (period.days) dateLimit.setDate(dateLimit.getDate() - period.days);
+      {/* Buttons */}
+<div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+  {[
+    { 
+      label: { de: 'Letzte Stunde', en: 'Last Hour', vi: 'Giờ qua' }, 
+      hours: 1, 
+      title: { de: 'Letzte Stunde', en: 'Last Hour', vi: 'Giờ qua' } 
+    },
+    { 
+      label: { de: 'Letzter Tag', en: 'Last Day', vi: 'Ngày qua' }, 
+      days: 1, 
+      title: { de: 'Letzter Tag', en: 'Last Day', vi: 'Ngày qua' } 
+    },
+    { 
+      label: { de: 'Letzter Monat', en: 'Last Month', vi: 'Tháng qua' }, 
+      days: 30, 
+      title: { de: 'Letzter Monat', en: 'Last Month', vi: 'Tháng qua' } 
+    }
+  ].map((period, idx) => (
+    <button
+      key={idx}
+      onClick={async () => {
+        let dateLimit = new Date()
+        if (period.hours) dateLimit.setHours(dateLimit.getHours() - period.hours)
+        if (period.days) dateLimit.setDate(dateLimit.getDate() - period.days)
 
-              const { data } = await supabase.from('orders').select('*').gte('created_at', dateLimit.toISOString()).order('created_at', { ascending: false });
-              setHistoryData(data || []);
-              setHistoryTitle(period.title[language] || period.title['de']);
-              setShowHistory(true);
-            }}
-            style={{ padding: '10px 18px', background: '#333', color: '#f59e0b', border: 'none', borderRadius: '9999px', fontWeight: '600' }}
-          >
-            {period.label[language]}
-          </button>
-        ))}
-      </div>
+        const { data } = await supabase
+          .from('orders')
+          .select('*')
+          .gte('created_at', dateLimit.toISOString())
+          .order('created_at', { ascending: false })
+
+        setHistoryData(data || [])
+        setHistoryTitle(period.title[language] || period.title['de'])
+        setShowHistory(true)
+      }}
+      style={{
+        padding: '10px 18px',
+        background: '#333',
+        color: '#f59e0b',
+        border: 'none',
+        borderRadius: '9999px',
+        fontWeight: '600'
+      }}
+    >
+      {period.label[language]}
+    </button>
+  ))}
+</div>
 
       {showHistory && historyData.length > 0 && (
         <div style={{ background: '#1f1f1f', padding: '1.5rem', borderRadius: '16px', marginBottom: '1.5rem', maxHeight: '400px', overflowY: 'auto' }}>
