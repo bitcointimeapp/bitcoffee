@@ -879,57 +879,59 @@ const submitOrder = async () => {
   </div>
 )}
 
-        <button
-      onClick={submitOrder}
-      style={{
-        width: '100%',
-        padding: '18px',
-        background: (!customerName || orderCart.length === 0) ? '#555' : '#f59e0b',
-        color: '#111',
-        fontWeight: 'bold',
-        border: 'none',
-        borderRadius: '9999px',
-        fontSize: '1.15rem',
-        opacity: (!customerName || orderCart.length === 0) ? 0.6 : 1,
-        cursor: (!customerName || orderCart.length === 0) ? 'not-allowed' : 'pointer'
-      }}
-    >
-      {language === 'de' && 'Bestellung in die Küche schicken'}
-      {language === 'en' && 'Send order to kitchen'}
-      {language === 'vi' && 'Gửi đơn hàng vào bếp'}
-    </button>
+     {/* Abstand + Button Bereich */}
+    <div style={{ marginTop: '2.5rem' }}>
+      <button
+        onClick={submitOrder}
+        style={{
+          width: '100%',
+          padding: '18px',
+          background: (!customerName || orderCart.length === 0) ? '#555' : '#f59e0b',
+          color: '#111',
+          fontWeight: 'bold',
+          border: 'none',
+          borderRadius: '9999px',
+          fontSize: '1.15rem',
+          opacity: (!customerName || orderCart.length === 0) ? 0.6 : 1,
+          cursor: (!customerName || orderCart.length === 0) ? 'not-allowed' : 'pointer'
+        }}
+      >
+        {language === 'de' && 'Bestellung in die Küche schicken'}
+        {language === 'en' && 'Send order to kitchen'}
+        {language === 'vi' && 'Gửi đơn hàng vào bếp'}
+      </button>
 
-    {/* Rote Fehlermeldung */}
-    {orderError && (
-      <p style={{ 
-        color: '#ef4444', 
-        textAlign: 'center', 
-        marginTop: '12px', 
-        fontSize: '0.95rem',
-        fontWeight: '500'
-      }}>
-        {orderError}
-      </p>
-    )}
+      {/* Rote Fehlermeldung */}
+      {orderError && (
+        <p style={{ 
+          color: '#ef4444', 
+          textAlign: 'center', 
+          marginTop: '12px', 
+          fontSize: '0.95rem',
+          fontWeight: '500'
+        }}>
+          {orderError}
+        </p>
+      )}
 
-    {/* Erfolgsmeldung nach Bestellung */}
-    {orderSuccess && (
-      <div style={{
-        marginTop: '1rem',
-        padding: '16px',
-        background: '#166534',
-        color: '#4ade80',
-        borderRadius: '12px',
-        textAlign: 'center',
-        fontWeight: '600',
-        fontSize: '1.05rem'
-      }}>
-        {language === 'de' && '✅ Bestellung erfolgreich in die Küche geschickt!'}
-        {language === 'en' && '✅ Order successfully sent to the kitchen!'}
-        {language === 'vi' && '✅ Đơn hàng đã được gửi thành công vào bếp!'}
-      </div>
-    )}
-  </div>
+      {/* Erfolgsmeldung */}
+      {orderSuccess && (
+        <div style={{
+          marginTop: '1rem',
+          padding: '16px',
+          background: '#166534',
+          color: '#4ade80',
+          borderRadius: '12px',
+          textAlign: 'center',
+          fontWeight: '600',
+          fontSize: '1.05rem'
+        }}>
+          {language === 'de' && '✅ Bestellung erfolgreich in die Küche geschickt!'}
+          {language === 'en' && '✅ Order successfully sent to the kitchen!'}
+          {language === 'vi' && '✅ Đơn hàng đã được gửi thành công vào bếp!'}
+        </div>
+      )}
+    </div>
 )}
 
 {/* ========== KÜCHEN-ANSICHT (außerhalb des Tabs) ========== */}
