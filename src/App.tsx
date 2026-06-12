@@ -838,48 +838,48 @@ const submitOrder = async () => {
                 </div>
 
     {/* Warenkorb mit Gesamtpreis */}
-{orderCart.length > 0 && (
-  <div style={{ background: '#1a1a1a', padding: '1rem', borderRadius: '10px', margin: '1.5rem 0' }}>
-    <strong style={{ color: '#f59e0b' }}>
-      {language === 'de' && 'Deine Bestellung:'}
-      {language === 'en' && 'Your order:'}
-      {language === 'vi' && 'Đơn hàng của bạn:'}
-    </strong>
+    {orderCart.length > 0 && (
+      <div style={{ background: '#1a1a1a', padding: '1rem', borderRadius: '10px', margin: '1.5rem 0' }}>
+        <strong style={{ color: '#f59e0b' }}>
+          {language === 'de' && 'Deine Bestellung:'}
+          {language === 'en' && 'Your order:'}
+          {language === 'vi' && 'Đơn hàng của bạn:'}
+        </strong>
 
-    {orderCart.map((item, index) => (
-      <div key={index} style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.4rem' }}>
-        <span>{item.name}</span>
-        <button onClick={() => {
-          const newCart = [...orderCart]
-          newCart.splice(index, 1)
-          setOrderCart(newCart)
-        }} style={{ color: '#f59e0b', background: 'none', border: 'none' }}>✕</button>
+        {orderCart.map((item, index) => (
+          <div key={index} style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.4rem' }}>
+            <span>{item.name}</span>
+            <button onClick={() => {
+              const newCart = [...orderCart]
+              newCart.splice(index, 1)
+              setOrderCart(newCart)
+            }} style={{ color: '#f59e0b', background: 'none', border: 'none' }}>✕</button>
+          </div>
+        ))}
+
+        {/* Gesamtpreis */}
+        <div style={{ 
+          marginTop: '1rem', 
+          paddingTop: '0.8rem', 
+          borderTop: '1px solid #444',
+          display: 'flex', 
+          justifyContent: 'space-between',
+          fontWeight: 'bold',
+          fontSize: '1.1rem'
+        }}>
+          <span>
+            {language === 'de' && 'Gesamt:'}
+            {language === 'en' && 'Total:'}
+            {language === 'vi' && 'Tổng:'}
+          </span>
+          <span style={{ color: '#f59e0b' }}>
+            {calculateTotal(orderCart).toLocaleString()} VND
+          </span>
+        </div>
       </div>
-    ))}
+    )}
 
-    {/* Gesamtpreis */}
-    <div style={{ 
-      marginTop: '1rem', 
-      paddingTop: '0.8rem', 
-      borderTop: '1px solid #444',
-      display: 'flex', 
-      justifyContent: 'space-between',
-      fontWeight: 'bold',
-      fontSize: '1.1rem'
-    }}>
-      <span>
-        {language === 'de' && 'Gesamt:'}
-        {language === 'en' && 'Total:'}
-        {language === 'vi' && 'Tổng:'}
-      </span>
-      <span style={{ color: '#f59e0b' }}>
-        {calculateTotal(orderCart).toLocaleString()} VND
-      </span>
-    </div>
-  </div>
-)}
-
-     {/* Abstand + Button Bereich */}
+    {/* === BUTTON + FEHLERMELDUNG MIT MEHR ABSTAND === */}
     <div style={{ marginTop: '2.5rem' }}>
       <button
         onClick={submitOrder}
@@ -914,7 +914,7 @@ const submitOrder = async () => {
         </p>
       )}
 
-      {/* Erfolgsmeldung */}
+      {/* Erfolgsmeldung nach Bestellung */}
       {orderSuccess && (
         <div style={{
           marginTop: '1rem',
@@ -932,6 +932,7 @@ const submitOrder = async () => {
         </div>
       )}
     </div>
+  </div>
 )}
 
 {/* ========== KÜCHEN-ANSICHT (außerhalb des Tabs) ========== */}
